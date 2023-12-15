@@ -2,3 +2,5 @@
 *.dtmp
 *.bkp
 *.dtmp
+.DS_Store
+
