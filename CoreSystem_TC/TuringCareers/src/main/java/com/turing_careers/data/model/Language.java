@@ -1,20 +1,14 @@
 package com.turing_careers.data.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Language {
     private int languageCode;
-
-    public Language() {
-    }
-
-    public Language(int languageCode) {
-        this.languageCode = languageCode;
-    }
-
-    public int getLanguageCode() {
-        return languageCode;
-    }
-
-    public void setLanguageCode(int languageCode) {
-        this.languageCode = languageCode;
-    }
 }
