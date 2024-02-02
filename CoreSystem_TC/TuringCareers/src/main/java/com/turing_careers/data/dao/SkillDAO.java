@@ -22,7 +22,7 @@ public class SkillDAO extends DAO {
     public List<Skill> getSkills() {
         return Optional.of(
                 super.em
-                        .createQuery("SELECT * FROM Skills", Skill.class)
+                        .createQuery("SELECT s FROM Skill s", Skill.class)
                         .getResultList()
         ).orElse(null);
     }

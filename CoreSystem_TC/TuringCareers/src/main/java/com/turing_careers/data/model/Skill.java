@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "Skill")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,8 +20,8 @@ public class Skill {
     private Long skillId;
 
     @Column
-    private String name;
+    private String skillName;
 
     @Column
-    private String type;
+    private String skillType;
 }

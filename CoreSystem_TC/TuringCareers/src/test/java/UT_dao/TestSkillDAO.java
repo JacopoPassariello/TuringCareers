@@ -13,7 +13,6 @@ public class TestSkillDAO {
     public void getSkillsTest() {
         SkillDAO skillDAO = SkillDAO.getInstance();
         List<Skill> skills = skillDAO.getSkills();
-
-        Assertions.assertNotNull(skills);
+        Assertions.assertFalse(skills.isEmpty());
     }
 }

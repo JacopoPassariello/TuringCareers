@@ -8,8 +8,9 @@ public abstract class DAO {
     private static EntityManagerFactory emf;
 
     public DAO() {
-        if (emf == null)
-            emf = Persistence.createEntityManagerFactory("culture_clothing");
+        if (emf == null) {
+            emf = Persistence.createEntityManagerFactory("turing_careersPU");
+        }
 
         this.em = emf.createEntityManager();
     }
