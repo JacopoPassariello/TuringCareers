@@ -15,8 +15,8 @@ public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "skillId", nullable = false)
+    private Long skillId;
 
     @Column
     private String name;
