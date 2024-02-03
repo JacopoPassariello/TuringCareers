@@ -2,6 +2,16 @@ drop database if exists unisa;
 create database unisa;
 use unisa;
 
+#Location (skillId, name, type)
+CREATE TABLE Location
+(
+    locationId INT NOT NULL AUTO_INCREMENT
+    ,lat FLOAT NOT NULL
+    ,lon FLOAT NOT NULL
+    ,PRIMARY KEY (locationId)
+);
+
+
 #Developer (developerId, firstName, lastName, bio, mail, passwordAccount)
 CREATE TABLE Developer
 (
@@ -11,8 +21,10 @@ CREATE TABLE Developer
     ,bio TEXT NOT NULL
     ,mail VARCHAR(255) NOT NULL
     ,passwordAccount VARCHAR(20) NOT NULL
+    ,locationId INT NOT NULL
     ,PRIMARY KEY (developerId)
     ,UNIQUE KEY (mail)
+    ,FOREIGN KEY (locationId) REFERENCES Location(locationId)
 );
 
 
@@ -38,8 +50,12 @@ CREATE TABLE Offer
     ,offerDescription TEXT NOT NULL
     ,locationType VARCHAR(10) NOT NULL
     ,passwordAccount VARCHAR(20) NOT NULL
-    ,PRIMARY KEY (offerId),
-    FULLTEXT(title, offerDescription, RequiredSkills)
+    ,employerId INT NOT NULL
+    ,locationId INT NOT NULL
+    ,PRIMARY KEY (offerId)
+    ,FOREIGN KEY (employerId) REFERENCES Employer(employerId)
+    ,FOREIGN KEY (locationId) REFERENCES Location(locationId)
+    ,FULLTEXT(title, offerDescription)
 );
 
 #Skill (skillId, name, type)
@@ -51,14 +67,6 @@ CREATE TABLE Skill
     ,PRIMARY KEY (skillId)
 );
 
-#Location (skillId, name, type)
-CREATE TABLE Location
-(
-    locationId INT NOT NULL AUTO_INCREMENT
-    ,lat FLOAT NOT NULL
-    ,lon FLOAT NOT NULL
-    ,PRIMARY KEY (locationId)
-);
 
 #Language (languageId, lat, lon)
 CREATE TABLE Language
@@ -70,3 +78,45 @@ CREATE TABLE Language
 );
 
 
+#DeveloperSkill (developerId, skillId)
+CREATE TABLE DeveloperSkill
+(
+	developerId INT NOT NULL
+    ,skillId INT NOT NULL
+    ,PRIMARY KEY (developerId, skillId)
+    ,FOREIGN KEY (developerId) REFERENCES Developer(developerId)
+    ,FOREIGN KEY (skillId) REFERENCES Skill(skillId)
+);
+
+
+#DeveloperLanguage (developerId, languageId)
+CREATE TABLE DeveloperLanguage
+(
+	developerId INT NOT NULL
+    ,languageId INT NOT NULL
+    ,PRIMARY KEY (developerId, languageId)
+    ,FOREIGN KEY (developerId) REFERENCES Developer(developerId)
+    ,FOREIGN KEY (languageId) REFERENCES Language(languageId)
+);
+
+
+#OfferSkill (offerId, skillId)
+CREATE TABLE OfferSkill
+(
+	offerId INT NOT NULL
+    ,skillId INT NOT NULL
+    ,PRIMARY KEY (offerId, skillId)
+    ,FOREIGN KEY (offerId) REFERENCES Offer(offerId)
+    ,FOREIGN KEY (skillId) REFERENCES Skill(skillId)
+);
+
+
+#OfferLanguage (offerId, languageId)
+CREATE TABLE OfferLanguage
+(
+	offerId INT NOT NULL
+    ,languageId INT NOT NULL
+    ,PRIMARY KEY (offerId, languageId)
+    ,FOREIGN KEY (offerId) REFERENCES Offer(offerId)
+    ,FOREIGN KEY (languageId) REFERENCES Language(languageId)
+);
