@@ -1,41 +1,27 @@
 package com.turing_careers.data.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "Skill")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Skill {
 
-    private int id;
-    private String name;
-    private String type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "skillId", nullable = false)
+    private Long skillId;
 
-    public Skill() {
-    }
+    @Column
+    private String skillName;
 
-    public Skill(int id, String name, String type) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    @Column
+    private String skillType;
 }
