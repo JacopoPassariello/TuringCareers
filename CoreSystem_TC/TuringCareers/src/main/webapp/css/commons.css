@@ -12,7 +12,6 @@
 @font-face {
     font-family: 'Inter-Bold', sans-serif;
     src: url("../font/Inter-Bold.ttf");
-    font-weight: 100;
 }
 
 .inter-bold {
@@ -22,7 +21,6 @@
 @font-face {
     font-family: 'Inter-Regular', sans-serif;
     src: url("../font/Inter-Regular.ttf");
-    font-weight: 100;
 }
 
 .inter-regular {
@@ -32,7 +30,6 @@
 @font-face {
     font-family: 'Inter-Medium', sans-serif;
     src: url("../font/Inter-Medium.ttf");
-    font-weight: 100;
 }
 
 .inter-medium {
@@ -42,7 +39,6 @@
 @font-face {
     font-family: 'Inter-Light', sans-serif;
     src: url("../font/Inter-Light.ttf");
-    font-weight: 100;
 }
 
 .inter-light {
@@ -60,4 +56,14 @@ body {
 
 .hover-dissolve:hover {
     opacity: 60%;
+}
+
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-none{
+    display: none;
 }

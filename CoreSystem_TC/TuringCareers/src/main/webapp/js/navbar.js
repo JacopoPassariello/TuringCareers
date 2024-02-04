@@ -2,8 +2,9 @@ $(document).ready(() => {
     /**
      * Menu Panel Setup
      * */
-    const toggle = $("#mb-nav-hamburger-radio")
+    const toggle = $("#mb-nav-hamburger-toggle")
+    const menu = $("#mb-nav-menu")
     toggle.click(() => {
-        // show panel
+        menu.toggleClass('display-none flex-center')
     })
 })
