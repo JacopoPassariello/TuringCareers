@@ -166,10 +166,7 @@
     font-size: 26px;
 }
 
-#dsk-nav-search-icon{
-    color: var(--purple);
-    font-size: 26px;
-}
+
 
 #dsk-nav-search-bar{
     display: flex;

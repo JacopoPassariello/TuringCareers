@@ -67,3 +67,8 @@ body {
 .display-none{
     display: none;
 }
+
+.search-icon{
+    color: var(--purple);
+    font-size: 26px;
+}
