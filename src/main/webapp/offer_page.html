@@ -1,0 +1,65 @@
+<!-- <%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+    <link rel="stylesheet" type="text/css" href="css/offer_page.css"/>
+</head>
+<body>
+    <div id="mb-of-searchbar-wrap" class="flex-center">
+        <div id="mb-of-searchbar" class="flex-center">
+            <input id="mb-of-searchbar-input" type="text" class="inter-regular"/>
+            <i class="bi bi-search search-icon flex-center"></i>
+        </div>
+    </div>
+    <div id="of-filters-wrap" class="flex-center">
+        <div id="of-filters">
+            <div id="of-filter-toggle-wrap" class="flex-center">
+                <i id="of-filter-toggle-icon" class="bi bi-filter"></i>
+                <input type="checkbox" id="of-filter-toggle" />
+            </div>
+            <div id="of-filter-list-wrap" class="display-none">
+                <div id="of-filter-list">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="of-list-wrap" class="flex-center">
+        <div id="of-list">
+            <div class="of-offer-card">
+                <div class="of-offer-card-header">
+                    <div class="of-offer-head">
+                        <h3 class="of-offer-employer-name">Azienda X</h3>
+                        <h1 class="of-offer-tile">Software Developer</h1>
+                    </div>
+                    <div class="of-offer-bookmark">
+                        <i class="bi bi-bookmark"></i>
+                    </div>
+                </div>
+                <div class="of-offer-card-meta">
+                    <h3>Roma, Italia</h3>
+                    <h3>Impiego</h3>
+                </div>
+                <div class="of-offer-card-content">
+                    <div class="of-offer-desc-preview">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Sed ut ligula et odio  fermentum commodo...
+                        </p>
+                    </div>
+                    <div class="of-offer-button">
+                        <div class="flex-center">
+                            <a>Dettagli</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script src="js/offer_page.js"></script>
+</body>
+</html>
