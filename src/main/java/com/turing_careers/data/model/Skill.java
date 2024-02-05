@@ -13,15 +13,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Skill {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "skillId", nullable = false)
-    private Long skillId;
+    private int skillId;
 
-    @Column
+    @Column(name = "name", nullable = false)
     private String skillName;
 
-    @Column
+    @Column(name = "type", nullable = false)
     private String skillType;
 }

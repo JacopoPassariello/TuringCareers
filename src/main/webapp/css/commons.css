@@ -42,7 +42,8 @@
 }
 
 .inter-light {
-    font-family: 'Inter-Light', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
 }
 
 body {
@@ -52,6 +53,14 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Edge */
 }
 
 .hover-dissolve:hover {
@@ -72,3 +81,11 @@ body {
     color: var(--purple);
     font-size: 26px;
 }
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24
+ }
