@@ -36,7 +36,7 @@ public class Employer {
     @Column(name = "companyName", nullable = false)
     private String companyName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employerId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     private List<Offer> offers;
 
     public void setId(int id) {
