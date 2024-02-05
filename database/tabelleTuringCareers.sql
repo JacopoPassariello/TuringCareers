@@ -6,6 +6,7 @@ use unisa;
 CREATE TABLE Location
 (
     locationId INT NOT NULL AUTO_INCREMENT
+    ,name VARCHAR(255) NOT NULL
     ,lat FLOAT NOT NULL
     ,lon FLOAT NOT NULL
     ,PRIMARY KEY (locationId)
