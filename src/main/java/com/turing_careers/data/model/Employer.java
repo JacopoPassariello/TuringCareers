@@ -33,6 +33,9 @@ public class Employer {
     @Column(name = "passwordAccount", nullable = false)
     private String password;
 
+    @Column(name = "companyName", nullable = false)
+    private String companyName;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employerId")
     private List<Offer> offers;
 
