@@ -24,15 +24,17 @@ public class DeveloperDAO extends DAO {
     public List<Developer> getDevelopers() {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findAll", Developer.class)
+                        .createNamedQuery("findAllDevelopers", Developer.class)
                         .getResultList()
         ).orElse(null);
     }
 
-    public Developer getDeveloperByMailAndPassword() {
+    public Developer getDeveloperByMailAndPassword(String mail, String password) {
         return Optional.of(
                 super.em
                         .createNamedQuery("findDevsByMailAndPassword", Developer.class)
+                        .setParameter("mail", mail)
+                        .setParameter("password", password)
                         .getSingleResult()
         ).orElse(null);
     }
@@ -41,6 +43,22 @@ public class DeveloperDAO extends DAO {
         try {
             em.getTransaction().begin();
             em.persist(developer);
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
+
+    public void removeDeveloper(Developer developer) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(developer));
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
+
+    public void updateDeveloper(Developer developer) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.merge(developer);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }

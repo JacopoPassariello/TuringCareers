@@ -2,63 +2,63 @@ package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
-import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.Location;
 
 import java.util.List;
 import java.util.Optional;
 
-public class EmployerDAO extends DAO {
+public class LocationDAO extends DAO {
 
-    private static EmployerDAO instance;
-    private EmployerDAO() {
+    private static LocationDAO instance;
+    private LocationDAO() {
         super();
     }
 
-    public static synchronized EmployerDAO getInstance() {
+    public static synchronized LocationDAO getInstance() {
         if (instance == null)
-            instance = new EmployerDAO();
+            instance = new LocationDAO();
 
         return instance;
     }
 
-    public List<Employer> getEmployers() {
+    public List<Location> getLocation() {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findAllEmployers", Employer.class)
+                        .createNamedQuery("findAllLocation", Location.class)
                         .getResultList()
         ).orElse(null);
     }
 
-    public Employer getEmployersByMailAndPassword(String mail, String password) {
+    public Developer getLocationLatAndLog(String lat, String log) {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findEmplsByMailAndPassword", Employer.class)
-                        .setParameter("mail", mail)
-                        .setParameter("password", password)
+                        .createNamedQuery("findLocationLatAndLog", Developer.class)
+                        .setParameter("lat", lat)
+                        .setParameter("log", log)
                         .getSingleResult()
         ).orElse(null);
     }
 
-    public void addEmployer(Employer employer) throws Exception {
+    public void addLocation(Location location) throws Exception {
         try {
             em.getTransaction().begin();
-            em.persist(employer);
+            em.persist(location);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
 
-    public void removeEmployer(Employer employer) throws Exception {
+    public void removeLocation(Location location) throws Exception {
         try {
             em.getTransaction().begin();
-            em.remove(em.merge(employer));
+            em.remove(em.merge(location));
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
 
-    public void updateEmployer(Employer employer) throws Exception {
+    public void updateLocation(Location location) throws Exception {
         try {
             em.getTransaction().begin();
-            em.merge(employer);
+            em.merge(location);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }

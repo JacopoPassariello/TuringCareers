@@ -2,63 +2,62 @@ package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
-import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.Offer;
 
 import java.util.List;
 import java.util.Optional;
 
-public class EmployerDAO extends DAO {
+public class OfferDAO extends DAO {
 
-    private static EmployerDAO instance;
-    private EmployerDAO() {
+    private static OfferDAO instance;
+    private OfferDAO() {
         super();
     }
 
-    public static synchronized EmployerDAO getInstance() {
+    public static synchronized OfferDAO getInstance() {
         if (instance == null)
-            instance = new EmployerDAO();
+            instance = new OfferDAO();
 
         return instance;
     }
 
-    public List<Employer> getEmployers() {
+    public List<Offer> getDevelopers() {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findAllEmployers", Employer.class)
+                        .createNamedQuery("findAllOffers", Offer.class)
                         .getResultList()
         ).orElse(null);
     }
 
-    public Employer getEmployersByMailAndPassword(String mail, String password) {
+    public Offer getOfferById(int id) {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findEmplsByMailAndPassword", Employer.class)
-                        .setParameter("mail", mail)
-                        .setParameter("password", password)
+                        .createNamedQuery("findOfferById", Offer.class)
+                        .setParameter("id", id)
                         .getSingleResult()
         ).orElse(null);
     }
 
-    public void addEmployer(Employer employer) throws Exception {
+    public void addOffer(Offer offer) throws Exception {
         try {
             em.getTransaction().begin();
-            em.persist(employer);
+            em.persist(offer);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
 
-    public void removeEmployer(Employer employer) throws Exception {
+    public void removeOffer(Offer offer) throws Exception {
         try {
             em.getTransaction().begin();
-            em.remove(em.merge(employer));
+            em.remove(em.merge(offer));
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
 
-    public void updateEmployer(Employer employer) throws Exception {
+    public void updateOffer(Offer offer) throws Exception {
         try {
             em.getTransaction().begin();
-            em.merge(employer);
+            em.merge(offer);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
