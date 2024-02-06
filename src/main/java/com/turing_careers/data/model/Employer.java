@@ -16,9 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
-    @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
-    @NamedQuery(name = "", query = ""),
-    @NamedQuery(name = "", query = "")
+    @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
+    @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password")
 })
 public class Employer {
     @Id
