@@ -16,15 +16,12 @@ import java.util.regex.Pattern;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
-    /**
-     * Manca doGet???
-     * */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
-        boolean authOutcome = false;
-        
+        Boolean authOutcome = false;
+
         if (authType.equals("login")) {
             authOutcome = this.loginUser(request, userType);
         } else if (authType.equals("register")) {
@@ -46,40 +43,28 @@ public class AuthenticationServlet extends HttpServlet {
         }
     }
 
-    /**
-     * TODO:
-     * - Implementare AuthService: classe nel package domain che gestisce logica di login e logout
-     * - Implementare DeveloperDAO/Repository e EmployerDAO/Repository: classi che effettuano query al database
-     * */
     private boolean loginUser(HttpServletRequest request, String userType) {
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-
-        if(userType.equals("developer")){
-            /**
-             * La logica per interagire col database deve essere spostata a livello data
-             * */
-            EntityManagerFactory dev_emf = Persistence.createEntityManagerFactory("turing_careersPU");
-            EntityManager dev_em = dev_emf.createEntityManager();
+        if (userType.equals("developer")) {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
+            EntityManager em = emf.createEntityManager();
             List<Developer> d = null;
-            try{
-                /**
-                 * La password dovrebbe essere cifrata
-                 * */
-                d = dev_em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch(NoResultException exception) {
-                System.out.println("No dev found!!!");
+            try {
+                d = em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
+            } catch (NoResultException exception) {
+                System.out.println("No dev founded!!!");
                 exception.printStackTrace();
-
-                /**
-                 * gli errori vengono segnalati tramite exception
-                 * */
                 return false;
             }
-        }else if(userType.equals("employer")){
-            /**
-             * Stessa cosa di sopra, inoltre andrebbe creato un meccanismo per astrarre il processo essendo identico
-             * */
+            if (d == null || d.size() != 1)
+                return false;
+            Developer dev = d.get(0);
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedIn", "true");
+            session.setAttribute("user", dev);
+            return true;
+        } else if (userType.equals("employer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             List<Employer> e = null;
