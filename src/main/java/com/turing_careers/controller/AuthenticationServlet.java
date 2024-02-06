@@ -22,21 +22,21 @@ public class AuthenticationServlet extends HttpServlet {
         String userType = request.getParameter("userType");
         Boolean authOutcome = false;
         
-        if(authType.equals("login")){
+        if (authType.equals("login")){
             authOutcome = this.loginUser(request, userType);
         } else if (authType.equals("register")) {
             authOutcome = this.registerUser(request, userType);
         }
 
-        if(authOutcome){
+        if (authOutcome){
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
-        }else{
+        } else {
             request.setAttribute("authOutcome", "negative");
             if(authType.equals("login")) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
-            }else if (authType.equals("register")) {
+            } else if (authType.equals("register")) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("subscription.jsp");
                 dispatcher.forward(request, response);
             }
@@ -46,38 +46,36 @@ public class AuthenticationServlet extends HttpServlet {
     private boolean loginUser(HttpServletRequest request, String userType) {
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
-        if(userType.equals("developer")){
+        if (userType.equals("developer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             List<Developer> d = null;
             try{
                 d = em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            }catch(NoResultException exception){
+            } catch(NoResultException exception){
                 System.out.println("No dev founded!!!");
                 exception.printStackTrace();
                 return false;
             }
-            if(d == null || d.size() != 1)
+            if (d == null || d.size() != 1)
                 return false;
             Developer dev = d.get(0);
             HttpSession session = request.getSession();
             session.setAttribute("loggedIn", "true");
             session.setAttribute("user", dev);
             return true;
-        }else if(userType.equals("employer")){
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+        } else if (userType.equals("employer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             List<Employer> e = null;
-            try{
+            try {
                 e = em.createNamedQuery("findEmplsByMailAndPassword", Employer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            }catch(NoResultException exception){
+            } catch (NoResultException exception){
                 System.out.println("No dev founded!!!");
                 exception.printStackTrace();
                 return false;
             }
-            if(e == null || e.size() != 1)
+            if (e == null || e.size() != 1)
                 return false;
             Employer emp = e.get(0);
             HttpSession session = request.getSession();
@@ -96,11 +94,11 @@ public class AuthenticationServlet extends HttpServlet {
 
         //controlliamo mail e password passati dall'utente per verificare
         //che rispettino il giusto formato
-        if(!validate(mail, password)) {
+        if (!validate(mail, password)) {
             return false;
         }
 
-        if(userType.equals("developer")){
+        if (userType.equals("developer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             EntityTransaction tx = em.getTransaction();
@@ -117,7 +115,7 @@ public class AuthenticationServlet extends HttpServlet {
             session.setAttribute("isLoggedIn", "true");
             session.setAttribute("utente", dev);
             return true;
-        }else if(userType.equals("employer")){
+        } else if(userType.equals("employer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             EntityTransaction tx = em.getTransaction();
