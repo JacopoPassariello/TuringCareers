@@ -2,7 +2,7 @@ package com.turing_careers.domain;
 
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
-public class Argon2Encryption implements EncryptionStrategy{
+public class Argon2Encryption implements EncryptionStrategy {
 
     private final Argon2PasswordEncoder encoder;
 

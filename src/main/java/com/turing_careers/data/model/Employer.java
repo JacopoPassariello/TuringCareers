@@ -19,7 +19,7 @@ import java.util.List;
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
     @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password")
 })
-public class Employer implements User{
+public class Employer implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employerId", nullable = false)
