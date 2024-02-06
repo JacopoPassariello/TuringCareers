@@ -52,7 +52,7 @@ public class AuthenticationServlet extends HttpServlet {
             List<Developer> d = null;
             try {
                 d = em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch(NoResultException exception) {
+            } catch (NoResultException exception) {
                 System.out.println("No dev founded!!!");
                 exception.printStackTrace();
                 return false;
