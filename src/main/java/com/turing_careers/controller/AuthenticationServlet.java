@@ -37,7 +37,7 @@ public class AuthenticationServlet extends HttpServlet {
         } else {
             request.setAttribute("authOutcome", "negative");
             if (authType.equals("login")) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("login.html");
                 dispatcher.forward(request, response);
             } else if (authType.equals("register")) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("subscription.jsp");

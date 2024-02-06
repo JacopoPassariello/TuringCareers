@@ -46,7 +46,7 @@
         <label style="float: right; margin-right: 10px;">Developer</label>
         <div style="clear: both;"></div> <!-- Clear float per evitare problemi di layout -->
     </div>
-    <div class="login">Hai gi&agrave; un account? <a href="login.jsp">Login</a></div>
+    <div class="login">Hai gi&agrave; un account? <a href="login.html">Login</a></div>
     <button type="text" class="submit">Invia</button>
 </form>
 </body>
