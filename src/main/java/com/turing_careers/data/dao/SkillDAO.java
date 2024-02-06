@@ -26,4 +26,28 @@ public class SkillDAO extends DAO {
                         .getResultList()
         ).orElse(null);
     }
+
+    public void addSkill(Skill skill) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.persist(skill);
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
+
+    public void removeSkill(Skill skill) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(skill));
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
+
+    public void updateSkill(Skill skill) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.merge(skill);
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
 }

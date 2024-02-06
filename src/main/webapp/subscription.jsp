@@ -40,10 +40,10 @@
         <div class="cut cut-short"></div>
     </div>
     <div class="input-container ic2 radiobutton">
-        <label style="float: left; margin-right: 10px; margin-left: 40px;">Employer</label>
+        <label style="float: left; margin-right: 10px; margin-left: 40px; color: #eee; font-family: sans-serif;font-size: 20px; font-weight: 600;">Employer</label>
         <input type="radio" id="accountTypeEmlpoyer" name="userTypeEmp" value="employer" style="float: left;">
         <input type="radio" id="accountTypeDeveloper" name="userTypeDev" value="developer" style="float: right; margin-right: 40px;">
-        <label style="float: right; margin-right: 10px;">Developer</label>
+        <label style="float: right; margin-right: 10px; color: #eee; font-family: sans-serif;font-size: 20px; font-weight: 600;">Developer</label>
         <div style="clear: both;"></div> <!-- Clear float per evitare problemi di layout -->
     </div>
     <div class="login">Hai gi&agrave; un account? <a href="login.html">Login</a></div>
@@ -51,9 +51,4 @@
 </form>
 </body>
 </html>
-
-
-
-
-
 

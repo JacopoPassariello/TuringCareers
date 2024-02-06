@@ -15,6 +15,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "findAllOffers", query = "SELECT o FROM Offer o"),
+        @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id")
+})
 public class Offer {
 
 

@@ -37,6 +37,7 @@ CREATE TABLE Employer
     ,lastName VARCHAR(255) NOT NULL
     ,mail VARCHAR(255) NOT NULL
     ,passwordAccount VARCHAR(20) NOT NULL
+    ,companyName VARCHAR(255) NOT NULL
     ,PRIMARY KEY (employerId)
     ,UNIQUE KEY (mail)
 );

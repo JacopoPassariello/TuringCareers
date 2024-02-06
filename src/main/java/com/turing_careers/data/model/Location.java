@@ -12,13 +12,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "findAllLocation", query = "SELECT l FROM Location l"),
+        @NamedQuery(name = "findLocationLatAndLog", query = "SELECT l FROM Location l WHERE l.lat = :lat AND l.log = :log")
+})
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "locationId", nullable = false)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "loc_name", nullable = false)
     private String name;
 
     @Column(name = "lat", nullable = false)
