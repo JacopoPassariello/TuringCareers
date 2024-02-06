@@ -6,10 +6,22 @@ import com.turing_careers.data.model.User;
  *
  * */
 public abstract class AuthService {
-    private EncryptionStrategy encryptionStrategy;
-    public abstract void loginUser(String email, String password);
+    protected EncryptionStrategy encryptionStrategy;
 
-    public abstract void signupUser(User user);
+    /**
+     *
+     * */
+    public abstract void loginUser(String email, String password) throws InvalidCredentialsException;
+
+
+    /**
+     *
+     * */
+    public abstract void signupUser(User user) throws Exception;
+
+    /**
+     *
+     * */
     public void setEncryptionStrategy(EncryptionStrategy strategy) {
         this.encryptionStrategy = strategy;
     }

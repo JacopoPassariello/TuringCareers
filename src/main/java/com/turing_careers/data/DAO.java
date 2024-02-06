@@ -9,7 +9,7 @@ public abstract class DAO {
 
     public DAO() {
         if (emf == null) {
-            emf = Persistence.createEntityManagerFactory("unisa");
+            emf = Persistence.createEntityManagerFactory("turing_careers");
         }
 
         this.em = emf.createEntityManager();

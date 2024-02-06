@@ -14,15 +14,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
-    @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password")
+    @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
+    @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail ")
 })
 public class Employer implements User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employerId", nullable = false)
     private int id;
 
@@ -43,6 +43,14 @@ public class Employer implements User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     private List<Offer> offers;
+
+    public Employer(String firstName, String lastName, String mail, String password, String companyName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mail = mail;
+        this.password = password;
+        this.companyName = companyName;
+    }
 
     public void setId(int id) {
         this.id = id;
