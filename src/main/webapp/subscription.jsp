@@ -39,10 +39,21 @@
         <input id="password" name="password" class="input" type="password" placeholder="Password" />
         <div class="cut cut-short"></div>
     </div>
+    <div class="input-container ic2 radiobutton">
+        <label style="float: left; margin-right: 10px; margin-left: 40px;">Employer</label>
+        <input type="radio" id="accountTypeEmlpoyer" name="userTypeEmp" value="employer" style="float: left;">
+        <input type="radio" id="accountTypeDeveloper" name="userTypeDev" value="developer" style="float: right; margin-right: 40px;">
+        <label style="float: right; margin-right: 10px;">Developer</label>
+        <div style="clear: both;"></div> <!-- Clear float per evitare problemi di layout -->
+    </div>
     <div class="login">Hai gi&agrave; un account? <a href="login.jsp">Login</a></div>
     <button type="text" class="submit">Invia</button>
 </form>
 </body>
 </html>
+
+
+
+
 
 
