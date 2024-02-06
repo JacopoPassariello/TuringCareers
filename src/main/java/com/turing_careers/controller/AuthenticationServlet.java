@@ -80,8 +80,6 @@ public class AuthenticationServlet extends HttpServlet {
             /**
              * Stessa cosa di sopra, inoltre andrebbe creato un meccanismo per astrarre il processo essendo identico
              * */
-
-        } else if (userType.equals("employer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             List<Employer> e = null;
