@@ -19,10 +19,12 @@ public class AuthenticationServlet extends HttpServlet {
     /**
      * Manca doGet???
      * */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
+
         boolean authOutcome = false;
         
         if (authType.equals("login")) {
@@ -55,19 +57,19 @@ public class AuthenticationServlet extends HttpServlet {
         String mail = request.getParameter("mail");
         String password = request.getParameter("password");
 
-        if(userType.equals("developer")){
+        if (userType.equals("developer")) {
             /**
              * La logica per interagire col database deve essere spostata a livello data
              * */
             EntityManagerFactory dev_emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager dev_em = dev_emf.createEntityManager();
             List<Developer> d = null;
-            try{
+            try {
                 /**
                  * La password dovrebbe essere cifrata
                  * */
                 d = dev_em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch(NoResultException exception) {
+            } catch (NoResultException exception) {
                 System.out.println("No dev found!!!");
                 exception.printStackTrace();
 
@@ -76,7 +78,7 @@ public class AuthenticationServlet extends HttpServlet {
                  * */
                 return false;
             }
-        }else if(userType.equals("employer")){
+        } else if (userType.equals("employer")) {
             /**
              * Stessa cosa di sopra, inoltre andrebbe creato un meccanismo per astrarre il processo essendo identico
              * */

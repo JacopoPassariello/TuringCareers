@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "findAllLanguages", query = "SELECT l FROM Language l"),
-        @NamedQuery(name = "findLanguageByLanguageCode", query = "SELECT l FROM Language l WHERE l.languageCode = :languageCode")
+    @NamedQuery(name = "findAllLanguages", query = "SELECT l FROM Language l"),
+    @NamedQuery(name = "findLanguageByLanguageCode", query = "SELECT l FROM Language l WHERE l.languageCode = :languageCode")
 })
 public class Language {
     @Id

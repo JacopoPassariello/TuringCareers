@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
-        @NamedQuery(name = "findAllLocation", query = "SELECT l FROM Location l"),
-        @NamedQuery(name = "findLocationLatAndLog", query = "SELECT l FROM Location l WHERE l.lat = :lat AND l.log = :log")
+    @NamedQuery(name = "findAllLocation", query = "SELECT l FROM Location l"),
+    @NamedQuery(name = "findLocationLatAndLog", query = "SELECT l FROM Location l WHERE l.lat = :lat AND l.log = :log")
 })
 public class Location {
     @Id
