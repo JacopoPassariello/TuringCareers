@@ -10,9 +10,19 @@ import java.util.List;
 
 public class TestSkillDAO {
     @Test
-    public void getSkillsTest() {
+    public void addSkillTest() throws Exception {
         SkillDAO skillDAO = SkillDAO.getInstance();
+        Skill skill = new Skill("Python", "Programming Language");
+
+        try {
+            skillDAO.addSkill(skill);
+            Assertions.assertTrue(true);
+        } catch (Exception ex) {
+            Assertions.assertTrue(false);
+        }
+
         List<Skill> skills = skillDAO.getSkills();
         Assertions.assertFalse(skills.isEmpty());
+        System.out.println(skills);
     }
 }

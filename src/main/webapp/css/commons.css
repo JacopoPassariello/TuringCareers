@@ -89,3 +89,20 @@ body {
              'GRAD' 0,
              'opsz' 24
  }
+
+.of-language-checkbox:checked {
+    background-color: var(--purple); /* Cambia il colore di sfondo quando il bottone è attivo */
+    color: var(--purple);
+    border-color: var(--purple);
+}
+.of-language-checkbox {
+    background-color: var(--purple); /* Cambia il colore di sfondo quando il bottone è attivo */
+    color: var(--purple);
+    border-color: var(--purple);
+}
+
+.of-language-checkbox:active {
+    background-color: var(--purple); /* Cambia il colore di sfondo quando il bottone è attivo */
+    color: var(--purple);
+    border-color: var(--purple);
+}
