@@ -1,0 +1,137 @@
+:root {
+    --white: #FFFFFF;
+    --light-gray: #C3CAD2;
+    --dark-gray: #2C3238;
+    --black: #21262C;
+    --purple: #533DA1;
+    --orange: #FF785B;
+}
+
+body {
+    align-items: center;
+    background-image: url("../images/paradise.jpg");
+    display: flex;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    justify-content: center;
+    background-size: 100% 100%;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 400px;
+    height: 370px;
+}
+
+.title {
+    text-align: center;
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.error {
+    padding-top: 1rem;
+    color: var(--purple);
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+}
+
+.register {
+    text-align: center;
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 25px;
+}
+
+a:link {
+    color: var(--purple);
+}
+
+a:visited {
+    color: var(--purple);
+    font-style: italic;
+}
+
+a:hover {
+    color: var(--purple);
+}
+
+a:active {
+    color: var(--purple);
+}
+
+.input-container {
+    height: 50px;
+    position: relative;
+    width: 100%;
+}
+
+.ic1 {
+    margin-top: 35px;
+}
+
+.ic2 {
+    margin-top: 30px;
+}
+
+.input {
+    background-color: white;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+}
+
+.submit {
+    background-color: var(--purple);
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 38px;
+    text-align: center;
+    width: 100%;
+}
+
+.submit:active {
+    background-color: var(--purple);
+}
+.submit:hover {
+    background-color: var(--purple);
+}
+
+@media only screen and (max-width: 700px) {
+    body {background-image: url("../images/paradisePhone.jpeg");};
