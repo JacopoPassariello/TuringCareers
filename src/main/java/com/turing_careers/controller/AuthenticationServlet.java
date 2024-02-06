@@ -22,18 +22,18 @@ public class AuthenticationServlet extends HttpServlet {
         String userType = request.getParameter("userType");
         Boolean authOutcome = false;
         
-        if (authType.equals("login")){
+        if (authType.equals("login")) {
             authOutcome = this.loginUser(request, userType);
         } else if (authType.equals("register")) {
             authOutcome = this.registerUser(request, userType);
         }
 
-        if (authOutcome){
+        if (authOutcome) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else {
             request.setAttribute("authOutcome", "negative");
-            if(authType.equals("login")) {
+            if (authType.equals("login")) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
                 dispatcher.forward(request, response);
             } else if (authType.equals("register")) {
@@ -50,9 +50,9 @@ public class AuthenticationServlet extends HttpServlet {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             List<Developer> d = null;
-            try{
+            try {
                 d = em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch(NoResultException exception){
+            } catch(NoResultException exception) {
                 System.out.println("No dev founded!!!");
                 exception.printStackTrace();
                 return false;
@@ -70,7 +70,7 @@ public class AuthenticationServlet extends HttpServlet {
             List<Employer> e = null;
             try {
                 e = em.createNamedQuery("findEmplsByMailAndPassword", Employer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch (NoResultException exception){
+            } catch (NoResultException exception) {
                 System.out.println("No dev founded!!!");
                 exception.printStackTrace();
                 return false;
@@ -115,7 +115,7 @@ public class AuthenticationServlet extends HttpServlet {
             session.setAttribute("isLoggedIn", "true");
             session.setAttribute("utente", dev);
             return true;
-        } else if(userType.equals("employer")) {
+        } else if (userType.equals("employer")) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
             EntityManager em = emf.createEntityManager();
             EntityTransaction tx = em.getTransaction();
