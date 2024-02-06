@@ -15,6 +15,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQueries({
+    @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
+    @NamedQuery(name = "", query = ""),
+    @NamedQuery(name = "", query = "")
+})
 public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
