@@ -1,28 +1,29 @@
-:root {
-    --white: #FFFFFF;
-    --light-gray: #C3CAD2;
-    --dark-gray: #2C3238;
-    --black: #21262C;
-    --purple: #533DA1;
-    --orange: #FF785B;
-}
-
-body {
-    align-items: center;
-    background-image: url("../images/paradise.jpg");
+#login-main-content {
     display: flex;
+    align-items: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     justify-content: center;
     background-size: 100% 100%;
 }
 
-form {
+#login-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#login-form-header h3 {
+    font-size: 24px;
+}
+
+#login-form {
     background-color: rgba(0, 0, 0, 0.5);
     margin: auto auto;
     padding: 40px;
     border-radius: 5px;
-    box-shadow: 0 0 10px #000;
+    box-shadow: 0 2px 10px rgba(33, 38, 44, 0.3);
+    color: var(--black);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -30,12 +31,16 @@ form {
     right: 0;
     width: 400px;
     height: 370px;
+    transition: box-shadow 0.15s ease-out;
+}
+
+#login-form:hover {
+    box-shadow: 0 6px 10px rgba(33, 38, 44, 0.5);
 }
 
 .title {
     text-align: center;
     color: #eee;
-    font-family: sans-serif;
     font-size: 36px;
     font-weight: 600;
     margin-top: 30px;
@@ -44,7 +49,6 @@ form {
 .subtitle {
     text-align: center;
     color: #eee;
-    font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
@@ -53,7 +57,6 @@ form {
 .error {
     padding-top: 1rem;
     color: var(--purple);
-    font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
@@ -63,7 +66,6 @@ form {
 .register {
     text-align: center;
     color: #eee;
-    font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin-top: 25px;
@@ -108,22 +110,53 @@ a:active {
     font-size: 18px;
     height: 100%;
     outline: 0;
-    padding: 4px 20px 0;
     width: 100%;
+    padding-left: 8px;
 }
 
-.submit {
-    background-color: var(--purple);
-    border-radius: 12px;
-    border: 0;
-    box-sizing: border-box;
-    color: #eee;
+#login-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#login-see-psw {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+
     cursor: pointer;
-    font-size: 18px;
-    height: 50px;
-    margin-top: 38px;
-    text-align: center;
+    font-size: 24px;
+    color: var(--purple);
+}
+
+#login-see-psw-toggle {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    z-index: 10;
+    opacity: 0;
+}
+
+#login-submit-button {
+    box-sizing: border-box;
+    cursor: pointer;
     width: 100%;
+    height: 50px;
+    font-size: 18px;
+    margin-top: 8px;
+
+    color: var(--black);
+    background-color: var(--white);
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+
+    transition: color 0.2s ease-out;
+}
+
+#login-submit-button:hover {
+    color: var(--white);
+    background-color: var(--purple);
 }
 
 .submit:active {
@@ -132,6 +165,3 @@ a:active {
 .submit:hover {
     background-color: var(--purple);
 }
-
-@media only screen and (max-width: 700px) {
-    body {background-image: url("../images/paradisePhone.jpeg");};

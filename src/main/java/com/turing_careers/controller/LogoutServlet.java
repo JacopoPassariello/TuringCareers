@@ -6,13 +6,14 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "LogoutServlet", value = "/LogoutServlet")
+@WebServlet(name = "LogoutServlet", value = "/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // invalidate session
         HttpSession session = request.getSession();
-        //invalidiamo la sessione
         session.invalidate();
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request,response);
     }
