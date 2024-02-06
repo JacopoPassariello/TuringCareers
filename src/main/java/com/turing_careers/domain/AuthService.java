@@ -1,5 +1,7 @@
 package com.turing_careers.domain;
 
+import com.turing_careers.data.model.User;
+
 /**
  *
  * */
