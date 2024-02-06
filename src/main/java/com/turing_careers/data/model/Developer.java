@@ -19,6 +19,7 @@ import java.util.List;
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
 })
 public class Developer implements User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "developerId", nullable = false)

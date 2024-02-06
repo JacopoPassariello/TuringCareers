@@ -19,10 +19,12 @@ public class AuthenticationServlet extends HttpServlet {
     /**
      * Manca doGet???
      * */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
+
         boolean authOutcome = false;
         
         if (authType.equals("login")) {
