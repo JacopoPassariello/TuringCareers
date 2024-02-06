@@ -15,11 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({
-    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password"),
-    @NamedQuery(name = "", query = ""),
-    @NamedQuery(name = "", query = "")
+    @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
+    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
 })
-public class Developer {
+public class Developer implements User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "developerId", nullable = false)

@@ -1,0 +1,61 @@
+<!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> -->
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Turing Careers - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
+  <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div id="login-main-content">
+    <form id="login-form" name="form" action="AuthenticationServlet" onsubmit="return validateLoginForm()" method="post">
+      <div id="login-form-header" >
+        <h3 class="inter-medium subtitle no-select">Login</h3>
+      </div>
+
+      <!--
+      <%
+        String block = "none";
+        String outcome = (String) request.getAttribute("authOutcome");
+        if(outcome != null) {
+          if (outcome.equals("negative"))
+            block = "block";
+        }else if(outcome == null)
+          block = "none";
+      %>-->
+      <!--<div id="error" class="error"  style="display: <%=block%>">Riprova!</div>-->
+      <input type="hidden" name="type" value="login">
+      <div id="login-input-wrapper">
+        <div id="email-container" class="input-container">
+          <div class="input">
+            <input name="email" id="email-input" class="input inter-regular" type="email" placeholder="Email" />
+          </div>
+        </div>
+        <div id="password-container" class="input-container">
+          <div class="input">
+            <input name="password" id="password-input" class="input inter-regular" type="password" placeholder="Password" />
+            <div id="login-see-psw">
+                <input id="login-see-psw-toggle" type="checkbox"/>
+                <i id="login-see-psw-icon" class="bi bi-eye-fill"></i>
+            </div>
+          </div>
+
+          <!--<i class="bi bi-eye-slash"></i>-->
+        </div>
+      </div>
+      <div class="register inter-light no-select">Non hai ancora un account? <a href="subscription.jsp">Registrati</a></div>
+      <button type="submit" id="login-submit-button" class="inter-bold">Invia</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/authFormValidate.js"></script>
+</body>
+</html>
+
+

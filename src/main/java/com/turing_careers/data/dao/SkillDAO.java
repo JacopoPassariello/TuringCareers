@@ -34,4 +34,20 @@ public class SkillDAO extends DAO {
             em.getTransaction().commit();
         } catch (Exception ex) { throw new Exception(ex); }
     }
+
+    public void removeSkill(Skill skill) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(skill));
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
+
+    public void updateSkill(Skill skill) throws Exception {
+        try {
+            em.getTransaction().begin();
+            em.merge(skill);
+            em.getTransaction().commit();
+        } catch (Exception ex) { throw new Exception(ex); }
+    }
 }
