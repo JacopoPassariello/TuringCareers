@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @NamedQueries({
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
