@@ -1,5 +1,7 @@
 package com.turing_careers.domain.search;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.Api;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Item;
@@ -34,14 +36,35 @@ public class RecommenderEngine {
     /**
      * Used to search offers
      * */
-    public List<Offer> search(String query, Developer user) {
+    public List<Offer> search(String query, Developer user) throws RuntimeException {
         if (this.type != ClientType.OFFER)
             throw new InvalidParameterException();
 
         ApiClient client = new ApiClient(query, user);
-        client.sendRequest("engine/v1/offers");
-        // ...
+        Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
 
+        if (itemsOpt.isPresent()) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                OfferMock[] offers = objectMapper.readValue(itemsOpt.get(), OfferMock[].class);
+                List<Offer> offerList = new ArrayList<>();
+
+                for (OfferMock mock : offers) {
+                    offerList.add(
+                            new Offer(
+                                    mock.getOfferId(),
+                                    mock.getOfferTitle(),
+                                    mock.getOfferDescription(),
+                                    mock.getOfferLocation(),
+                                    mock.getOfferSkills(),
+                                    mock.getOfferLanguages()
+                            )
+                    );
+                }
+            } catch (JsonProcessingException error) {
+                throw new RuntimeException(error.toString());
+            }
+        }
         return new ArrayList<>();
     }
 }

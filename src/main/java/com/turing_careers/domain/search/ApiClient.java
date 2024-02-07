@@ -1,5 +1,6 @@
 package com.turing_careers.domain.search;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.model.*;
 import jakarta.ws.rs.client.Client;
@@ -11,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +36,7 @@ public class ApiClient {
         this.requestBody = new RequestBody(query, user);
     }
 
-    public Optional<List<Item>> sendRequest(String endpoint) {
+    public Optional<String> sendRequest(String endpoint) {
         // Build Target Path
         WebTarget target = this.requestClient
                 .target(ApiClient.API_ENDPOINT)
@@ -51,18 +53,14 @@ public class ApiClient {
                 .post(entity);
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            //GenericType<List<Item>> genericType = new GenericType<>(){};
-            //List<Item> items = response.readEntity(genericType);
-            //return Optional.ofNullable(items);
-            System.out.println(response.readEntity(String.class));
-            return Optional.empty();
+            return Optional.of(response.readEntity(String.class));
         } else {
             System.out.println("Error: " + response.getStatus());
             return Optional.empty();
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         Skill skill = new Skill("Python", "Programming Language");
         List<Skill> skills = new ArrayList<>();
         skills.add(skill);
@@ -84,25 +82,14 @@ public class ApiClient {
         );
 
         ApiClient client = new ApiClient("Web developer", dev);
-        Optional<List<Item>> itemsOpt = client.sendRequest("engine/v1/offers");
-        /*
+        Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
+
         if (itemsOpt.isPresent()) {
-            List<Item> items = itemsOpt.get();
-            List<Offer> offers = new ArrayList<>();
-
-            for (Item item : items) {
-                Offer offer = new Offer();
-                offer.setId(((Offer) item).getId());
-                offer.setTitle(((Offer) item).getTitle());
-                offer.setDescription(((Offer) item).getDescription());
-                offer.setState(((Offer) item).getState());
-                offer.setLocationType(((Offer) item).getLocationType());
-                offers.add(offer);
+            ObjectMapper objectMapper = new ObjectMapper();
+            OfferMock[] offers = objectMapper.readValue(itemsOpt.get(), OfferMock[].class);
+            for (OfferMock mock : offers) {
+                System.out.println(mock);
             }
-
-            for (Offer o : offers) {
-                System.out.println(o);
-            }
-        }*/
+        }
     }
 }
