@@ -1,16 +1,14 @@
 package com.turing_careers.data.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "Language")
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @NamedQueries({
     @NamedQuery(name = "findAllLanguages", query = "SELECT l FROM Language l"),
     @NamedQuery(name = "findLanguageByLanguageCode", query = "SELECT l FROM Language l WHERE l.languageCode = :languageCode")
@@ -19,7 +17,7 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "languageId", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "languageCode", nullable = false)
     private String languageCode;
@@ -28,11 +26,11 @@ public class Language {
         this.languageCode = languageCode;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }

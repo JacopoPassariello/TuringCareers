@@ -2,10 +2,7 @@ package com.turing_careers.data.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @NamedQueries({
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
     @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
@@ -24,7 +22,7 @@ public class Employer implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employerId", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "firstName", nullable = false)
     private String firstName;
@@ -52,11 +50,11 @@ public class Employer implements User {
         this.companyName = companyName;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @NamedQueries({
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
@@ -20,7 +20,7 @@ public class Developer implements User, Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "developerId", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "firstName", nullable = false)
     private String firstName;
@@ -49,11 +49,11 @@ public class Developer implements User, Item {
     @JoinTable(name = "DeveloperLanguage")
     private List<Language> languages;
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }
