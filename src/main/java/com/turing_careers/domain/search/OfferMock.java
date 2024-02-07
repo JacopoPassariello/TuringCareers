@@ -1,6 +1,7 @@
 package com.turing_careers.domain.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.Language;
 import com.turing_careers.data.model.Location;
 import com.turing_careers.data.model.Skill;
@@ -28,11 +29,14 @@ public class OfferMock {
     private String offerLocationType;
 
     @JsonProperty("_Offer__location")
-    private LocationMock offerLocation;
+    private Location offerLocation;
 
     @JsonProperty("_Offer__skills")
-    private List<SkillMock> offerSkills;
+    private List<Skill> offerSkills;
 
     @JsonProperty("_Offer__languages")
-    private  List<LanguageMock> offerLanguages;
+    private List<Language> offerLanguages;
+
+    @JsonProperty("_Offer__employer")
+    private Employer employer;
 }

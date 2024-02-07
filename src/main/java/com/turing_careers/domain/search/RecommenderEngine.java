@@ -43,18 +43,20 @@ public class RecommenderEngine {
         ApiClient client = new ApiClient(query, user);
         Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
 
+        List<Offer> offerList = new ArrayList<>();
         if (itemsOpt.isPresent()) {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
                 OfferMock[] offers = objectMapper.readValue(itemsOpt.get(), OfferMock[].class);
-                List<Offer> offerList = new ArrayList<>();
 
                 for (OfferMock mock : offers) {
                     offerList.add(
                             new Offer(
-                                    mock.getOfferId(),
                                     mock.getOfferTitle(),
                                     mock.getOfferDescription(),
+                                    mock.getOfferState(),
+                                    mock.getOfferLocationType(),
+                                    mock.getEmployer(),
                                     mock.getOfferLocation(),
                                     mock.getOfferSkills(),
                                     mock.getOfferLanguages()
@@ -65,6 +67,6 @@ public class RecommenderEngine {
                 throw new RuntimeException(error.toString());
             }
         }
-        return new ArrayList<>();
+        return offerList;
     }
 }

@@ -44,7 +44,7 @@ public class ClientFactory {
                     languages
                 );
 
-        List<Offer> offers = (List<Offer>) new ClientFactory()
+        List<Offer> offers = new ClientFactory()
                 .setType(ClientType.OFFER)
                 .getRecommenderEngine()
                 .search("Web Developer", dev);

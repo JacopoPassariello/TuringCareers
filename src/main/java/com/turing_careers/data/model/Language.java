@@ -1,5 +1,6 @@
 package com.turing_careers.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,9 +18,11 @@ public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "languageId", nullable = false)
+    @JsonProperty("_Language__id")
     private Long id;
 
     @Column(name = "languageCode", nullable = false)
+    @JsonProperty("_Language__code")
     private String languageCode;
 
     public Language(String languageCode) {
