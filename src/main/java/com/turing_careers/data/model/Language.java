@@ -11,14 +11,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "findAllLanguages", query = "SELECT l FROM Language l"),
     @NamedQuery(name = "findLanguageByLanguageCode", query = "SELECT l FROM Language l WHERE l.languageCode = :languageCode")
 })
 public class Language {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "languageId", nullable = false)
     private int id;
 

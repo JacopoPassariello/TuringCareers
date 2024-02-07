@@ -18,7 +18,7 @@ import java.util.List;
 public class Developer implements User, Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "developerId", nullable = false)
     private int id;
 

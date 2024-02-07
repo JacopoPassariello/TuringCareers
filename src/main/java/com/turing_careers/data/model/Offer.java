@@ -23,7 +23,7 @@ public class Offer implements Item{
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offerId", nullable = false)
     private int id;
 
