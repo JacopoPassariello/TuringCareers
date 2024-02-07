@@ -14,8 +14,8 @@ public class ClientFactory {
         return this;
     }
 
-    public RecommenderEngine getRecommenderEngine() {
-            return new RecommenderEngine(this.clientType);
+    public RecommenderEngine getRecommenderEngine() { 
+        return new RecommenderEngine(this.clientType);
     }
 
     public UpdateEngine getUpdateEngine() {
