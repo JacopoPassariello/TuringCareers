@@ -1,4 +1,4 @@
-package com.turing_careers.domain;
+package com.turing_careers.domain.auth;
 
 import lombok.experimental.StandardException;
 

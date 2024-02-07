@@ -1,4 +1,4 @@
-package com.turing_careers.domain;
+package com.turing_careers.domain.auth;
 
 import com.turing_careers.data.model.User;
 

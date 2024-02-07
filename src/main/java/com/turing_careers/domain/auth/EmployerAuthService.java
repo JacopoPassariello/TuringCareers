@@ -1,11 +1,8 @@
-package com.turing_careers.domain;
+package com.turing_careers.domain.auth;
 
-import com.turing_careers.data.dao.DeveloperDAO;
 import com.turing_careers.data.dao.EmployerDAO;
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.User;
-import jakarta.persistence.NoResultException;
 
 import java.security.InvalidParameterException;
 

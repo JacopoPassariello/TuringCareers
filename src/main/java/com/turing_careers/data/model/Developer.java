@@ -1,10 +1,7 @@
 package com.turing_careers.data.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
 })
-public class Developer implements User {
+public class Developer implements User, Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
