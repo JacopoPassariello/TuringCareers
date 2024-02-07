@@ -21,7 +21,7 @@ public class LocationDAO extends DAO {
         return instance;
     }
 
-    public List<Location> getLocation() {
+    public List<Location> getLocations() {
         return Optional.of(
                 super.em
                         .createNamedQuery("findAllLocation", Location.class)
@@ -29,12 +29,12 @@ public class LocationDAO extends DAO {
         ).orElse(null);
     }
 
-    public Developer getLocationLatAndLog(String lat, String log) {
+    public Developer getLocationLatAndLog(String lat, String lon) {
         return Optional.of(
                 super.em
                         .createNamedQuery("findLocationLatAndLog", Developer.class)
                         .setParameter("lat", lat)
-                        .setParameter("log", log)
+                        .setParameter("lon", lon)
                         .getSingleResult()
         ).orElse(null);
     }

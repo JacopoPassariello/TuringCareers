@@ -6,7 +6,7 @@ use turing_careers;
 CREATE TABLE Location
 (
     locationId INT NOT NULL AUTO_INCREMENT
-    ,name VARCHAR(255) NOT NULL
+    ,loc_name VARCHAR(255) NOT NULL
     ,lat FLOAT NOT NULL
     ,lon FLOAT NOT NULL
     ,PRIMARY KEY (locationId)
@@ -64,8 +64,8 @@ CREATE TABLE Offer
 CREATE TABLE Skill
 (
     skillId INT NOT NULL AUTO_INCREMENT
-    ,name VARCHAR(255) NOT NULL
-    ,type VARCHAR(10) NOT NULL
+    ,skill_name VARCHAR(255) NOT NULL
+    ,skill_type VARCHAR(255) NOT NULL
     ,PRIMARY KEY (skillId)
 );
 
