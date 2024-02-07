@@ -1,6 +1,6 @@
-drop database if exists unisa;
-create database unisa;
-use unisa;
+drop database if exists turing_careers;
+create database turing_careers;
+use turing_careers;
 
 #Location (skillId, name, type)
 CREATE TABLE Location
@@ -21,7 +21,7 @@ CREATE TABLE Developer
     ,lastName VARCHAR(255) NOT NULL
     ,bio TEXT NOT NULL
     ,mail VARCHAR(255) NOT NULL
-    ,passwordAccount VARCHAR(20) NOT NULL
+    ,passwordAccount VARCHAR(255) NOT NULL
     ,locationId INT NOT NULL
     ,PRIMARY KEY (developerId)
     ,UNIQUE KEY (mail)
@@ -36,7 +36,7 @@ CREATE TABLE Employer
     ,firstName VARCHAR(255) NOT NULL
     ,lastName VARCHAR(255) NOT NULL
     ,mail VARCHAR(255) NOT NULL
-    ,passwordAccount VARCHAR(20) NOT NULL
+    ,passwordAccount VARCHAR(255) NOT NULL
     ,companyName VARCHAR(255) NOT NULL
     ,PRIMARY KEY (employerId)
     ,UNIQUE KEY (mail)
