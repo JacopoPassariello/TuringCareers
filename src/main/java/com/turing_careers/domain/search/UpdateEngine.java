@@ -2,7 +2,7 @@ package com.turing_careers.domain.search;
 
 import com.turing_careers.data.model.Item;
 
-public class UpdateEngine implements Engine{
+public class UpdateEngine {
     private ClientType type;
     public UpdateEngine(ClientType type) {
 
