@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Client for Recommendations API, builds the JSON Body to send in the request with RequestBody class.
+ * */
 public class ApiClient {
     private static final String API_ENDPOINT  = "http://localhost:8000/";
     private RequestBody requestBody;
@@ -36,6 +39,10 @@ public class ApiClient {
         this.requestBody = new RequestBody(query, user);
     }
 
+    /**
+     * @param endpoint: the specific endpoint should be specified by Engine calling sendRequest
+     * @return : returns a String representation of the JSON response that is converted by Engines
+     * */
     public Optional<String> sendRequest(String endpoint) {
         // Build Target Path
         WebTarget target = this.requestClient
@@ -57,39 +64,6 @@ public class ApiClient {
         } else {
             System.out.println("Error: " + response.getStatus());
             return Optional.empty();
-        }
-    }
-
-    public static void main(String[] args) throws JsonProcessingException {
-        Skill skill = new Skill("Python", "Programming Language");
-        List<Skill> skills = new ArrayList<>();
-        skills.add(skill);
-
-        Language lang = new Language("it");
-        List<Language> languages = new ArrayList<>();
-        languages.add(lang);
-
-        Developer dev = new Developer(
-                1L,
-                "Antonino",
-                "Lorenzo",
-                "bio",
-                "anton@gmail.com",
-                "1234",
-                new Location(),
-                skills,
-                languages
-        );
-
-        ApiClient client = new ApiClient("Web developer", dev);
-        Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
-
-        if (itemsOpt.isPresent()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            OfferMock[] offers = objectMapper.readValue(itemsOpt.get(), OfferMock[].class);
-            for (OfferMock mock : offers) {
-                System.out.println(mock);
-            }
         }
     }
 }

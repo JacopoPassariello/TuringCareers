@@ -2,7 +2,6 @@ package com.turing_careers.controller;
 
 import java.io.*;
 
-import com.turing_careers.domain.SearchProxy;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 

@@ -10,9 +10,13 @@ import com.turing_careers.data.model.User;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by ClientFactory, serves as interface for ApiClient that manages the requests to Recommendations API.
+ * */
 public class RecommenderEngine {
     private ClientType type;
     public RecommenderEngine(ClientType type) {
@@ -34,7 +38,9 @@ public class RecommenderEngine {
     }
 
     /**
-     * Used to search offers
+     * Used to search offers, uses ApiClient to make a request to Recommendations API.
+     * @param query: textual query received by client, will be matched against Offer titles and descriptions
+     * @param user: the user making the request, it should be a developers
      * */
     public List<Offer> search(String query, Developer user) throws RuntimeException {
         if (this.type != ClientType.OFFER)
@@ -47,22 +53,13 @@ public class RecommenderEngine {
         if (itemsOpt.isPresent()) {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
-                OfferMock[] offers = objectMapper.readValue(itemsOpt.get(), OfferMock[].class);
-
-                for (OfferMock mock : offers) {
-                    offerList.add(
-                            new Offer(
-                                    mock.getOfferTitle(),
-                                    mock.getOfferDescription(),
-                                    mock.getOfferState(),
-                                    mock.getOfferLocationType(),
-                                    mock.getEmployer(),
-                                    mock.getOfferLocation(),
-                                    mock.getOfferSkills(),
-                                    mock.getOfferLanguages()
-                            )
-                    );
-                }
+                return Arrays.asList(
+                        objectMapper
+                                .readValue(
+                                        itemsOpt.get(),
+                                        Offer[].class
+                                )
+                );
             } catch (JsonProcessingException error) {
                 throw new RuntimeException(error.toString());
             }

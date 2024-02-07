@@ -5,9 +5,12 @@ import com.turing_careers.data.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Only class a Client should interact with directly, creates a RecommenderEngine or UpdateEngine
+ * based on the ClientType specified; users must set a ClientType that can be OFFER or DEVELOPER.
+ * */
 public class ClientFactory {
-    private ClientType clientType;
-
+    private ClientType clientType = null;
 
     public ClientFactory setType(ClientType type) {
         this.clientType = type;
@@ -15,38 +18,14 @@ public class ClientFactory {
     }
 
     public RecommenderEngine getRecommenderEngine() {
+        if (this.clientType == null)
+            throw new RuntimeException("ClientFactory: must set a ClientType");
         return new RecommenderEngine(this.clientType);
     }
 
     public UpdateEngine getUpdateEngine() {
+        if (this.clientType == null)
+            throw new RuntimeException("ClientFactory: must set a ClientType");
         return new UpdateEngine(this.clientType);
-    }
-
-    public static void main(String[] args) {
-        Skill skill = new Skill("Python", "Programming Language");
-        List<Skill> skills = new ArrayList<>();
-        skills.add(skill);
-
-        Language lang = new Language("it");
-        List<Language> languages = new ArrayList<>();
-        languages.add(lang);
-
-
-        Developer dev = new Developer(
-                    1L,
-                    "Antonino",
-                    "Lorenzo",
-                    "bio",
-                    "anton@gmail.com",
-                    "1234",
-                    new Location(),
-                    skills,
-                    languages
-                );
-
-        List<Offer> offers = new ClientFactory()
-                .setType(ClientType.OFFER)
-                .getRecommenderEngine()
-                .search("Web Developer", dev);
     }
 }
