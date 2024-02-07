@@ -21,7 +21,7 @@ public class OfferDAO extends DAO {
         return instance;
     }
 
-    public List<Offer> getDevelopers() {
+    public List<Offer> getOffers() {
         return Optional.of(
                 super.em
                         .createNamedQuery("findAllOffers", Offer.class)

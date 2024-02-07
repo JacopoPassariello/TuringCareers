@@ -52,6 +52,17 @@ public class Offer implements Item{
     @JoinTable(name = "OfferLanguage")
     private List<Language> languages;
 
+    public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.locationType = locationType;
+        this.employer = employer;
+        this.location = location;
+        this.skills = skills;
+        this.languages = languages;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
