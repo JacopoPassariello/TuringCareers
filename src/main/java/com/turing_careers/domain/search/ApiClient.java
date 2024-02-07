@@ -51,11 +51,11 @@ public class ApiClient {
                 .post(entity);
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            GenericType<List<Item>> genericType = new GenericType<>(){};
-            List<Item> items = response.readEntity(genericType);
-            return Optional.ofNullable(items);
-            //System.out.println(response.readEntity(String.class));
-            //return Optional.empty();
+            //GenericType<List<Item>> genericType = new GenericType<>(){};
+            //List<Item> items = response.readEntity(genericType);
+            //return Optional.ofNullable(items);
+            System.out.println(response.readEntity(String.class));
+            return Optional.empty();
         } else {
             System.out.println("Error: " + response.getStatus());
             return Optional.empty();
