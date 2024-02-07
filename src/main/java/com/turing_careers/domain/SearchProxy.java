@@ -1,4 +1,4 @@
-package com.turing_careers.controller;
+package com.turing_careers.domain;
 
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
@@ -17,17 +17,22 @@ import java.util.Optional;
 
 public class SearchProxy {
     private Client client;
-    private WebTarget target;
+    private WebTarget baseTarget;
+    private static final String API_ENDPOINT = "http://localhost:8000/api"; // replace with environment variables ???
+    private static final String OFFER_SEARCH_ENDPOINT = "/engine/v1/offers";
 
     public SearchProxy() {
         this.client = ClientBuilder.newClient();
-        this.target = client.target("http://localhost:8000/api");
+        this.baseTarget = client.target(SearchProxy.API_ENDPOINT);
     }
 
     /**
      * TODO: Implement
      * */
     public Optional<List<Offer>> searchOffer(String query, Developer user) {
+        WebTarget offersTarget = baseTarget.path(OFFER_SEARCH_ENDPOINT);
+
+
         return Optional.empty();
     }
 
@@ -44,7 +49,7 @@ public class SearchProxy {
     public void test() {
         Response response = null;
         try {
-            response = target.request(MediaType.APPLICATION_JSON).get();
+            response = baseTarget.request(MediaType.APPLICATION_JSON).get();
         } catch (ClientErrorException | ServerErrorException clientError) {
             // Handle exception
         }

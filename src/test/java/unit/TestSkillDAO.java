@@ -1,4 +1,4 @@
-package UT_dao;
+package unit;
 
 
 import com.turing_careers.data.dao.SkillDAO;
@@ -16,9 +16,8 @@ public class TestSkillDAO {
 
         try {
             skillDAO.addSkill(skill);
-            Assertions.assertTrue(true);
         } catch (Exception ex) {
-            Assertions.assertTrue(false);
+            Assertions.fail();
         }
 
         List<Skill> skills = skillDAO.getSkills();

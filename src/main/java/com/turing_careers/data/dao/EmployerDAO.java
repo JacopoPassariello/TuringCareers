@@ -39,6 +39,15 @@ public class EmployerDAO extends DAO {
         ).orElse(null);
     }
 
+    public Employer getEmployerByMail(String mail) {
+        return Optional.of(
+                super.em
+                        .createNamedQuery("findEmployerByMail", Employer.class)
+                        .setParameter("mail", mail)
+                        .getSingleResult()
+        ).orElse(null);
+    }
+
     public void addEmployer(Employer employer) throws Exception {
         try {
             em.getTransaction().begin();

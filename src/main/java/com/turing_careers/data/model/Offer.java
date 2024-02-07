@@ -1,10 +1,7 @@
 package com.turing_careers.data.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 
 import java.util.List;
@@ -14,18 +11,18 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @NamedQueries({
     @NamedQuery(name = "findAllOffers", query = "SELECT o FROM Offer o"),
     @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id")
 })
-public class Offer {
+public class Offer implements Item {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "offerId", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -55,11 +52,22 @@ public class Offer {
     @JoinTable(name = "OfferLanguage")
     private List<Language> languages;
 
-    public void setId(int id) {
+    public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.locationType = locationType;
+        this.employer = employer;
+        this.location = location;
+        this.skills = skills;
+        this.languages = languages;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }

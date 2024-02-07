@@ -1,12 +1,12 @@
-drop database if exists unisa;
-create database unisa;
-use unisa;
+drop database if exists turing_careers;
+create database turing_careers;
+use turing_careers;
 
 #Location (skillId, name, type)
 CREATE TABLE Location
 (
     locationId INT NOT NULL AUTO_INCREMENT
-    ,name VARCHAR(255) NOT NULL
+    ,loc_name VARCHAR(255) NOT NULL
     ,lat FLOAT NOT NULL
     ,lon FLOAT NOT NULL
     ,PRIMARY KEY (locationId)
@@ -21,7 +21,7 @@ CREATE TABLE Developer
     ,lastName VARCHAR(255) NOT NULL
     ,bio TEXT NOT NULL
     ,mail VARCHAR(255) NOT NULL
-    ,passwordAccount VARCHAR(20) NOT NULL
+    ,passwordAccount VARCHAR(255) NOT NULL
     ,locationId INT NOT NULL
     ,PRIMARY KEY (developerId)
     ,UNIQUE KEY (mail)
@@ -36,7 +36,7 @@ CREATE TABLE Employer
     ,firstName VARCHAR(255) NOT NULL
     ,lastName VARCHAR(255) NOT NULL
     ,mail VARCHAR(255) NOT NULL
-    ,passwordAccount VARCHAR(20) NOT NULL
+    ,passwordAccount VARCHAR(255) NOT NULL
     ,companyName VARCHAR(255) NOT NULL
     ,PRIMARY KEY (employerId)
     ,UNIQUE KEY (mail)
@@ -64,8 +64,8 @@ CREATE TABLE Offer
 CREATE TABLE Skill
 (
     skillId INT NOT NULL AUTO_INCREMENT
-    ,name VARCHAR(255) NOT NULL
-    ,type VARCHAR(10) NOT NULL
+    ,skill_name VARCHAR(255) NOT NULL
+    ,skill_type VARCHAR(255) NOT NULL
     ,PRIMARY KEY (skillId)
 );
 
