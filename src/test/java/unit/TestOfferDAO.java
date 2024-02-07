@@ -20,6 +20,7 @@ public class TestOfferDAO {
         List<Language> languages = new ArrayList<>();
         languages.add(new Language("it_IT"));
         List<Skill> skills = new ArrayList<>();
+        skills.add(new Skill("Python", "Programming language"));
         Employer employer = new Employer("Antonio", "Pagnotta", "antoniopagnotta_figo@gmail.com", "123456", "TonyLoaf Inc.");
         Location location = new Location("Milano", "3223", "2332");
         Offer offer = new Offer("Sviluppatore Java full-stack", "Lavoro super pagato come sviluppatore Java full-stack.", "Aperta", "Remoto", employer, location, skills, languages);
