@@ -16,7 +16,7 @@ import java.util.List;
     @NamedQuery(name = "findAllOffers", query = "SELECT o FROM Offer o"),
     @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id")
 })
-public class Offer implements Item{
+public class Offer implements Item {
 
 
     @Id
