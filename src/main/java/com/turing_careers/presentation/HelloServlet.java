@@ -10,7 +10,7 @@ public class HelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
 
-        SearchProxy search = new SearchProxy();
-        search.test();
+        //SearchProxy search = new SearchProxy();
+        //search.test();
     }
 }
