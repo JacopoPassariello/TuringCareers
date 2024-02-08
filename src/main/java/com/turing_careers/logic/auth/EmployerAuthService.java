@@ -9,7 +9,7 @@ import java.security.InvalidParameterException;
 /**
  *
  * */
-public class EmployerAuthService extends AuthService {
+public class EmployerAuthService extends Authenticator {
 
     public EmployerAuthService() { super(); }
 

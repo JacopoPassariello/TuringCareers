@@ -46,7 +46,7 @@ public class AuthenticationServlet extends HttpServlet {
 
     /**
      * TODO:
-     * - Implementare AuthService: classe nel package domain che gestisce logica di login e logout
+     * - Implementare Authenticator: classe nel package domain che gestisce logica di login e logout
      * - Implementare DeveloperDAO/Repository e EmployerDAO/Repository: classi che effettuano query al database
      * */
     private boolean loginUser(HttpServletRequest request, String userType) {

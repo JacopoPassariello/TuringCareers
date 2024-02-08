@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
+import com.turing_careers.data.model.Skill;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -20,14 +21,20 @@ public class RecommenderEngine {
         this.type = type;
     }
 
-    public List<Developer> search(String query) {
+    /**
+     *
+     * */
+    public List<Developer> search(Offer offer) {
         if (this.type != ClientType.DEVELOPER)
             throw new InvalidParameterException();
-        // ...
-        return new ArrayList<>();
+
+        return this.search(offer.getSkills());
     }
 
-    public List<Developer> match(List<Offer> offers) {
+    /**
+     *
+     * */
+    public List<Developer> search(List<Skill> skills) {
         if (this.type != ClientType.DEVELOPER)
             throw new InvalidParameterException();
 

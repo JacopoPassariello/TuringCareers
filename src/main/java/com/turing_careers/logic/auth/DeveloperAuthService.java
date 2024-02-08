@@ -10,7 +10,7 @@ import java.security.InvalidParameterException;
 /**
  *
  * */
-public class DeveloperAuthService extends AuthService {
+public class DeveloperAuthService extends Authenticator {
 
     public DeveloperAuthService() {
         super();

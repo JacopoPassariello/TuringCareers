@@ -5,7 +5,7 @@ import com.turing_careers.data.model.User;
 /**
  *
  * */
-public abstract class AuthService {
+public abstract class Authenticator {
     protected EncryptionStrategy encryptionStrategy;
 
     /**
