@@ -62,7 +62,7 @@ public class Offer implements Item {
     @JsonProperty("_Offer__languages")
     private List<Language> languages;
 
-    @ManyToMany(mappedBy = "savedOffers")
+    @ManyToMany(mappedBy = "savedOffers", fetch = FetchType.LAZY)
     private List<Developer> subscribedDevelopers;
 
 

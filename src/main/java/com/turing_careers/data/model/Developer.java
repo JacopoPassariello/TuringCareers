@@ -50,7 +50,7 @@ public class Developer implements User, Item {
     @JoinTable(name = "DeveloperLanguage")
     private List<Language> languages;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "DeveloperOffer",
             joinColumns = @JoinColumn(name = "offerId"),
