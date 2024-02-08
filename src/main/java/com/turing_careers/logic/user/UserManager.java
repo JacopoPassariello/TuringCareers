@@ -31,8 +31,16 @@ public class UserManager {
     public static void deleteAccount() {
         //TODO
     }
-    public static void saveProfile() {
-        //TODO
+    public static void saveDeveloperProfile(Employer e, Developer d) throws UpdateProfileException {
+        EmployerDAO updater = EmployerDAO.getInstance();
+        if(!e.getSavedDevelopers().contains(d)) {
+            e.getSavedDevelopers().add(d);
+            try {
+                updater.updateEmployer(e);
+            } catch (Exception ex) {
+                throw new UpdateProfileException("Could not add developer " + d.getId() + " to employer " + e.getId());
+            }
+        }
     }
 
     private static void checkValidity(Developer user) throws UserNotValidException {
