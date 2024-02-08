@@ -12,10 +12,6 @@ import java.util.List;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
-    /**
-     * Manca doGet???
-     * */
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
@@ -147,6 +143,10 @@ public class AuthenticationServlet extends HttpServlet {
             return true;
         }
         return false;
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //negaWatt
     }
 
     private boolean validate(String mail, String password) {
