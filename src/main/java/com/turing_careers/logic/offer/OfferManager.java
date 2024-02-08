@@ -38,19 +38,4 @@ public class OfferManager {
             throw new UpdateOfferException(e.getMessage());
         }
     }
-
-    public void changeStatus(int offerId, String newState) throws Exception {
-        OfferDAO updater = OfferDAO.getInstance();
-        if (newState.equals(OfferManager.STATE_CLOSED)) {
-            // TODO: implement removeOfferByID
-            Offer toRemove = updater.getOfferById(offerId);
-            updater.removeOffer(toRemove);
-        } else {
-            Offer toUpdate = updater.getOfferById(offerId);
-
-            toUpdate.setState(newState);
-
-            updater.updateOffer(toUpdate);
-        }
-    }
 }
