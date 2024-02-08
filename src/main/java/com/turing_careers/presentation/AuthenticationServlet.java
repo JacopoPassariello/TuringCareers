@@ -1,6 +1,5 @@
-package com.turing_careers.controller;
+package com.turing_careers.presentation;
 
-import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import jakarta.persistence.*;
@@ -9,10 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
