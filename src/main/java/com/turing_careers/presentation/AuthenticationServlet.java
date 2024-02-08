@@ -2,6 +2,7 @@ package com.turing_careers.presentation;
 
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.logic.user.UserNotValidException;
 import jakarta.persistence.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,6 +10,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
@@ -103,7 +105,7 @@ public class AuthenticationServlet extends HttpServlet {
 
         //controlliamo mail e password passati dall'utente per verificare
         //che rispettino il giusto formato
-        if (!validate(mail, password)) {
+        if (!validate(request)) {
             return false;
         }
 
@@ -146,11 +148,26 @@ public class AuthenticationServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //negaWatt
+        //vuoto
     }
 
-    private boolean validate(String mail, String password) {
-        //validare mail e password
+    private boolean validate(HttpServletRequest request) {
+
+        final String firstname = request.getParameter("firstname");
+        final String lastname = request.getParameter("lastname");
+        final String mail = request.getParameter("email");
+        final String password = request.getParameter("bio");
+        final String bio = request.getParameter("password");
+        Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+
+        if(firstname.length() == 0
+                || firstname.length() > 32
+                || lastname.length() == 0
+                || lastname.length() > 64
+                || bio.length() > 2048
+                || mail.length() == 0
+                || !mailPattern.matcher(mail).matches()
+        ) return false;
         return true;
     }
 }
