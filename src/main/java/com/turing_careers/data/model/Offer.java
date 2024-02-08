@@ -62,6 +62,10 @@ public class Offer implements Item {
     @JsonProperty("_Offer__languages")
     private List<Language> languages;
 
+    @ManyToMany(mappedBy = "savedOffers")
+    private List<Developer> subscribedDevelopers;
+
+
     public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
         this.title = title;
         this.description = description;
