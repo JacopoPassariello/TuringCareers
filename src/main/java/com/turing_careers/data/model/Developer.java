@@ -58,6 +58,18 @@ public class Developer implements User, Item {
     )
     private List<Offer> savedOffers;
 
+    public Developer(String firstName, String lastName, String bio, String mail, String password, Location location, List<Skill> skills, List<Language> languages, List<Offer> savedOffers) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.mail = mail;
+        this.password = password;
+        this.location = location;
+        this.skills = skills;
+        this.languages = languages;
+        this.savedOffers = savedOffers;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

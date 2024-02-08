@@ -10,9 +10,9 @@ import java.security.InvalidParameterException;
 /**
  *
  * */
-public class DeveloperAuthService extends Authenticator {
+public class DeveloperAuthenticator extends Authenticator {
 
-    public DeveloperAuthService() {
+    public DeveloperAuthenticator() {
         super();
     }
 

@@ -18,14 +18,14 @@ public class OfferManager {
 
     /**
      *
-     * */
+     */
     public void createOffer() throws Exception {
 
     }
 
     /**
      *
-     * */
+     */
     public void modifyOffer() throws Exception {
 
     }
@@ -33,7 +33,7 @@ public class OfferManager {
 
     /**
      *
-     * */
+     */
     public void changeStatus(int offerId, String newState) throws Exception {
         if (newState.equals(OfferManager.STATE_CLOSED)) {
             // TODO: implement removeOfferByID

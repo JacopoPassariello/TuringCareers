@@ -30,7 +30,8 @@ public class ClientFactoryTest {
                 "1234",
                 new Location(),
                 skills,
-                languages
+                languages,
+                new ArrayList<Offer>()
         );
 
         // Execution

@@ -9,9 +9,9 @@ import java.security.InvalidParameterException;
 /**
  *
  * */
-public class EmployerAuthService extends Authenticator {
+public class EmployerAuthenticator extends Authenticator {
 
-    public EmployerAuthService() { super(); }
+    public EmployerAuthenticator() { super(); }
 
     @Override
     public void loginUser(String email, String password) throws InvalidCredentialsException {
