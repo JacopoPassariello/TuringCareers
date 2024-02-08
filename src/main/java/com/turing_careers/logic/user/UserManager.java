@@ -6,7 +6,18 @@ import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import java.util.regex.Pattern;
 
+
+/**
+ * Classe che implementa i servizi di modifica e cancellazione di profili di utenti, oltre all'operazione di salvataggio di un developer da parte di un employer
+ */
 public class UserManager {
+
+    /**
+     * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
+     * @param newProfile L'Entità che rappresenta la versione aggiornata del profilo
+     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
+     * @throws UserNotValidException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     */
     public static void editProfile(Developer newProfile) throws UpdateProfileException, UserNotValidException {
         checkValidity(newProfile);
         DeveloperDAO updater = DeveloperDAO.getInstance();
@@ -17,6 +28,12 @@ public class UserManager {
         }
     }
 
+    /**
+     * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
+     * @param newProfile L'Entità che rappresenta la versione aggiornata del profilo
+     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
+     * @throws UserNotValidException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     */
     public static void editProfile(Employer newProfile) throws UpdateProfileException, UserNotValidException {
         checkValidity(newProfile);
         EmployerDAO updater = EmployerDAO.getInstance();
@@ -27,6 +44,11 @@ public class UserManager {
         }
     }
 
+    /**
+     * Rimuove un utente dal sistema.
+     * @param user L'Entità rappresentante il profilo dell'utente da rimuovere.
+     * @throws DeleteProfileException Lanciata quando la rimozione del profilo non va a buon fine.
+     */
     public static void deleteAccount(Developer user) throws DeleteProfileException {
         DeveloperDAO updater = DeveloperDAO.getInstance();
         try {
@@ -36,6 +58,11 @@ public class UserManager {
         }
     }
 
+    /**
+     * Rimuove un utente dal sistema.
+     * @param user L'Entità rappresentante il profilo dell'utente da rimuovere.
+     * @throws DeleteProfileException Lanciata quando la rimozione del profilo non va a buon fine.
+     */
     public static void deleteAccount(Employer user) throws DeleteProfileException {
         EmployerDAO updater = EmployerDAO.getInstance();
         try {
@@ -45,18 +72,29 @@ public class UserManager {
         }
     }
 
-    public static void saveDeveloperProfile(Employer e, Developer d) throws UpdateProfileException {
+    /**
+     * Implementa l'operazione di salvataggio di un profilo di un developer da parte di un employer
+     * @param employer L'Entità che rappresenta l'employer che sta eseguendo l'operazione.
+     * @param developer L'Entità che rappresenta il developer che sta venendo salvato.
+     * @throws UpdateProfileException
+     */
+    public static void saveDeveloperProfile(Employer employer, Developer developer) throws UpdateProfileException {
         EmployerDAO updater = EmployerDAO.getInstance();
-        if(!e.getSavedDevelopers().contains(d)) {
-            e.getSavedDevelopers().add(d);
+        if(!employer.getSavedDevelopers().contains(developer)) {
+            employer.getSavedDevelopers().add(developer);
             try {
-                updater.updateEmployer(e);
+                updater.updateEmployer(employer);
             } catch (Exception ex) {
-                throw new UpdateProfileException("Could not add developer " + d.getId() + " to employer " + e.getId());
+                throw new UpdateProfileException("Could not add developer " + developer.getId() + " to employer " + employer.getId());
             }
         }
     }
 
+    /**
+     * Controlla la validità dei campi dell'utente
+     * @param user L'entità da validare.
+     * @throws UserNotValidException Lanciata quando l'entità contiene almeno un campo contenente un valore non valido.
+     */
     private static void checkValidity(Developer user) throws UserNotValidException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
@@ -74,6 +112,11 @@ public class UserManager {
         ) throw new UserNotValidException();
     }
 
+    /**
+     * Controlla la validità dei campi dell'utente
+     * @param user L'entità da validare.
+     * @throws UserNotValidException Lanciata quando l'entità contiene almeno un campo contenente un valore non valido.
+     */
     private static void checkValidity(Employer user) throws UserNotValidException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
