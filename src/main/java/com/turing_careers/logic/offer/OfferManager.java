@@ -11,7 +11,6 @@ public class OfferManager {
     private static String STATE_PAUSED = "PAUSED";
     private static String STATE_CLOSED = "CLOSED";
 
-
     public static void editOffer(Offer offer)  throws UpdateOfferException {
         OfferDAO updater = OfferDAO.getInstance();
         try {
