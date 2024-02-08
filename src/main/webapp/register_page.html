@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Turing Careers - Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
+    <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+    <link rel="stylesheet" href="css/subscription.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div id="register-main-content" class="flex-center">
+        <form id="first-form" class="register-form-wrapper" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+            <div id="register-form">
+                <div class="title inter-bold">Registrazione</div>
+                <div id="register-form-input-wrapper">
+                    <div id="register-form-user-type-input">
+                        <div class="register-user-type">
+                            <input type="radio" id="accountTypeEmlpoyer" name="userTypeEmp" value="employer">
+                            <p class="inter-regular">Developer</p>
+                        </div>
+                        <div class="register-user-type">
+                            <input type="radio" id="accountTypeDeveloper" name="userTypeDev" value="developer">
+                            <p class="inter-regular">Employer</p>
+                        </div>
+                    </div>
+                    <div id="error" class="error">Riprova!</div>
+                    <input type="hidden" name="type" value="register">
+                    <div class="input-container input-text ic1">
+                        <input id="firstname" name="firstname" class="input inter-regular" type="text" placeholder="Nome" />
+                        <div class="cut"></div>
+                    </div>
+                    <div class="input-container input-text ic2">
+                        <input id="lastname" name="lastname" class="input inter-regular" type="text" placeholder="Cognome" />
+                    </div>
+                    <div class="input-container input-text ic2">
+                        <input id="email" name="email" class="input inter-regular" type="email" placeholder="Email" />
+                        <div class="cut cut-short"></div>
+                    </div>
+                    <div id="password-container" class="input-container">
+                        <div style="position: relative">
+                            <input name="password" id="password-input" class="input-text inter-regular" type="password" placeholder="Password" />
+                            <div id="see-psw">
+                                <input id="see-psw-toggle" type="checkbox"/>
+                                <i id="see-psw-icon" class="bi bi-eye-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="login inter-light">Hai gi&agrave; un account? <a href="login.html">Login</a></div>
+                <div class="register-switch-form-wrapper" >
+                    <div class="register-switch-form">
+                        <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                        <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                        <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form id="second-form" class="register-form-wrapper display-none" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+            <div id="register-form-2">
+                <div class="register-switch-form-wrapper" >
+                    <div class="register-switch-form">
+                        <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                        <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                        <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/authFormValidate.js"></script>
+</body>
+</html>

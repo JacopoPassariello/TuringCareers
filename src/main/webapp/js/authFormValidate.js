@@ -2,8 +2,8 @@ $(document).ready(() => {
     /**
      * Password Setup
      * */
-    const psw_toggle = $("#login-see-psw-toggle")
-    const psw_icon = $("#login-see-psw-icon")
+    const psw_toggle = $("#see-psw-toggle")
+    const psw_icon = $("#see-psw-icon")
     const psw_input = $("#password-input")
     psw_toggle.click(() => {
         if (psw_icon.hasClass('bi-eye-fill')) {
@@ -14,6 +14,30 @@ $(document).ready(() => {
             psw_icon.addClass('bi-eye-fill')
             psw_icon.removeClass('bi-eye-slash')
             psw_input.attr('type', 'password')
+        }
+    })
+
+    /**
+     * Switch Setup
+     * */
+    const first_form = $("#first-form")
+    const second_form = $("#second-form")
+    let switch_form_left = $(".switch-form-left")
+    let switch_form_right = $(".switch-form-right")
+    let current = 1
+    switch_form_right.click(() => {
+        if (current === 1) {
+            current = 2
+            first_form.addClass('display-none')
+            second_form.removeClass('display-none')
+        }
+    })
+
+    switch_form_left.click(() => {
+        if (current === 2) {
+            current = 1
+            second_form.addClass('display-none')
+            first_form.removeClass('display-none')
         }
     })
 
