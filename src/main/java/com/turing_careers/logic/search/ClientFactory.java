@@ -1,9 +1,4 @@
-package com.turing_careers.domain.search;
-
-import com.turing_careers.data.model.*;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.turing_careers.logic.search;
 
 /**
  * Only class a Client should interact with directly, creates a RecommenderEngine or UpdateEngine

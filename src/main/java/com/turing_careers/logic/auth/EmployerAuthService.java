@@ -1,4 +1,4 @@
-package com.turing_careers.domain.auth;
+package com.turing_careers.logic.auth;
 
 import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.model.Employer;

@@ -1,12 +1,9 @@
-package com.turing_careers.domain.search;
+package com.turing_careers.logic.search;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.protobuf.Api;
 import com.turing_careers.data.model.Developer;
-import com.turing_careers.data.model.Item;
 import com.turing_careers.data.model.Offer;
-import com.turing_careers.data.model.User;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package integration;
 
 import com.turing_careers.data.model.*;
-import com.turing_careers.domain.search.ClientFactory;
-import com.turing_careers.domain.search.ClientType;
+import com.turing_careers.logic.search.ClientFactory;
+import com.turing_careers.logic.search.ClientType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
