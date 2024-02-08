@@ -1,8 +1,6 @@
 package unit;
 
-import com.turing_careers.data.dao.DeveloperDAO;
 import com.turing_careers.data.dao.EmployerDAO;
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
