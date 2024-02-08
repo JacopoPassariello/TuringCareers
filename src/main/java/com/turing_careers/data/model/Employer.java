@@ -49,6 +49,13 @@ public class Employer implements User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     private List<Offer> offers;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "EmployerDeveloper",
+            joinColumns = @JoinColumn(name = "employerId")
+    )
+    private List<Developer> savedDevelopers;
+
     public Employer(String firstName, String lastName, String mail, String password, String companyName) {
         this.firstName = firstName;
         this.lastName = lastName;

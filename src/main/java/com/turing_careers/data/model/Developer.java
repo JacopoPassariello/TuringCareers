@@ -50,6 +50,14 @@ public class Developer implements User, Item {
     @JoinTable(name = "DeveloperLanguage")
     private List<Language> languages;
 
+    @ManyToMany
+    @JoinTable(
+            name = "DeveloperOffer",
+            joinColumns = @JoinColumn(name = "offerId"),
+            inverseJoinColumns = @JoinColumn(name = "developerId")
+    )
+    private List<Offer> savedOffers;
+
     public void setId(Long id) {
         this.id = id;
     }
