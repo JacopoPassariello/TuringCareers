@@ -90,6 +90,16 @@ CREATE TABLE DeveloperSkill
     ,FOREIGN KEY (skillId) REFERENCES Skill(skillId)
 );
 
+#DeveloperOffer (developerId, offerId)
+CREATE TABLE DeveloperOffer 
+(
+	developerId INT NOT NULL
+    ,offerId INT NOT NULL
+    ,PRIMARY KEY (developerId, offerId)
+    ,FOREIGN KEY (developerId) REFERENCES Developer(developerId)
+    ,FOREIGN KEY (offerId) REFERENCES Offer(offerId)
+);
+
 
 #DeveloperLanguage (developerId, languageId)
 CREATE TABLE DeveloperLanguage
@@ -121,4 +131,14 @@ CREATE TABLE OfferLanguage
     ,PRIMARY KEY (offerId, languageId)
     ,FOREIGN KEY (offerId) REFERENCES Offer(offerId)
     ,FOREIGN KEY (languageId) REFERENCES Language(languageId)
+);
+
+#EmployerDeveloper (employerId, developerId)
+CREATE TABLE EmployerDeveloper
+(
+	employerId INT NOT NULL
+    ,developerId INT NOT NULL
+    ,PRIMARY KEY (employerId, developerId)
+    ,FOREIGN KEY (employerId) REFERENCES Employer(employerId)
+    ,FOREIGN KEY (developerId) REFERENCES Developer(developerId)
 );
