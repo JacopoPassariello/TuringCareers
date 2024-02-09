@@ -179,7 +179,7 @@
 }
 
 .register-switch-form {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
 }
@@ -278,10 +278,9 @@
 }
 
 #skill-input-text {
-    min-width: 80px;
+    width: 30px;
     height: 30px;
 
-    border: none;
     outline: none;
     font-size: 18px;
 }
@@ -297,6 +296,13 @@
     opacity: 0.8;
 }
 
+#skills-autocomplete-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
 
 /***/
 a:link {

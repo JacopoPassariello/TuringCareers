@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="register-main-content" class="flex-center">
-        <form id="user-type-form" class="register-form-wrapper display-none  fade-in">
+        <form id="user-type-form" class="register-form-wrapper fade-in">
             <div id="register-form-0">
                 <div id="register-form-0-content">
                     <h3 class="no-select inter-bold">Scegli un tipo di account.</h3>
@@ -66,7 +66,7 @@
             </div>
         </form>
         <!-- Developer Form -->
-        <form id="second-form" class="register-form-wrapper fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+        <form id="second-form" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
             <div id="register-form-2-wrapper">
                 <div id="register-form-2">
                     <div id="form-2-inputs" class="">
@@ -89,11 +89,8 @@
                                             <i class="bi bi-plus-circle"></i>
                                         </div>
                                     </div>
-                                    <div class="autocomplete-section">
-                                        <ul class="autocomplete-suggestions">
-                                            <li>Java</li>
-                                            <li>Javascript</li>
-                                        </ul>
+                                    <div id="skills-autocomplete-section" class="autocomplete-section">
+                                        <ul id="skills-autocomplete-list" class="autocomplete-suggestions"></ul>
                                     </div>
                                 </div>
                             </div>
