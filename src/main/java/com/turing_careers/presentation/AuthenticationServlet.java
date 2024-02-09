@@ -95,12 +95,6 @@ public class AuthenticationServlet extends HttpServlet {
         proceed(request, response, authType, authOutcome);
     }
 
-    /**
-     * TODO:
-     * - Implementare Authenticator: classe nel package domain che gestisce logica di login e logout
-     * - Implementare DeveloperDAO/Repository e EmployerDAO/Repository: classi che effettuano query al database
-     * */
-
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //vuoto
     }
