@@ -53,7 +53,7 @@ public class OfferManager {
         }
     }
 
-    public static void checkValidity(Offer offer) throws OfferNotValidException{
+    public static void checkValidity(Offer offer) throws OfferNotValidException {
         if (offer.getDescription().isEmpty()
                 || offer.getTitle().isEmpty()
                 || offer.getSkills().size() == 0
