@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Antonino Lorenzo
+ * */
 @WebServlet(name = "locationsSuggestions", value = "/suggest-locations")
 public class LocationSuggestionServlet extends HttpServlet {
 
