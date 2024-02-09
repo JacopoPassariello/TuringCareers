@@ -27,13 +27,13 @@ public class Location {
 
     @Column(name = "lat", nullable = false)
     @JsonProperty("_Location__lat")
-    private String lat;
+    private Double lat;
 
     @Column(name = "lon", nullable = false)
     @JsonProperty("_Location__lon")
-    private String lon;
+    private Double lon;
 
-    public Location(String name, String lat, String lon) {
+    public Location(String name, Double lat, Double lon) {
         this.name = name;
         this.lat = lat;
         this.lon = lon;
