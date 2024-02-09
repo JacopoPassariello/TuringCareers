@@ -19,13 +19,16 @@ public class UserValidator {
      */
     public static void checkValidity(Developer user) throws ValidationException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+        Pattern namePattern = Pattern.compile("([A-Za-z]+( [A-Za-z]+)+)");
 
 
         if (user == null
                 || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
+                || !namePattern.matcher(user.getFirstName()).matches()
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
+                || !namePattern.matcher(user.getLastName()).matches()
                 || user.getBio().length() > 2048
                 || user.getMail().length() == 0
                 || !mailPattern.matcher(user.getMail()).matches()
@@ -46,12 +49,15 @@ public class UserValidator {
      */
     public static void checkValidity(Employer user) throws ValidationException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+        Pattern namePattern = Pattern.compile("([A-Za-z]+( [A-Za-z]+)+)");
 
         if (user == null
                 || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
+                || !namePattern.matcher(user.getFirstName()).matches()
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
+                || !namePattern.matcher(user.getLastName()).matches()
                 || user.getCompanyName().length() == 0
                 || user.getCompanyName().length() > 64
                 || !mailPattern.matcher(user.getMail()).matches()

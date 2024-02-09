@@ -93,7 +93,7 @@ public class AuthenticationServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
-                session.setAttribute("utente", dev);
+                session.setAttribute("user", dev);
             } else if (userType.equals("employer")) {
                 Employer emp = new Employer();
                 try {
@@ -113,7 +113,7 @@ public class AuthenticationServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
-                session.setAttribute("utente", emp);
+                session.setAttribute("user", emp);
             }
         }
         proceed(request, response, authType, authOutcome);
