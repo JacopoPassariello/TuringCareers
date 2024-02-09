@@ -37,7 +37,7 @@ public class AuthenticationServlet extends HttpServlet {
                     devAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
                     //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat 
+                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
