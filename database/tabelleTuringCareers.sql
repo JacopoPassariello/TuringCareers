@@ -53,7 +53,7 @@ CREATE TABLE Offer
     ,offerDescription TEXT NOT NULL
     ,locationType VARCHAR(10) NOT NULL
     ,employerId INT NOT NULL
-    ,locationId INT NOT NULL
+    ,locationId INT
     ,PRIMARY KEY (offerId)
     ,FOREIGN KEY (employerId) REFERENCES Employer(employerId)
     ,FOREIGN KEY (locationId) REFERENCES Location(locationId)
