@@ -20,8 +20,8 @@ public class LanguageValidator {
     public void validateLanguages(List<Language> languageList) throws ValidationException {
         LanguageDAO validator = LanguageDAO.getInstance();
         List<Language> dbLangs = validator.getLanguages();
-        for(Language l : languageList) {
-            if(!dbLangs.contains(l)) {
+        for (Language l : languageList) {
+            if (!dbLangs.contains(l)) {
                 throw new ValidationException("Input Langugage is not present in DB!");
             }
         }

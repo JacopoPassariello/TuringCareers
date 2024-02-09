@@ -150,7 +150,7 @@ public class UserManager {
         try {
             languageValidator.validateLanguages(user.getLanguages());
             skillValidator.validateSkills(user.getSkills());
-        } catch(ValidationException e) {
+        } catch (ValidationException e) {
             throw new UserNotValidException(e.getMessage());
         }
     }

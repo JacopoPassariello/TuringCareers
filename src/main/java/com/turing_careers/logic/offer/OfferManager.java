@@ -74,7 +74,7 @@ public class OfferManager {
         try {
             skillValidator.validateSkills(offer.getSkills());
             languageValidator.validateLanguages(offer.getLanguages());
-        }catch(ValidationException e) {
+        } catch (ValidationException e) {
             throw new OfferNotValidException(e.getMessage());
         }
     }
