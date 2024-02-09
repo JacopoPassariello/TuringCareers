@@ -1,4 +1,4 @@
-package com.turing_careers.domain.search;
+package com.turing_careers.logic.search;
 
 import com.turing_careers.data.model.Item;
 

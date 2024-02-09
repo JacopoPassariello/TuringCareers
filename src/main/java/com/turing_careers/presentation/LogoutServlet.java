@@ -1,4 +1,4 @@
-package com.turing_careers.controller;
+package com.turing_careers.presentation;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

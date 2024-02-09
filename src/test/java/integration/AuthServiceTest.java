@@ -1,11 +1,9 @@
 package integration;
 
 
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.domain.auth.DeveloperAuthService;
-import com.turing_careers.domain.auth.EmployerAuthService;
-import com.turing_careers.domain.auth.InvalidCredentialsException;
+import com.turing_careers.logic.auth.EmployerAuthenticator;
+import com.turing_careers.logic.auth.InvalidCredentialsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,7 @@ public class AuthServiceTest {
 
     @Test
     public void testSignupUser() {
-        EmployerAuthService authService = new EmployerAuthService();
+        EmployerAuthenticator authService = new EmployerAuthenticator();
         Employer employer = new Employer(
                 "Tony",
                 "Loaf",
@@ -34,7 +32,7 @@ public class AuthServiceTest {
 
     @Test
     public void testLoginUserFail() {
-        EmployerAuthService authService = new EmployerAuthService();
+        EmployerAuthenticator authService = new EmployerAuthenticator();
 
         try {
             authService.loginUser(
@@ -48,7 +46,7 @@ public class AuthServiceTest {
 
     @Test
     public void testLoginUserSuccess() {
-        EmployerAuthService authService = new EmployerAuthService();
+        EmployerAuthenticator authService = new EmployerAuthenticator();
 
         try {
             authService.loginUser(

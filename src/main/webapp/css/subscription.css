@@ -1,69 +1,200 @@
-:root {
-    --white: #FFFFFF;
-    --light-gray: #C3CAD2;
-    --dark-gray: #2C3238;
-    --black: #21262C;
-    --purple: #533DA1;
-    --orange: #FF785B;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .register-form-wrapper {
+        min-width: 80vw;
+        min-height: 60dvh;
+    }
+    #register-form {
+        min-width: 80dvw;
+    }
 }
 
-body {
-    align-items: center;
-    background-image: url("../images/paradise.jpg");
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .register-form-wrapper {
+        min-width: 80vw;
+        min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 80dvw;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .register-form-wrapper {
+        min-width: 70vw;
+        min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 70dvw;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .register-form-wrapper {
+        min-width: 60vw;
+        min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 60vw;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .register-form-wrapper {
+        min-width: 50vw;
+        min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 50vw;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity:  0.4;
+        margin-right: 60px;
+    }
+    100% {
+        opacity:  1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.2s ease-in-out  0s  1 normal none running;
+}
+
+
+#register-main-content {
+    width: 100%;
+    height: 100dvh;
+}
+
+.register-form-wrapper {
+    background-color: var(--white);
+    border: 4px solid var(--purple);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 6px rgba(33, 38, 44, 0.3);
+    transition: box-shadow 0.15s ease-out;
+}
+
+.register-form-wrapper:hover {
+    box-shadow: 0 6px 8px rgba(33, 38, 44, 0.4);
+}
+
+#register-form-0 {
+    width: 100%;
+    min-height: 60dvh;
     display: flex;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     justify-content: center;
-    background-size: 100% 100%;
+    align-items: center;
 }
 
-form {
-    background-color: rgba(0, 0, 0, 0.5);
-    margin: auto auto;
-    padding: 40px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #000;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 400px;
-    height: 550px;
+#register-form-0-content {
+    width: 80%;
+}
+
+#register-form-1-wrapper {
+    width: 100%;
+    min-height: 60dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
     text-align: center;
-    color: #eee;
-    font-family: sans-serif;
-    font-size: 36px;
-    font-weight: 600;
-    margin-top: 30px;
+    color: var(--black);
+
+    font-size: 28px;
 }
 
 .subtitle {
     text-align: center;
     color: #eee;
-    font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
 }
 
+#register-form-input-wrapper {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#register-form-user-type-input {
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.register-user-type {
+    display: flex;
+    gap: 12px;
+    font-size: 18px;
+}
+
+.register-user-type input {
+    width: 18px;
+    margin-bottom: 6px;
+}
+
 .error {
-    padding-top: 1rem;
-    color: var(--purple);
-    font-family: sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    text-align: center;
-    display: none;
+    color: rgb(231, 61, 61);
+}
+
+.input-container {
+    height: 50px;
+    width: 80%;
+}
+
+.register-switch-form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.register-switch-form {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-submit-button {
+    width: 40%;
+}
+
+.switch-arrow:hover {
+    cursor: pointer;
+    color: rgba(33, 38, 44, 0.4);
+}
+
+.switch-form-right {
+
+}
+
+.switch-form-right {
+
 }
 
 .login {
     text-align: center;
     color: #eee;
-    font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin-top: 20px;
@@ -84,20 +215,6 @@ a:hover {
 
 a:active {
     color: var(--purple);
-}
-
-.input-container {
-    height: 50px;
-    position: relative;
-    width: 100%;
-}
-
-.ic1 {
-    margin-top: 35px;
-}
-
-.ic2 {
-    margin-top: 30px;
 }
 
 .input {
@@ -122,7 +239,7 @@ a:active {
     font-size: 18px;
     height: 50px;
     margin-top: 38px;
-// outline: 0;
+    outline: 0;
     text-align: center;
     width: 100%;
 }
@@ -134,5 +251,3 @@ a:active {
     background-color: var(--purple);
 }
 
-@media only screen and (max-width: 700px) {
-    body {background-image: url("../images/paradisePhone.jpeg");};

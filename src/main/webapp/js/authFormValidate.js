@@ -2,21 +2,71 @@ $(document).ready(() => {
     /**
      * Password Setup
      * */
-    const psw_toggle = $("#login-see-psw-toggle")
-    const psw_icon = $("#login-see-psw-icon")
-    const psw_input = $("#password-input")
-    psw_toggle.click(() => {
-        if (psw_icon.hasClass('bi-eye-fill')) {
-            psw_icon.addClass('bi-eye-slash')
-            psw_icon.removeClass('bi-eye-fill')
-            psw_input.attr('type', 'text')
+    const pswToggle = $("#see-psw-toggle")
+    const pswIcon = $("#see-psw-icon")
+    const pswInput = $("#password-input")
+    pswToggle.click(() => {
+        if (pswIcon.hasClass('bi-eye-fill')) {
+            pswIcon.addClass('bi-eye-slash')
+            pswIcon.removeClass('bi-eye-fill')
+            pswInput.attr('type', 'text')
         } else {
-            psw_icon.addClass('bi-eye-fill')
-            psw_icon.removeClass('bi-eye-slash')
-            psw_input.attr('type', 'password')
+            pswIcon.addClass('bi-eye-fill')
+            pswIcon.removeClass('bi-eye-slash')
+            pswInput.attr('type', 'password')
         }
     })
 
+    /**
+     * Switch Setup
+     * */
+    const userTypeForm = $("#user-type-form")
+    const userDeveloperButton = $("#account-type-employer")
+    const userEmployerButton = $("#account-type-developer")
+    let userTypeDeveloper = false;
+    let userTypeEmployer = false;
+
+    userDeveloperButton.click(() => {
+        userTypeForm.addClass('display-none')
+        firstForm.removeClass('display-none')
+        userTypeDeveloper = true;
+    })
+
+    userEmployerButton.click(() => {
+        userTypeForm.addClass('display-none')
+        firstForm.removeClass('display-none')
+        userTypeEmployer = true;
+    })
+
+
+    const firstForm = $("#first-form")
+    const secondForm = $("#second-form")
+    let switchFormLeft = $(".switch-form-left")
+    let switchFormRight = $(".switch-form-right")
+    let current = 1
+    switchFormRight.click(() => {
+        if (current === 1) {
+            current = 2
+            firstForm.addClass('display-none')
+            secondForm.removeClass('display-none')
+        }
+    })
+
+    switchFormLeft.click(() => {
+        if (current === 2) {
+            current = 1
+            secondForm.addClass('display-none')
+            firstForm.removeClass('display-none')
+        }
+        else if (current === 1) {
+            firstForm.addClass('display-none')
+            userTypeForm.removeClass('display-none')
+        }
+    })
+
+    /**
+     * TODO: cleanup
+     * */
     function validateSubForm() {
         let mail = document.forms["form"]["email"].value;
         let password = document.forms["form"]["password"].value;
