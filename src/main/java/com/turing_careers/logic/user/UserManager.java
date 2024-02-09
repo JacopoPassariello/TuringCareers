@@ -12,6 +12,26 @@ import java.util.regex.Pattern;
  */
 public class UserManager {
 
+    public static void createProfile(Developer newProfile) throws UpdateProfileException, UserNotValidException {
+        checkValidity(newProfile);
+        DeveloperDAO updater = DeveloperDAO.getInstance();
+        try {
+            updater.addDeveloper(newProfile);
+        } catch (Exception e) {
+            throw new UpdateProfileException(e.getMessage());
+        }
+    }
+
+    public static void createProfile(Employer newProfile) throws UpdateProfileException, UserNotValidException {
+        checkValidity(newProfile);
+        EmployerDAO updater = EmployerDAO.getInstance();
+        try {
+            updater.addEmployer(newProfile);
+        } catch (Exception e) {
+            throw new UpdateProfileException(e.getMessage());
+        }
+    }
+
     /**
      * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
      * @param newProfile L'Entità che rappresenta la versione aggiornata del profilo
