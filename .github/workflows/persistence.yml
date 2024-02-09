@@ -40,7 +40,7 @@ jobs:
           while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
             sleep  1
           done
-          mysql -u root -p"tc_root" turing_careers < database/tablelleTuringCareers.sql
+          mysql -u root -p"tc_root" turing_careers < ./database/tablelleTuringCareers.sql
 
       - name: Run TestSkillDAO
         run: mvn test -Dtest=unit.TestSkillDAO
