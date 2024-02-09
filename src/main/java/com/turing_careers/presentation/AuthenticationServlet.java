@@ -22,20 +22,17 @@ public class AuthenticationServlet extends HttpServlet {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
 
-        String mail = request.getParameter("mail");
+        String mail = request.getParameter("email");
         String password = request.getParameter("password");
 
-        boolean authOutcome = false;
+        boolean authOutcome = true;
 
         if (authType.equals("login")) {
             if (userType.equals("developer")) {
 
                 DeveloperAuthenticator devAuth = new DeveloperAuthenticator();
                 try {
-                    Argon2Encryption encryptor = new Argon2Encryption();
-                    String encryptedPassword = encryptor.encrypt(password);
-                    System.out.println("Password criptata: " + encryptedPassword);
-                    devAuth.loginUser(mail, encryptedPassword);
+                    devAuth.loginUser(mail, password);
                 } catch (InvalidCredentialsException e) {
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
@@ -49,12 +46,10 @@ public class AuthenticationServlet extends HttpServlet {
                  */
 
             } else if (userType.equals("employer")) {
-
                 EmployerAuthenticator empAuth = new EmployerAuthenticator();
                 try {
-                    Argon2Encryption encryptor = new Argon2Encryption();
-                    String encryptedPassword = encryptor.encrypt(password);
-                    empAuth.loginUser(mail, encryptedPassword);
+                    empAuth.loginUser(mail, password);
+                    System.out.println("Success: " + authOutcome);
                 } catch (InvalidCredentialsException e) {
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
