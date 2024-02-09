@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="register-main-content" class="flex-center">
-        <form id="user-type-form" class="register-form-wrapper fade-in">
+        <form id="user-type-form" class="register-form-wrapper display-none fade-in">
             <div id="register-form-0">
                 <div id="register-form-0-content">
                     <h3 class="no-select inter-bold">Scegli un tipo di account.</h3>
@@ -66,7 +66,7 @@
             </div>
         </form>
         <!-- Developer Form -->
-        <form id="second-form" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+        <form id="second-form" class="register-form-wrapper  fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
             <div id="register-form-2-wrapper">
                 <div id="register-form-2">
                     <div id="form-2-inputs" class="">
@@ -100,18 +100,20 @@
                                 <h3 class="no-select inter-regular">Location</h3>
                                 <div class="autocomplete-wrapper">
                                     <div>
-                                        <input type="text" class="input">
+                                        <input id="locations-input-text" type="text" class="input">
                                     </div>
-                                    <div class="autocomplete-section">
-                                        <ul class="autocomplete-suggestions">
-                                            <li>
+                                    <div id="locations-autocomplete-section" class="autocomplete-section display-none">
+                                        <ul id="locations-autocomplete-list" class="autocomplete-suggestions">
+                                            <!--
+                                            <li class="location-suggestion">
                                                 <i class="bi bi-geo-alt-fill"></i>
-                                                <p>Roma, Italia</p>
+                                                <p class="inter-light">Roma, Italia</p>
                                             </li>
-                                            <li>
+                                            <li class="location-suggestion">
                                                 <i class="bi bi-geo-alt"></i>
-                                                <p>Romania</p>
+                                                <p class="inter-light">Romania</p>
                                             </li>
+                                            -->
                                         </ul>
                                     </div>
                                 </div>
@@ -132,5 +134,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/authFormValidate.js"></script>
     <script type="text/javascript" src="js/skills.js"></script>
+    <script type="text/javascript" src="js/locations.js"></script>
 </body>
 </html>

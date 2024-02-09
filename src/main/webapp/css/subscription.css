@@ -224,6 +224,7 @@
 /* SKILLS AND LOCATION */
 .autocomplete-wrapper {
     border: 2px solid var(--purple);
+    border-radius: 12px;
 }
 
 .autocomplete-section {
@@ -302,6 +303,20 @@
     gap: 8px;
     margin-top: 8px;
     margin-bottom: 8px;
+}
+
+#locations-input-text {
+    height: 50px;
+}
+
+.location-suggestion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location-suggestion i {
+    color: var(--purple);
 }
 
 /***/

@@ -12,7 +12,7 @@ $(document).ready(() => {
             skillsAutocompleteSection.removeClass('display-none')
             // TODO: query servlet to get matching skills
             let matchingSkills = ['Java', 'Javascript'];
-            updateSuggestions(matchingSkills);
+            updateSkillsSuggestions(matchingSkills);
         } else
             skillsAutocompleteSection.addClass('display-none')
 
@@ -27,8 +27,7 @@ $(document).ready(() => {
      * Shows available skills
      * @param skills: a not empty list of skills
      * */
-    function updateSuggestions(skills) {
-        console.log('called')
+    function updateSkillsSuggestions(skills) {
         const skillsSuggestionsContainer = $("#skills-autocomplete-list");
         skillsSuggestionsContainer.empty();
 
