@@ -319,6 +319,10 @@
     color: var(--purple);
 }
 
+.suggestion-error {
+    border: 2px solid #c92626 !important;
+}
+
 /***/
 a:link {
     color: var(--purple);

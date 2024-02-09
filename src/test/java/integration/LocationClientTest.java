@@ -12,6 +12,6 @@ public class LocationClientTest {
     @Test
     public void testGetSuggestions() throws Exception {
         List<Location> locations = LocationClient.getSuggestions("Rom");
-        Assertions.assertNotNull(locations.get(0));
+        Assertions.assertFalse(locations.isEmpty());
     }
 }

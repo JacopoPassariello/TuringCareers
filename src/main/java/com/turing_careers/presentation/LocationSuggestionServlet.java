@@ -34,6 +34,9 @@ public class LocationSuggestionServlet extends HttpServlet {
         List<Location> locations;
         try {
             locations = LocationClient.getSuggestions(query);
+            for (Location loc : locations) {
+                System.out.println(loc);
+            }
             if (locations.isEmpty()) {
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 return;
