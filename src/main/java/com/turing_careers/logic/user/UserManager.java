@@ -140,6 +140,7 @@ public class UserManager {
                 //TODO: controllare che le skills dello user siano presenti nel database
                 || user.getLanguages().isEmpty()
                 //TODO: controllare che le lingue dello user siano presenti nel database
+                || user.getLocation() == null // Aggiunto check su location
         ) throw new UserNotValidException();
     }
 

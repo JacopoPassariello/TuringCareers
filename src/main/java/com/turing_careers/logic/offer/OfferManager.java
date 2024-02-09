@@ -60,7 +60,7 @@ public class OfferManager {
                 || offer.getLanguages().size() == 0
                 || offer.getLocationType().isEmpty()
                 || offer.getEmployer() == null
-                || offer.getLocationType() == OfferManager.IN_PLACE && offer.getLocation() == null
+                || offer.getLocationType().equals(OfferManager.IN_PLACE) && offer.getLocation() == null
         ) throw new OfferNotValidException("Invalid Offer Input!");
     }
 }
