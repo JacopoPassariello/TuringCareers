@@ -1,5 +1,6 @@
 package com.turing_careers.logic.auth;
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.User;
 
 /**
@@ -17,7 +18,7 @@ public abstract class Authenticator {
     /**
      *
      * */
-    public abstract void signupUser(User user) throws Exception;
+    public abstract void signupUser(User user) throws Exception, PersistenceException;
 
     /**
      *

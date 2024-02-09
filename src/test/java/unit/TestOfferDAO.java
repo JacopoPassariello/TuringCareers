@@ -3,6 +3,7 @@ package unit;
 import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.OfferDAO;
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class TestOfferDAO {
     @Test
-    public void addOfferTest() throws Exception {
+    public void addOfferTest() throws PersistenceException {
         OfferDAO offerDAO = OfferDAO.getInstance();
         EmployerDAO employerDAO = EmployerDAO.getInstance();
         LocationDAO locationDAO = LocationDAO.getInstance();
@@ -28,7 +29,7 @@ public class TestOfferDAO {
             employerDAO.addEmployer(employer);
             locationDAO.addLocation(location);
             offerDAO.addOffer(offer);
-        } catch (Exception ex) {
+        } catch (PersistenceException ex) {
             Assertions.fail();
         }
 

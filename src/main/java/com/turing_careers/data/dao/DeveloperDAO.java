@@ -39,27 +39,27 @@ public class DeveloperDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addDeveloper(Developer developer) throws Exception {
+    public void addDeveloper(Developer developer) throws PersistenceException  {
         try {
             em.getTransaction().begin();
             em.persist(developer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeDeveloper(Developer developer) throws Exception {
+    public void removeDeveloper(Developer developer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(developer));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateDeveloper(Developer developer) throws Exception {
+    public void updateDeveloper(Developer developer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(developer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

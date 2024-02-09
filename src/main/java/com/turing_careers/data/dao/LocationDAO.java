@@ -39,27 +39,27 @@ public class LocationDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addLocation(Location location) throws Exception {
+    public void addLocation(Location location) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(location);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeLocation(Location location) throws Exception {
+    public void removeLocation(Location location) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(location));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateLocation(Location location) throws Exception {
+    public void updateLocation(Location location) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(location);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }
