@@ -1,6 +1,7 @@
 package integration;
 
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.logic.auth.EmployerAuthenticator;
 import com.turing_careers.logic.auth.InvalidCredentialsException;
@@ -24,7 +25,7 @@ public class AuthServiceTest {
 
         try {
             authService.signupUser(employer);
-        } catch (Exception exception) {
+        } catch (PersistenceException exception) {
             exception.printStackTrace();
             fail("Unexpected exception occurred: " + exception.getMessage());
         }

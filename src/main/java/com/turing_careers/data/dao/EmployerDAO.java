@@ -48,27 +48,27 @@ public class EmployerDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addEmployer(Employer employer) throws Exception {
+    public void addEmployer(Employer employer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(employer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeEmployer(Employer employer) throws Exception {
+    public void removeEmployer(Employer employer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(employer));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateEmployer(Employer employer) throws Exception {
+    public void updateEmployer(Employer employer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(employer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

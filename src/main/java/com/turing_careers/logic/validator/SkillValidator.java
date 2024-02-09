@@ -15,7 +15,7 @@ public class SkillValidator {
      * @param skillList lista di skill da validare.
      * @throws ValidationException eccezione lanciata quando una skill non è presente nel db.
      */
-    public void validateSkills(List<Skill> skillList) throws ValidationException {
+    public static void validateSkills(List<Skill> skillList) throws ValidationException {
         SkillDAO validator = SkillDAO.getInstance();
         List<Skill> dbSkills = validator.getSkills();
         for (Skill s : skillList) {

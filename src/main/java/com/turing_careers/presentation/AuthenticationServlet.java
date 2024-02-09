@@ -1,11 +1,13 @@
 package com.turing_careers.presentation;
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.logic.auth.*;
 import com.turing_careers.logic.user.UpdateProfileException;
 import com.turing_careers.logic.user.UserManager;
 import com.turing_careers.logic.user.UserNotValidException;
+import com.turing_careers.logic.validator.ValidationException;
 import jakarta.persistence.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -81,13 +83,13 @@ public class AuthenticationServlet extends HttpServlet {
                 Developer dev = new Developer();
                 try {
                     UserManager.createProfile(dev);
-                } catch (UpdateProfileException e) {
+                } catch (PersistenceException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
-                } catch (UserNotValidException e) {
+                } catch (ValidationException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;
@@ -102,13 +104,13 @@ public class AuthenticationServlet extends HttpServlet {
                 Employer emp = new Employer();
                 try {
                     UserManager.createProfile(emp);
-                } catch (UpdateProfileException e) {
+                } catch (PersistenceException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
-                } catch (UserNotValidException e) {
+                } catch (ValidationException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;

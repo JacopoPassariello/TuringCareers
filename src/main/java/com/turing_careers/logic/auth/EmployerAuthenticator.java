@@ -1,6 +1,7 @@
 package com.turing_careers.logic.auth;
 
 import com.turing_careers.data.dao.EmployerDAO;
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.User;
 
@@ -28,7 +29,7 @@ public class EmployerAuthenticator extends Authenticator {
     }
 
     @Override
-    public void signupUser(User user) throws Exception {
+    public void signupUser(User user) throws InvalidParameterException, PersistenceException {
         if (!(user instanceof Employer))
             throw new InvalidParameterException("EmployerAuthService: Not an Employer");
         Employer emp = (Employer) user;
@@ -38,10 +39,6 @@ public class EmployerAuthenticator extends Authenticator {
         emp.setPassword(encryptedPassword);
 
         EmployerDAO employerDAO = EmployerDAO.getInstance();
-        try {
-            employerDAO.addEmployer((Employer) user);
-        } catch (Exception ex) {
-            throw new Exception(ex.getMessage());
-        }
+        employerDAO.addEmployer((Employer) user);
     }
 }

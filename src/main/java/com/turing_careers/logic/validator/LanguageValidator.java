@@ -17,7 +17,7 @@ public class LanguageValidator {
      * @throws ValidationException eccezione lanciata quando incontra una lingua non presente nel database.
 
      **/
-    public void validateLanguages(List<Language> languageList) throws ValidationException {
+    public static void validateLanguages(List<Language> languageList) throws ValidationException {
         LanguageDAO validator = LanguageDAO.getInstance();
         List<Language> dbLangs = validator.getLanguages();
         for (Language l : languageList) {
