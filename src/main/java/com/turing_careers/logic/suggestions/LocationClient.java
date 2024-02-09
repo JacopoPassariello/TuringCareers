@@ -26,11 +26,7 @@ public class LocationClient {
         // Setup
         String endpoint = null;
         try {
-             endpoint = String.format(
-                    API_ENDPOINT,
-                    query,
-                    System.getenv("PLACES_KEY")
-            );
+             endpoint = String.format(API_ENDPOINT, query, System.getenv("PLACES_KEY"));
         } catch (NullPointerException noKeyException) {
             System.out.println("Can't Find PLACES_KEY in environment variables");
         } catch (SecurityException ex) {
