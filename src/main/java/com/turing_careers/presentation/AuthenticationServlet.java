@@ -28,7 +28,7 @@ public class AuthenticationServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         boolean authOutcome = false;
-        
+
         if (authType.equals("login")) {
             if (userType.equals("developer")) {
 
@@ -133,7 +133,7 @@ public class AuthenticationServlet extends HttpServlet {
                          String authType, Boolean authOutcome) throws ServletException, IOException {
         if (authOutcome) {
             /*TODO cambiare
-            */
+             */
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else {
