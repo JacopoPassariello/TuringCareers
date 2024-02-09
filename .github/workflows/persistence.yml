@@ -46,5 +46,5 @@ jobs:
           mysql -u root -p"tc_root" -h 127.0.0.1 -P"$PORT" turing_careers < ./database/tabelleTuringCareers.sql
 
       - name: Run TestSkillDAO
-        run: mvn test -Dtest=unit.TestSkillDAO
+        run: mvn test
 
