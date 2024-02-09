@@ -82,17 +82,13 @@ public class AuthenticationServlet extends HttpServlet {
                 try {
                     UserManager.createProfile(dev);
                 } catch (UpdateProfileException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 } catch (UserNotValidException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 }
 
                 HttpSession session = request.getSession();
@@ -103,17 +99,11 @@ public class AuthenticationServlet extends HttpServlet {
                 try {
                     UserManager.createProfile(emp);
                 } catch (UpdateProfileException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 } catch (UserNotValidException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
