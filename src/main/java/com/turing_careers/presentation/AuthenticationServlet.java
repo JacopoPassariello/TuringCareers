@@ -36,10 +36,17 @@ public class AuthenticationServlet extends HttpServlet {
                     String encryptedPassword = encryptor.encrypt(password);
                     devAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat 
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
+                //andrebbe fatto il retrieve dell'utente appena creato
+                //per verificare che sia andato tutto a buon fine
+                //e per passarlo alla sessione
                 //session.setAttribute("user", emp);
 
             } else if (userType.equals("employer")) {
@@ -50,10 +57,17 @@ public class AuthenticationServlet extends HttpServlet {
                     String encryptedPassword = encryptor.encrypt(password);
                     empAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
+                //andrebbe fatto il retrieve dell'utente appena creato
+                //per verificare che sia andato tutto a buon fine
+                //e per passarlo alla sessione
                 //session.setAttribute("user", emp);
             }
         } else if (authType.equals("register")) {
@@ -61,7 +75,7 @@ public class AuthenticationServlet extends HttpServlet {
             final String firstname = request.getParameter("firstname");
             final String lastname = request.getParameter("lastname");
             //controlliamo mail e password passati dall'utente per verificare
-            //che rispettino il giusto formato
+            //che rispettino il formato giusto
             if (!this.validate(request)) {
                 authOutcome = false;
                 proceed(request, response, authType, authOutcome);
@@ -71,8 +85,16 @@ public class AuthenticationServlet extends HttpServlet {
                 try {
                     UserManager.createProfile(dev);
                 } catch (UpdateProfileException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 } catch (UserNotValidException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 }
 
@@ -81,6 +103,21 @@ public class AuthenticationServlet extends HttpServlet {
                 session.setAttribute("utente", dev);
             } else if (userType.equals("employer")) {
                 Employer emp = new Employer();
+                try {
+                    UserManager.createProfile(emp);
+                } catch (UpdateProfileException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                } catch (UserNotValidException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                }
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
                 session.setAttribute("utente", emp);
@@ -88,12 +125,6 @@ public class AuthenticationServlet extends HttpServlet {
         }
         proceed(request, response, authType, authOutcome);
     }
-
-    /**
-     * TODO:
-     * - Implementare Authenticator: classe nel package domain che gestisce logica di login e logout
-     * - Implementare DeveloperDAO/Repository e EmployerDAO/Repository: classi che effettuano query al database
-     * */
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //vuoto
