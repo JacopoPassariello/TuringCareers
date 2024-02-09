@@ -3,6 +3,9 @@ package com.turing_careers.logic.offer;
 import com.turing_careers.data.dao.OfferDAO;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
+import com.turing_careers.logic.validator.LanguageValidator;
+import com.turing_careers.logic.validator.SkillValidator;
+import com.turing_careers.logic.validator.ValidationException;
 
 /**
  *
@@ -54,6 +57,10 @@ public class OfferManager {
     }
 
     public static void checkValidity(Offer offer) throws OfferNotValidException {
+
+        SkillValidator skillValidator = new SkillValidator();
+        LanguageValidator languageValidator = new LanguageValidator();
+
         if (offer.getDescription().isEmpty()
                 || offer.getTitle().isEmpty()
                 || offer.getSkills().size() == 0
@@ -62,5 +69,13 @@ public class OfferManager {
                 || offer.getEmployer() == null
                 || offer.getLocationType().equals(OfferManager.IN_PLACE) && offer.getLocation() == null
         ) throw new OfferNotValidException("Invalid Offer Input!");
+
+        //CHECKME: blocco di codice per validaione di skill language
+        try {
+            skillValidator.validateSkills(offer.getSkills());
+            languageValidator.validateLanguages(offer.getLanguages());
+        }catch(ValidationException e) {
+            throw new OfferNotValidException(e.getMessage());
+        }
     }
 }

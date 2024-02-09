@@ -1,7 +1,6 @@
 package unit;
 
 import com.turing_careers.data.dao.EmployerDAO;
-import com.turing_careers.data.dao.LanguageDAO;
 import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.OfferDAO;
 import com.turing_careers.data.model.*;

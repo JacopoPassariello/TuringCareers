@@ -4,6 +4,10 @@ import com.turing_careers.data.dao.DeveloperDAO;
 import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.logic.validator.LanguageValidator;
+import com.turing_careers.logic.validator.SkillValidator;
+import com.turing_careers.logic.validator.ValidationException;
+
 import java.util.regex.Pattern;
 
 
@@ -128,6 +132,8 @@ public class UserManager {
      */
     private static void checkValidity(Developer user) throws UserNotValidException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+        SkillValidator skillValidator = new SkillValidator();
+        LanguageValidator languageValidator = new LanguageValidator();
 
         if (user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
@@ -137,11 +143,16 @@ public class UserManager {
                 || user.getMail().length() == 0
                 || !mailPattern.matcher(user.getMail()).matches()
                 || user.getSkills().isEmpty()
-                //TODO: controllare che le skills dello user siano presenti nel database
                 || user.getLanguages().isEmpty()
-                //TODO: controllare che le lingue dello user siano presenti nel database
                 || user.getLocation() == null // Aggiunto check su location
         ) throw new UserNotValidException();
+        //CHECKME: nuovo blocco di codice per la validazione di skill e language
+        try {
+            languageValidator.validateLanguages(user.getLanguages());
+            skillValidator.validateSkills(user.getSkills());
+        } catch(ValidationException e) {
+            throw new UserNotValidException(e.getMessage());
+        }
     }
 
     /**
