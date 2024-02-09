@@ -16,7 +16,7 @@ public class TestLocationDAO {
     @Test
     public void addLocationTest() throws ParameterResolutionException {
         LocationDAO locationDAO = LocationDAO.getInstance();
-        Location location = new Location("Milan", "3455", "5675");
+        Location location = new Location("Milan", 3455.0, 56.0);
 
         try {
             locationDAO.addLocation(location);

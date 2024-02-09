@@ -36,6 +36,7 @@ public class AuthenticationServlet extends HttpServlet {
                 try {
                     Argon2Encryption encryptor = new Argon2Encryption();
                     String encryptedPassword = encryptor.encrypt(password);
+                    System.out.println("Password criptata: " + encryptedPassword);
                     devAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
                     authOutcome = false;

@@ -15,7 +15,7 @@ public class TestDeveloperDAO {
     public void addDeveloperTest() {
         DeveloperDAO developerDAO = DeveloperDAO.getInstance();
         LocationDAO locationDAO = LocationDAO.getInstance();
-        Location location = new Location("Milano", "323", "232");
+        Location location = new Location("Milano", 323.0, 232.0);
         List<Skill> skills = new ArrayList<>();
         List<Language> languages = new ArrayList<>();
         List<Offer> offers = new ArrayList<>();

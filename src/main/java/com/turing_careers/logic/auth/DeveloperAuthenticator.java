@@ -22,8 +22,9 @@ public class DeveloperAuthenticator extends Authenticator {
         super.setEncryptionStrategy(new Argon2Encryption());
         String encryptedPassword = encryptionStrategy.encrypt(password);
 
-        DeveloperDAO developerDAO = DeveloperDAO.getInstance();
-        Developer dev = developerDAO.getDeveloperByMailAndPassword(email, encryptedPassword);
+        DeveloperDAO updater = DeveloperDAO.getInstance();
+        Developer dev = updater.getDeveloperByMail(email);
+        encryptionStrategy.verify(password, dev.getPassword());
         if (dev == null) {
             throw new InvalidCredentialsException();
         }

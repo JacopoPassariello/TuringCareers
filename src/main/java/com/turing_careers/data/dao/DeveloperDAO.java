@@ -2,6 +2,7 @@ package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
+import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.Skill;
 
 import java.util.List;
@@ -35,6 +36,16 @@ public class DeveloperDAO extends DAO {
                         .createNamedQuery("findDevsByMailAndPassword", Developer.class)
                         .setParameter("mail", mail)
                         .setParameter("password", password)
+                        .getSingleResult()
+        ).orElse(null);
+    }
+
+
+    public Developer getDeveloperByMail(String mail) {
+        return Optional.of(
+                super.em
+                        .createNamedQuery("findDeveloperByMail", Developer.class)
+                        .setParameter("mail", mail)
                         .getSingleResult()
         ).orElse(null);
     }
