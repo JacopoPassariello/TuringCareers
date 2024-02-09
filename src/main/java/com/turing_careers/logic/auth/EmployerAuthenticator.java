@@ -21,7 +21,9 @@ public class EmployerAuthenticator extends Authenticator {
 
         try {
             Employer emp = employerDAO.getEmployerByMail(email);
+            System.out.println(emp);
             String psw = emp.getPassword();
+
             encryptionStrategy.verify(password, psw);
         } catch (InvalidCredentialsException invalidCredentials) {
             throw new InvalidCredentialsException(invalidCredentials.getMessage());

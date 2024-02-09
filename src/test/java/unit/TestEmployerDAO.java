@@ -13,7 +13,13 @@ public class TestEmployerDAO {
     public void addEmployerTest()
     {
         EmployerDAO employerDAO = EmployerDAO.getInstance();
-        Employer employer = new Employer("Antonio", "Pagnotta", "333@gmail.com", "123456", "Tony Loaf Inc.");
+        Employer employer = new Employer(
+                "Antonio",
+                "Pagnotta",
+                "diocan@gmail.com",
+                "123456",
+                "Tony Loaf Inc."
+        );
 
         try {
             employerDAO.addEmployer(employer);

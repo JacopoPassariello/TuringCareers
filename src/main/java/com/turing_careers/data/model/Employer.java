@@ -49,10 +49,11 @@ public class Employer implements User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     private List<Offer> offers;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "EmployerDeveloper",
-            joinColumns = @JoinColumn(name = "employerId")
+            joinColumns = @JoinColumn(name = "employerId"),
+            inverseJoinColumns = @JoinColumn(name = "developerId")
     )
     private List<Developer> savedDevelopers;
 
