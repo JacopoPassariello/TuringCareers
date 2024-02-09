@@ -103,6 +103,11 @@ body {
     transition: color 0.2s ease-out;
 }
 
+.submit-button:hover {
+    color: var(--white);
+    background-color: var(--purple);
+}
+
 #password-input {
     outline: none;
     width: 100%;
@@ -126,6 +131,10 @@ body {
     height: 25px;
     z-index: 10;
     opacity: 0;
+}
+
+#login-redirect {
+    color: var(--black);
 }
 
 .material-symbols-outlined {

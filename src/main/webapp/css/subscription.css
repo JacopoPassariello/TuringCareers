@@ -1,42 +1,76 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    #register-form {
+    .register-form-wrapper {
         min-width: 80vw;
         min-height: 60dvh;
+    }
+    #register-form {
+        min-width: 80dvw;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    #register-form {
+    .register-form-wrapper {
         min-width: 80vw;
         min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 80dvw;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #register-form {
+    .register-form-wrapper {
         min-width: 70vw;
         min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 70dvw;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    #register-form {
+    .register-form-wrapper {
         min-width: 60vw;
         min-height: 60dvh;
+    }
+
+    #register-form {
+        min-width: 60vw;
     }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    #register-form {
+    .register-form-wrapper {
         min-width: 50vw;
         min-height: 60dvh;
     }
+
+    #register-form {
+        min-width: 50vw;
+    }
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity:  0.4;
+        margin-right: 60px;
+    }
+    100% {
+        opacity:  1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.2s ease-in-out  0s  1 normal none running;
+}
+
 
 #register-main-content {
     width: 100%;
@@ -52,12 +86,28 @@
     transition: box-shadow 0.15s ease-out;
 }
 
-#register-form {
-    padding-top: 54px;
+.register-form-wrapper:hover {
+    box-shadow: 0 6px 8px rgba(33, 38, 44, 0.4);
 }
 
-#register-form-wrapper:hover {
-    box-shadow: 0 6px 8px rgba(33, 38, 44, 0.4);
+#register-form-0 {
+    width: 100%;
+    min-height: 60dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-form-0-content {
+    width: 80%;
+}
+
+#register-form-1-wrapper {
+    width: 100%;
+    min-height: 60dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
@@ -85,10 +135,10 @@
 }
 
 #register-form-user-type-input {
-    width: 80%;
     height: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
 .register-user-type {
@@ -100,6 +150,10 @@
 .register-user-type input {
     width: 18px;
     margin-bottom: 6px;
+}
+
+.error {
+    color: rgb(231, 61, 61);
 }
 
 .input-container {
@@ -136,15 +190,6 @@
 
 .switch-form-right {
 
-}
-
-.error {
-    padding-top: 1rem;
-    color: var(--purple);
-    font-size: 16px;
-    font-weight: 600;
-    text-align: center;
-    display: none;
 }
 
 .login {
