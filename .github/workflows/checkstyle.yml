@@ -1,6 +1,6 @@
 name: Checkstyle
 
-on: [commit]
+on: [push]
 
 jobs:
   checkstyle:

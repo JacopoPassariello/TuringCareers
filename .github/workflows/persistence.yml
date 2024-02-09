@@ -31,7 +31,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -DskipTests
 
       - name: Verify MySQL connection
         env:
@@ -40,6 +40,7 @@ jobs:
           while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
             sleep  1
           done
+          mysql -u root -p"tc_root" turing_careers < database/tablelleTuringCareers.sql
 
       - name: Run TestSkillDAO
         run: mvn test -Dtest=unit.TestSkillDAO
