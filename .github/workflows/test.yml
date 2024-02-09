@@ -1,4 +1,4 @@
-name: Persistence Unit Test
+name: Testing
 
 on: [push]
 
@@ -45,6 +45,6 @@ jobs:
         run: |
           mysql -u root -p"tc_root" -h 127.0.0.1 -P"$PORT" turing_careers < ./database/tabelleTuringCareers.sql
 
-      - name: Run TestSkillDAO
+      - name: Run Tests
         run: mvn test
 
