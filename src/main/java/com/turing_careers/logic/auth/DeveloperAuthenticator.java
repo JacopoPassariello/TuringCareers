@@ -1,6 +1,7 @@
 package com.turing_careers.logic.auth;
 
 import com.turing_careers.data.dao.DeveloperDAO;
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.User;
 
@@ -38,6 +39,8 @@ public class DeveloperAuthenticator extends Authenticator {
             developerDAO.addDeveloper((Developer) user);
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
+        } catch (PersistenceException e) {
+            throw new RuntimeException(e);
         }
     }
 }
