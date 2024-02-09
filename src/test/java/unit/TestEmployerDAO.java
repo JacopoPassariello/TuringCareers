@@ -10,7 +10,8 @@ import java.util.List;
 
 public class TestEmployerDAO {
     @Test
-    public void addEmployerTest() {
+    public void addEmployerTest()
+    {
         EmployerDAO employerDAO = EmployerDAO.getInstance();
         Employer employer = new Employer("Antonio", "Pagnotta", "333@gmail.com", "123456", "Tony Loaf Inc.");
 

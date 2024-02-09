@@ -38,10 +38,8 @@ public class DeveloperAuthenticator extends Authenticator {
         DeveloperDAO developerDAO = DeveloperDAO.getInstance();
         try {
             developerDAO.addDeveloper((Developer) user);
-        } catch (Exception ex) {
+        } catch (PersistenceException ex) {
             throw new Exception(ex.getMessage());
-        } catch (PersistenceException e) {
-            throw new RuntimeException(e);
         }
     }
 }

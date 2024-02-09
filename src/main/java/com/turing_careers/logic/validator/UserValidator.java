@@ -2,12 +2,13 @@ package com.turing_careers.logic.validator;
 
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.logic.user.UserNotValidException;
+
 
 import java.util.regex.Pattern;
 
 /**
  * Classe che implementa la validazione di un oggetto User.
+ * @author Jacopo Passariello
  */
 public class UserValidator {
     /**
@@ -20,7 +21,8 @@ public class UserValidator {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
 
-        if (user.getFirstName().length() == 0
+        if (user == null
+                || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
@@ -45,7 +47,8 @@ public class UserValidator {
     public static void checkValidity(Employer user) throws ValidationException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
-        if (user.getFirstName().length() == 0
+        if (user == null
+                || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64

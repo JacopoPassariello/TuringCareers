@@ -11,13 +11,17 @@ import com.turing_careers.logic.validator.SkillValidator;
 import com.turing_careers.logic.validator.UserValidator;
 import com.turing_careers.logic.validator.ValidationException;
 
-import java.util.regex.Pattern;
-
 
 /**
  * Classe che implementa i servizi di modifica e cancellazione di profili di utenti, oltre all'operazione di salvataggio di un developer da parte di un employer
+ * @author Claudio Gaudino
  */
 public class UserManager {
+    /**
+     * @param newProfile Entità che rappresenta il nuovo profilo.
+     * @throws PersistenceException quando si verifica un errore nel tentativo di persistenza dell'entità.
+     * @throws ValidationException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     */
     public static void createProfile(Developer newProfile) throws PersistenceException, ValidationException {
         UserValidator.checkValidity(newProfile);
         DeveloperDAO updater = DeveloperDAO.getInstance();
@@ -26,8 +30,8 @@ public class UserManager {
     /**
      * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
      * @param newProfile L'Entità che rappresenta il nuovo profilo.
-     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di aggiunta dell'entità.
-     * @throws UserNotValidException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     * @throws PersistenceException Lanciata quando si verifica un errore nel tentativo di persistenza dell'entità.
+     * @throws ValidationException Lanciata quando almeno uno dei campi di newProfile non è valido.
      */
     public static void createProfile(Employer newProfile) throws PersistenceException, ValidationException {
         UserValidator.checkValidity(newProfile);
@@ -38,8 +42,8 @@ public class UserManager {
     /**
      * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
      * @param editedProfile L'Entità che rappresenta la versione aggiornata del profilo
-     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
-     * @throws UserNotValidException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     * @throws PersistenceException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
+     * @throws ValidationException Lanciata quando almeno uno dei campi di newProfile non è valido.
      */
     public static void editProfile(Developer editedProfile) throws PersistenceException, ValidationException {
         UserValidator.checkValidity(editedProfile);
@@ -50,7 +54,7 @@ public class UserManager {
     /**
      * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
      * @param editedProfile L'Entità che rappresenta la versione aggiornata del profilo
-     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
+     * @throws PersistenceException Lanciata quando si verifica un errore nel tentativo di merge dell'entità.
      * @throws ValidationException Lanciata quando almeno uno dei campi di newProfile non è valido.
      */
     public static void editProfile(Employer editedProfile) throws PersistenceException, ValidationException {
@@ -91,9 +95,9 @@ public class UserManager {
      * Implementa l'operazione di salvataggio di un profilo di un developer da parte di un employer
      * @param employer L'Entità che rappresenta l'employer che sta eseguendo l'operazione.
      * @param developer L'Entità che rappresenta il developer che sta venendo salvato.
-     * @throws UpdateProfileException lanciata quando si verifica un'errore nell'aggiunta del profilo alla lista dei Developer salvati.
+     * @throws PersistenceException lanciata quando si verifica un'errore nell'aggiunta del profilo alla lista dei Developer salvati.
      */
-    public static void saveDeveloperProfile(Employer employer, Developer developer) throws UpdateProfileException, PersistenceException {
+    public static void saveDeveloperProfile(Employer employer, Developer developer) throws PersistenceException {
         EmployerDAO updater = EmployerDAO.getInstance();
         if (!employer.getSavedDevelopers().contains(developer)) {
             employer.getSavedDevelopers().add(developer);
