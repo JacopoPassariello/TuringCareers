@@ -80,7 +80,7 @@ public class UserManager {
      */
     public static void saveDeveloperProfile(Employer employer, Developer developer) throws UpdateProfileException {
         EmployerDAO updater = EmployerDAO.getInstance();
-        if(!employer.getSavedDevelopers().contains(developer)) {
+        if (!employer.getSavedDevelopers().contains(developer)) {
             employer.getSavedDevelopers().add(developer);
             try {
                 updater.updateEmployer(employer);
@@ -98,7 +98,7 @@ public class UserManager {
     private static void checkValidity(Developer user) throws UserNotValidException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
-        if(user.getFirstName().length() == 0
+        if (user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
@@ -120,7 +120,7 @@ public class UserManager {
     private static void checkValidity(Employer user) throws UserNotValidException {
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
-        if(user.getFirstName().length() == 0
+        if (user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64

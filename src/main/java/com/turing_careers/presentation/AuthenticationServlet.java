@@ -160,7 +160,7 @@ public class AuthenticationServlet extends HttpServlet {
         final String bio = request.getParameter("password");
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
-        if(firstname.length() == 0
+        if (firstname.length() == 0
                 || firstname.length() > 32
                 || lastname.length() == 0
                 || lastname.length() > 64
