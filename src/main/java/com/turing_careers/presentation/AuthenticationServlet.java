@@ -40,6 +40,9 @@ public class AuthenticationServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
+                //andrebbe fatto il retrieve dell'utente appena creato
+                //per verificare che sia andato tutto a buon fine
+                //e per passarlo alla sessione
                 //session.setAttribute("user", emp);
 
             } else if (userType.equals("employer")) {
@@ -54,6 +57,9 @@ public class AuthenticationServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
+                //andrebbe fatto il retrieve dell'utente appena creato
+                //per verificare che sia andato tutto a buon fine
+                //e per passarlo alla sessione
                 //session.setAttribute("user", emp);
             }
         } else if (authType.equals("register")) {
@@ -61,7 +67,7 @@ public class AuthenticationServlet extends HttpServlet {
             final String firstname = request.getParameter("firstname");
             final String lastname = request.getParameter("lastname");
             //controlliamo mail e password passati dall'utente per verificare
-            //che rispettino il giusto formato
+            //che rispettino il formato giusto
             if (!this.validate(request)) {
                 authOutcome = false;
                 proceed(request, response, authType, authOutcome);
