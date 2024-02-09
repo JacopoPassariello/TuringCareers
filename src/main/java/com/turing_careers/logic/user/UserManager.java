@@ -21,7 +21,12 @@ public class UserManager {
             throw new UpdateProfileException(e.getMessage());
         }
     }
-
+    /**
+     * Controlla la validità dei valori del profilo da aggiornare e lo aggiorna
+     * @param newProfile L'Entità che rappresenta il nuovo profilo.
+     * @throws UpdateProfileException Lanciata quando si verifica un errore nel tentativo di aggiunta dell'entità.
+     * @throws UserNotValidException Lanciata quando almeno uno dei campi di newProfile non è valido.
+     */
     public static void createProfile(Employer newProfile) throws UpdateProfileException, UserNotValidException {
         checkValidity(newProfile);
         EmployerDAO updater = EmployerDAO.getInstance();
@@ -70,6 +75,9 @@ public class UserManager {
      * @throws DeleteProfileException Lanciata quando la rimozione del profilo non va a buon fine.
      */
     public static void deleteAccount(Developer user) throws DeleteProfileException {
+        if (user.getId() == null) {
+            throw new DeleteProfileException("User ID is null!");
+        }
         DeveloperDAO updater = DeveloperDAO.getInstance();
         try {
             updater.removeDeveloper(user);
@@ -84,6 +92,9 @@ public class UserManager {
      * @throws DeleteProfileException Lanciata quando la rimozione del profilo non va a buon fine.
      */
     public static void deleteAccount(Employer user) throws DeleteProfileException {
+        if (user.getId() == null) {
+            throw new DeleteProfileException("User ID is null!");
+        }
         EmployerDAO updater = EmployerDAO.getInstance();
         try {
             updater.removeEmployer(user);
@@ -96,7 +107,7 @@ public class UserManager {
      * Implementa l'operazione di salvataggio di un profilo di un developer da parte di un employer
      * @param employer L'Entità che rappresenta l'employer che sta eseguendo l'operazione.
      * @param developer L'Entità che rappresenta il developer che sta venendo salvato.
-     * @throws UpdateProfileException
+     * @throws UpdateProfileException lanciata quando si verifica un'errore nell'aggiunta del profilo alla lista dei Developer salvati.
      */
     public static void saveDeveloperProfile(Employer employer, Developer developer) throws UpdateProfileException {
         EmployerDAO updater = EmployerDAO.getInstance();
