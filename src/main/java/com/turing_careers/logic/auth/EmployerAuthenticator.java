@@ -7,7 +7,7 @@ import com.turing_careers.data.model.User;
 import java.security.InvalidParameterException;
 
 /**
- *
+ * @author Antonino Lorenzo
  * */
 public class EmployerAuthenticator extends Authenticator {
 

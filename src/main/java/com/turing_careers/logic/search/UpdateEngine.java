@@ -2,6 +2,9 @@ package com.turing_careers.logic.search;
 
 import com.turing_careers.data.model.Item;
 
+/**
+ * @author Antonino Lorenzo
+ * */
 public class UpdateEngine {
     private ClientType type;
     public UpdateEngine(ClientType type) {

@@ -3,7 +3,7 @@ package com.turing_careers.logic.auth;
 import com.turing_careers.data.model.User;
 
 /**
- *
+ * @author Antonino Lorenzo
  * */
 public abstract class Authenticator {
     protected EncryptionStrategy encryptionStrategy;

@@ -14,6 +14,7 @@ import java.util.Optional;
 
 /**
  * Created by ClientFactory, serves as interface for ApiClient that manages the requests to Recommendations API.
+ * @author Antonino Lorenzo
  * */
 public class RecommenderEngine {
     private ClientType type;

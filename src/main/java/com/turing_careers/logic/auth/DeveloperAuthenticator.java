@@ -8,7 +8,7 @@ import java.security.InvalidParameterException;
 
 
 /**
- *
+ * @author Antonino Lorenzo
  * */
 public class DeveloperAuthenticator extends Authenticator {
 

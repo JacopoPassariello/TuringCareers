@@ -3,6 +3,7 @@ package com.turing_careers.logic.search;
 /**
  * Only class a Client should interact with directly, creates a RecommenderEngine or UpdateEngine
  * based on the ClientType specified; users must set a ClientType that can be OFFER or DEVELOPER.
+ * @author Antonino Lorenzo
  * */
 public class ClientFactory {
     private ClientType clientType = null;
