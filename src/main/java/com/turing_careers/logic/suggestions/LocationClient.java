@@ -1,19 +1,16 @@
 package com.turing_careers.logic.suggestions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.model.Location;
-import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Antonino Lorenzo
@@ -21,7 +18,12 @@ import java.util.Optional;
 public class LocationClient {
     private static final String API_ENDPOINT = "https://maps.googleapis.com/maps/api/place" +
                                                 "/textsearch/json?query=%s&key=%s";
-    public static List<LocationMock> getSuggestions(String query) {
+
+    /**
+     * @param query: query for Google Places API
+     * */
+    public static List<Location> getSuggestions(String query) throws Exception {
+        // Setup
         String endpoint = null;
         try {
              endpoint = String.format(
@@ -44,33 +46,30 @@ public class LocationClient {
                 .get();
 
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
+            // Parse result
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
-                String entity = response.readEntity(String.class);
-                System.out.println(entity);
-                LocationMock[] locations = objectMapper.readValue(
-                        entity,
-                        LocationMock[].class
+                objectMapper.configure(
+                        DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                        false
                 );
-                System.out.println("Done");
-                return Arrays.asList(locations);
-            } catch (JsonProcessingException ex) {
 
+                return objectMapper.readValue(
+                        response.readEntity(String.class),
+                        PlacesResponse.class
+                ).getLocations();
+            } catch (JsonProcessingException ex) {
+                throw new Exception(ex.getMessage());
             }
         } else {
-            System.out.println("Error: " + response.getStatus());
+            throw new Exception("Response Status: " + response.getStatus());
         }
-
-        return new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        List<LocationMock> locMoc = LocationClient.getSuggestions("Rom");
-
-        for (LocationMock loc : locMoc) {
-            System.out.println(
-                loc
-            );
+    public static void main(String[] args) throws Exception {
+        List<Location> locations = LocationClient.getSuggestions("Rom");
+        for (Location loc : locations) {
+            System.out.println("> " + loc);
         }
     }
 }
