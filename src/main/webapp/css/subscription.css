@@ -102,7 +102,16 @@
     width: 80%;
 }
 
+/*TODO: refactor as form-wrapper class*/
 #register-form-1-wrapper {
+    width: 100%;
+    min-height: 60dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-form-2-wrapper {
     width: 100%;
     min-height: 60dvh;
     display: flex;
@@ -125,7 +134,7 @@
     margin-top: 10px;
 }
 
-#register-form-input-wrapper {
+.register-form-input-wrapper {
     width: 100%;
     min-height: 100px;
     display: flex;
@@ -170,7 +179,7 @@
 }
 
 .register-switch-form {
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -200,6 +209,66 @@
     margin-top: 20px;
 }
 
+#register-form-2 {
+    width: 80%;
+}
+
+.form-labeled-input h3 {
+    font-size: 22px;
+}
+
+#form-2-inputs {
+    width: 100%;
+}
+
+/* SKILLS AND LOCATION */
+.autocomplete-wrapper {
+    border: 2px solid var(--purple);
+}
+
+.autocomplete-section {
+    border-top: 1px solid var(--light-gray);
+}
+
+.autocomplete-suggestions {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 16px;
+}
+
+#skill-tags {
+    list-style-type: none;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    margin: 0
+}
+
+.skill-tag {
+    background-color: rgba(195, 202, 210, 0.4);
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 0 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.skill-tag p {
+    color: var(--black);
+    font-size: 16px;
+}
+
+.skill-tag h3 {
+    color: var(--dark-gray);
+    font-size: 14px;
+    padding-top: 4px;
+}
+
+
+
+
+/***/
 a:link {
     color: var(--purple);
 }

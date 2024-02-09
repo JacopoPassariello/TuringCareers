@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="register-main-content" class="flex-center">
-        <form id="user-type-form" class="register-form-wrapper fade-in">
+        <form id="user-type-form" class="register-form-wrapper display-none  fade-in">
             <div id="register-form-0">
                 <div id="register-form-0-content">
                     <h3 class="no-select inter-bold">Scegli un tipo di account.</h3>
@@ -30,8 +30,8 @@
         </form>
         <form id="first-form" class="register-form-wrapper display-none fade-in">
             <div id="register-form-1-wrapper">
-                <div id="register-form">
-                    <div id="register-form-input-wrapper">
+                <div id="register-form" class="register-form-1">
+                    <div class="register-form-input-wrapper">
                         <input type="hidden" name="type" value="register">
                         <div class="input-container input-text ic1">
                             <input id="firstname" name="firstname" class="input inter-regular" type="text" placeholder="Nome" />
@@ -65,13 +65,67 @@
                 </div>
             </div>
         </form>
-        <form id="second-form" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
-            <div id="register-form-2">
-                <div class="register-switch-form-wrapper" >
-                    <div class="register-switch-form">
-                        <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
-                        <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
-                        <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+        <!-- Developer Form -->
+        <form id="second-form" class="register-form-wrapper fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+            <div id="register-form-2-wrapper">
+                <div id="register-form-2">
+                    <div id="form-2-inputs" class="">
+                        <div class="form-labeled-input">
+                            <div id="dev-skills-input">
+                                <h3 class="no-select inter-regular">Skill</h3>
+                                <div class="autocomplete-wrapper">
+                                    <div style="display: grid; grid-template-columns: 80% 20%">
+                                        <div style="display: flex; flex-wrap: wrap">
+                                            <ul id="skill-tags" style="">
+                                                <li class="skill-tag">
+                                                    <p class="no-select inter-regular">Python</p>
+                                                    <h3 class="no-select inter-regular">X</h3>
+                                                </li>
+                                            </ul>
+                                            <input id="skill-input-text" type="text" style="min-width: 80px; max-width: 200px">
+                                        </div>
+                                        <div>
+                                            <input type="button" value="Add">
+                                        </div>
+                                    </div>
+                                    <div class="autocomplete-section">
+                                        <ul class="autocomplete-suggestions">
+                                            <li>Java</li>
+                                            <li>Javascript</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-labeled-input">
+                            <div id="dev-locations-input">
+                                <h3 class="no-select inter-regular">Location</h3>
+                                <div class="autocomplete-wrapper">
+                                    <div>
+                                        <input type="text" class="input">
+                                    </div>
+                                    <div class="autocomplete-section">
+                                        <ul class="autocomplete-suggestions">
+                                            <li>
+                                                <i class="bi bi-geo-alt-fill"></i>
+                                                <p>Roma, Italia</p>
+                                            </li>
+                                            <li>
+                                                <i class="bi bi-geo-alt"></i>
+                                                <p>Romania</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-switch-form-wrapper" >
+                        <div class="register-switch-form">
+                            <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                            <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                            <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,5 +133,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/authFormValidate.js"></script>
+    <script type="text/javascript" src="js/skills.js"></script>
 </body>
 </html>
