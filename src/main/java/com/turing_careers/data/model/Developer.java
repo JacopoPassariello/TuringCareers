@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 @NamedQueries({
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
+    @NamedQuery(name = "findDeveloperByMail", query = "SELECT d FROM Developer d WHERE d.mail = :mail"),
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
 })
 public class Developer implements User, Item {

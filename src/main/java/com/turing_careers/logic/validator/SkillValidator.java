@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Classe che implementa la validazione di skill da effettuare quando vanno creati/aggiornati profili di Dev oppure Offerte.
+ * @author Jacopo Passariello
  */
 public class SkillValidator {
     /**
@@ -16,6 +17,9 @@ public class SkillValidator {
      * @throws ValidationException eccezione lanciata quando una skill non è presente nel db.
      */
     public static void validateSkills(List<Skill> skillList) throws ValidationException {
+        if (skillList.isEmpty()) {
+            throw new ValidationException("Skill List is empty!");
+        }
         SkillDAO validator = SkillDAO.getInstance();
         List<Skill> dbSkills = validator.getSkills();
         for (Skill s : skillList) {

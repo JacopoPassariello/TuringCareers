@@ -1,13 +1,13 @@
 package com.turing_careers.logic.validator;
 
 import com.turing_careers.data.dao.LanguageDAO;
-import com.turing_careers.data.dao.SkillDAO;
 import com.turing_careers.data.model.Language;
 
 import java.util.List;
 
 /**
  * Classe che implementa la validazione di language da effettuare quando vanno creati/aggiornati profili di Dev oppure Offerte.
+ * @author Jacopo Passariello
  */
 public class LanguageValidator {
     /**
@@ -18,6 +18,9 @@ public class LanguageValidator {
 
      **/
     public static void validateLanguages(List<Language> languageList) throws ValidationException {
+        if (languageList.isEmpty()) {
+            throw new ValidationException("Language List is Empty");
+        }
         LanguageDAO validator = LanguageDAO.getInstance();
         List<Language> dbLangs = validator.getLanguages();
         for (Language l : languageList) {
