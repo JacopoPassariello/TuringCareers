@@ -36,18 +36,16 @@ public class AuthenticationServlet extends HttpServlet {
                     String encryptedPassword = encryptor.encrypt(password);
                     devAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
-                //andrebbe fatto il retrieve dell'utente appena creato
-                //per verificare che sia andato tutto a buon fine
-                //e per passarlo alla sessione
-                //session.setAttribute("user", emp);
+                /*TODO andrebbe fatto il retrieve dell'utente appena creato
+                   per verificare che sia andato tutto a buon fine
+                   e per passarlo alla sessione
+                   session.setAttribute("user", emp);
+                 */
 
             } else if (userType.equals("employer")) {
 
@@ -57,23 +55,22 @@ public class AuthenticationServlet extends HttpServlet {
                     String encryptedPassword = encryptor.encrypt(password);
                     empAuth.loginUser(mail, encryptedPassword);
                 } catch (InvalidCredentialsException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                    throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
-                //andrebbe fatto il retrieve dell'utente appena creato
-                //per verificare che sia andato tutto a buon fine
-                //e per passarlo alla sessione
-                //session.setAttribute("user", emp);
+                /*TODO andrebbe fatto il retrieve dell'utente appena creato
+                   per verificare che sia andato tutto a buon fine
+                   e per passarlo alla sessione
+                   session.setAttribute("user", emp);
+                 */
             }
         } else if (authType.equals("register")) {
 
             final String firstname = request.getParameter("firstname");
             final String lastname = request.getParameter("lastname");
+            final String bio = request.getParameter("bio");
             //controlliamo mail e password passati dall'utente per verificare
             //che rispettino il formato giusto
             if (!this.validate(request)) {
@@ -130,8 +127,11 @@ public class AuthenticationServlet extends HttpServlet {
         //vuoto
     }
 
-    private void proceed(HttpServletRequest request, HttpServletResponse response, String authType, Boolean authOutcome) throws ServletException, IOException {
+    private void proceed(HttpServletRequest request, HttpServletResponse response,
+                         String authType, Boolean authOutcome) throws ServletException, IOException {
         if (authOutcome) {
+            /*TODO cambiare
+            */
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else {
