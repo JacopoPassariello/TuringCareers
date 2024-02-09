@@ -236,6 +236,17 @@
     padding-left: 16px;
 }
 
+#skill-tags-section {
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+#skill-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 #skill-tags {
     list-style-type: none;
     display: flex;
@@ -260,12 +271,31 @@
 }
 
 .skill-tag h3 {
+    cursor: pointer;
     color: var(--dark-gray);
     font-size: 14px;
     padding-top: 4px;
 }
 
+#skill-input-text {
+    min-width: 80px;
+    height: 30px;
 
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+
+#add-skill-button {
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#add-skill-button:hover {
+    opacity: 0.8;
+}
 
 
 /***/
