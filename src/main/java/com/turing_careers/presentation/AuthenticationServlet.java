@@ -1,11 +1,13 @@
 package com.turing_careers.presentation;
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.logic.auth.*;
 import com.turing_careers.logic.user.UpdateProfileException;
 import com.turing_careers.logic.user.UserManager;
 import com.turing_careers.logic.user.UserNotValidException;
+import com.turing_careers.logic.validator.ValidationException;
 import jakarta.persistence.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -26,7 +28,7 @@ public class AuthenticationServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         boolean authOutcome = false;
-        
+
         if (authType.equals("login")) {
             if (userType.equals("developer")) {
 
@@ -81,14 +83,18 @@ public class AuthenticationServlet extends HttpServlet {
                 Developer dev = new Developer();
                 try {
                     UserManager.createProfile(dev);
-                } catch (UpdateProfileException e) {
-                    authOutcome = false;
-                    proceed(request, response, authType, authOutcome);
-                } catch (UserNotValidException e) {
+                } catch (PersistenceException e) {
                     //rivedere il comportamento in caso di eccezione
                     //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                } catch (ValidationException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
                 }
 
                 HttpSession session = request.getSession();
@@ -98,12 +104,18 @@ public class AuthenticationServlet extends HttpServlet {
                 Employer emp = new Employer();
                 try {
                     UserManager.createProfile(emp);
-                } catch (UpdateProfileException e) {
+                } catch (PersistenceException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
-                } catch (UserNotValidException e) {
+                    throw new RuntimeException(e);
+                } catch (ValidationException e) {
+                    //rivedere il comportamento in caso di eccezione
+                    //chiedere e frat
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
@@ -121,7 +133,7 @@ public class AuthenticationServlet extends HttpServlet {
                          String authType, Boolean authOutcome) throws ServletException, IOException {
         if (authOutcome) {
             /*TODO cambiare
-            */
+             */
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else {

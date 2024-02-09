@@ -38,27 +38,27 @@ public class LanguageDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addLanguage(Language language) throws Exception {
+    public void addLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(language);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex); }
     }
 
-    public void removeLanguage(Language language) throws Exception {
+    public void removeLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(language));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateLanguage(Language language) throws Exception {
+    public void updateLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(language);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

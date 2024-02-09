@@ -2,6 +2,9 @@ package com.turing_careers.logic.auth;
 
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
+/**
+ * @author Antonino Lorenzo
+ * */
 public class Argon2Encryption implements EncryptionStrategy {
 
     private static Argon2PasswordEncoder encoder;
@@ -34,19 +37,6 @@ public class Argon2Encryption implements EncryptionStrategy {
     public void verify(String raw, String original) throws InvalidCredentialsException {
         if (!encoder.matches(raw, original))
             throw new InvalidCredentialsException();
-    }
-
-    public static void main(String[] args) {
-        Argon2Encryption enc1 = new Argon2Encryption();
-        String test = enc1.encrypt("123");
-        Argon2Encryption enc2 = new Argon2Encryption();
-
-        try {
-            enc2.verify("123", test);
-            System.out.println("Equals");
-        } catch (InvalidCredentialsException ex) {
-            System.out.println("Not Equals");
-        }
     }
 }
 

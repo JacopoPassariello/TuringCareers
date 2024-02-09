@@ -2,6 +2,7 @@ package unit;
 
 import com.turing_careers.data.dao.LanguageDAO;
 import com.turing_careers.data.dao.LocationDAO;
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Language;
 import com.turing_careers.data.model.Location;
 import org.glassfish.jersey.message.internal.LanguageTag;
@@ -18,7 +19,7 @@ public class TestLanguageDAO {
 
         try {
             languageDAO.addLanguage(language);
-        } catch (Exception ex) {
+        } catch (PersistenceException ex) {
             Assertions.fail();
         }
 

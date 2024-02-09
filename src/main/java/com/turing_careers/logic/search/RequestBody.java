@@ -8,6 +8,9 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Antonino Lorenzo
+ * */
 @Getter
 public class RequestBody {
     private String jsonRequest;
