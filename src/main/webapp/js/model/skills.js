@@ -1,5 +1,16 @@
 class Skill {
-    // TODO: implement if required
+    constructor(skill) {
+        this.skill = skill;
+        this.type = 'Programming Language'
+    }
+
+    toJSON() {
+        return {
+            _Skill_id: 3,
+            _Skill__name: this.skill,
+            _Skill__type: this.type
+        }
+    }
 }
 
 $(document).ready(() => {
@@ -11,6 +22,11 @@ $(document).ready(() => {
      * Listener to text input
      * */
     skillInput.on('input', () => {
+        // shrink/grow text field on input
+        skillInput.css({
+            'width': ($(this)[0].scrollWidth) + 'px'
+        });
+
         // Suggest skills while input
         let userInput = skillInput.val();
         if (userInput.length > 2) {
@@ -28,13 +44,9 @@ $(document).ready(() => {
             });
         } else
             skillsAutocompleteSection.addClass('display-none')
-
-        // shrink/grow text field on input
-        $(this).css({
-            'width': 'auto',
-            'width': ($(this)[0].scrollWidth) + 'px'
-        });
     }).trigger('input');
+
+
 
     /**
      * Listener to suggestion list items

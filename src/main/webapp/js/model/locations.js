@@ -1,3 +1,19 @@
+class Location {
+    constructor(name) {
+        this.name = name;
+    }
+
+    toJSON() {
+        return {
+            _Location__name: this.name,
+            _Location__lat: 41.9027, // TODO : get lat and lon
+            _Location__lon: 12.4962
+        }
+    }
+
+}
+
+
 $(document).ready(() => {
     /**
      * Location Text Input

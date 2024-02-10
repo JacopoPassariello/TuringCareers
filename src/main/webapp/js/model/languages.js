@@ -1,8 +1,19 @@
 class Languages {
-    static ITALIAN = {id: 1, code: 'it', full: 'italiano'}
-    static ENGLISH = {id: 2, code: 'en', full: 'inglese'}
-    static FRENCH = {id: 3, code: 'fr', full: 'francese'}
-    static SPANISH = {id: 4, code: 'es', full: 'spagnolo'}
+    static ITALIAN = {id: 1, code: 'it_IT', full: 'italiano'}
+    static ENGLISH = {id: 2, code: 'en_EN', full: 'inglese'}
+    static FRENCH = {id: 4, code: 'fr_FR', full: 'francese'}
+    static SPANISH = {id: 3, code: 'es_ES', full: 'spagnolo'}
+
+    constructor(full) {
+        this.lang = Languages.ITALIAN
+    }
+
+    toJSON() {
+        return {
+            _Language__id: 1,
+            _Language__code: this.lang['code']
+        }
+    }
 }
 
 $(document).ready(() => {

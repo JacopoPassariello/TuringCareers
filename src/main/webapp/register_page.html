@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="register-main-content" class="flex-center">
-        <form id="user-type-form" class="register-form-wrapper display-none fade-in">
+        <form id="user-type-form" class="register-form-wrapper fade-in">
             <div id="register-form-0">
                 <div id="register-form-0-content">
                     <h3 class="no-select inter-bold">Scegli un tipo di account.</h3>
@@ -45,8 +45,8 @@
                             <div class="cut cut-short"></div>
                         </div>
                         <div id="password-container" class="input-container">
-                            <div style="position: relative">
-                                <input name="password" id="password-input" class="input-text inter-regular" type="password" placeholder="Password" />
+                            <div style="position: relative" class="input-text">
+                                <input name="password" id="password-input" class="input inter-regular" type="password" placeholder="Password" />
                                 <div id="see-psw">
                                     <input id="see-psw-toggle" type="checkbox"/>
                                     <i id="see-psw-icon" class="bi bi-eye-fill"></i>
@@ -66,7 +66,8 @@
             </div>
         </form>
         <!-- Developer Form -->
-        <form id="second-form" class="register-form-wrapper fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+        <!-- name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post" -->
+        <div id="second-form" class="register-form-wrapper display-none fade-in" >
             <div id="register-form-2-wrapper">
                 <div id="register-form-2">
                     <div id="form-2-inputs" class="">
@@ -115,12 +116,12 @@
                         <div class="register-switch-form">
                             <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
                             <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
-                            <button type="submit" id="register-submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                            <button  id="dev-register-submit" class="register-submit-button submit-button inter-bold">Invia</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         <form id="second-form-employer" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
 
         </form>
@@ -129,5 +130,7 @@
     <script type="text/javascript" src="js/pages/register_page.js"></script>
     <script type="text/javascript" src="js/model/skills.js"></script>
     <script type="text/javascript" src="js/model/locations.js"></script>
+    <script type="text/javascript" src="js/model/developer.js"></script>
+    <script type="text/javascript" src="js/model/languages.js"></script>
 </body>
 </html>

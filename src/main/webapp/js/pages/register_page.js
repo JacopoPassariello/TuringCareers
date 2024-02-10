@@ -78,8 +78,57 @@ $(document).ready(() => {
     })
 
     /**
+     * Form Submit
+     * */
+    const developerSubmit = $("#dev-register-submit")
+    developerSubmit.click(() => {
+        const firstName = $("#firstname").val()
+        const lastName = $("#lastname").val()
+        const mail = $("#email").val()
+        const psw = $("#password-input").val()
+        const location = $("#locations-input-text").val()
+        const skillTags = $("#skill-tags")
+
+        let skills = []
+        skillTags.each(function() {
+            let skillText = $(this).find('p').text().trim();
+            skills.push(new Skill(skillText));
+        });
+
+        let dev = new Developer(firstName, lastName, '', mail, psw, new Location(location), skills, [new Languages('italiano')])
+        // console.log('Input Developer: ' + JSON.stringify(dev))
+
+        // TODO: validation should be done inside Developer validate method
+        if (!dev.validate()) {
+            // handle error
+        } else {
+            return $.ajax({
+                url: 'http://localhost:8080/TuringCareers_war/AuthenticationServlet?' +
+                    'userType=' + encodeURIComponent('developer') +
+                    '&authType=' + encodeURIComponent('register'),
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dev),
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    if (jqXHR.getResponseHeader('Location')) {
+                        // window.location.href = jqXHR.getResponseHeader('Location');
+                    } else {
+                        //
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('There was a problem with the AJAX request:', errorThrown);
+                    // TODO: reload page with error
+                }
+            });
+        }
+    });
+
+    /**
      * TODO: cleanup
      * */
+
     function validateSubForm() {
         let mail = document.forms["form"]["email"].value;
         let password = document.forms["form"]["password"].value;
