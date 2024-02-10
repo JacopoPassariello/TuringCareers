@@ -14,6 +14,9 @@ public class OfferDAO extends DAO {
         super();
     }
 
+    /**
+     * @return Istanza condivisa da tutti gli OfferDAO
+     */
     public static synchronized OfferDAO getInstance() {
         if (instance == null)
             instance = new OfferDAO();
@@ -21,6 +24,9 @@ public class OfferDAO extends DAO {
         return instance;
     }
 
+    /**
+     * @return Una lista contenente ogni istanza di Offer
+     */
     public List<Offer> getOffers() {
         return Optional.of(
                 super.em
@@ -29,6 +35,10 @@ public class OfferDAO extends DAO {
         ).orElse(null);
     }
 
+    /**
+     * @param id L'id da usare per recuperare la Offer
+     * @return L'istanza di Offer che contiene id come id
+     */
     public Offer getOfferById(Long id) {
         return Optional.of(
                 super.em
@@ -38,6 +48,11 @@ public class OfferDAO extends DAO {
         ).orElse(null);
     }
 
+    /**
+     * Aggiunge una Offer al database
+     * @param offer L'istanza di Offer da aggiungere
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiunta
+     */
     public void addOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
@@ -46,6 +61,11 @@ public class OfferDAO extends DAO {
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
+    /**
+     * Rimuove una Offer dal database
+     * @param offer L'istanza di Offer da rimuovere
+     * @throws PersistenceException Lanciata quando avviene un errore durante la rimozione
+     */
     public void removeOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
@@ -54,6 +74,11 @@ public class OfferDAO extends DAO {
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
+    /**
+     * Aggiorna una Offer dal database
+     * @param offer L'istanza di Offer da aggiornare
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiornamento
+     */
     public void updateOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
