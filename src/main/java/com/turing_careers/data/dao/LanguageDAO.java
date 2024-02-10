@@ -14,6 +14,9 @@ public class LanguageDAO extends DAO {
         super();
     }
 
+    /**
+     * @return Istanza condivisa da tutti gli LanguageDAO
+     */
     public static synchronized LanguageDAO getInstance() {
         if (instance == null)
             instance = new LanguageDAO();
@@ -21,6 +24,9 @@ public class LanguageDAO extends DAO {
         return instance;
     }
 
+    /**
+     * @return Una lista contenente ogni istanza di Language
+     */
     public List<Language> getLanguages() {
         return Optional.of(
                 super.em
@@ -29,36 +35,55 @@ public class LanguageDAO extends DAO {
         ).orElse(null);
     }
 
-    public Developer getLanguageByLanguageCode(String languageCode) {
+    /**
+     * @param languageCode Il language code da usare per recuperare il linguaggio
+     * @return L'istanza di Language che contiene languageCode
+     */
+    public Language getLanguageByLanguageCode(String languageCode) {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findLanguageByLanguageCode", Developer.class)
+                        .createNamedQuery("findLanguageByLanguageCode", Language.class)
                         .setParameter("languageCode", languageCode)
                         .getSingleResult()
         ).orElse(null);
     }
 
-    public void addLanguage(Language language) throws Exception {
+    /**
+     * Aggiunge un Language al database
+     * @param language L'istanza di Language da aggiungere
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiunta
+     */
+    public void addLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(language);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex); }
     }
 
-    public void removeLanguage(Language language) throws Exception {
+    /**
+     * Rimuove un Language dal database
+     * @param language L'istanza di Language da rimuovere
+     * @throws PersistenceException Lanciata quando avviene un errore durante la rimozione
+     */
+    public void removeLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(language));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateLanguage(Language language) throws Exception {
+    /**
+     * Aggiorna un Language nel database
+     * @param language L'istanza di Language da aggiornare
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiornamento
+     */
+    public void updateLanguage(Language language) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(language);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

@@ -27,27 +27,34 @@ public class SkillDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addSkill(Skill skill) throws Exception {
+    public List<Skill> getSkillsByName(String query) {
+        return super.em
+                .createNamedQuery("indexSkillsByName", Skill.class)
+                .setParameter("query", "%" + query + "%")
+                .getResultList();
+    }
+
+    public void addSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(skill);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeSkill(Skill skill) throws Exception {
+    public void removeSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(skill));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateSkill(Skill skill) throws Exception {
+    public void updateSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(skill);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

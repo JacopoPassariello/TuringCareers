@@ -1,6 +1,7 @@
-package unit;
+package unit.data_testing;
 
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.dao.SkillDAO;
 import com.turing_careers.data.model.Skill;
 import org.junit.jupiter.api.Assertions;
@@ -10,13 +11,13 @@ import java.util.List;
 
 public class TestSkillDAO {
     @Test
-    public void addSkillTest() throws Exception {
+    public void addSkillTest() throws PersistenceException {
         SkillDAO skillDAO = SkillDAO.getInstance();
         Skill skill = new Skill("Python", "Programming Language");
 
         try {
             skillDAO.addSkill(skill);
-        } catch (Exception ex) {
+        } catch (PersistenceException ex) {
             Assertions.fail();
         }
 

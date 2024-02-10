@@ -1,8 +1,11 @@
 package com.turing_careers.presentation;
 
+import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.logic.user.UserNotValidException;
+import com.turing_careers.logic.auth.*;
+import com.turing_careers.logic.user.UserManager;
+import com.turing_careers.logic.validator.ValidationException;
 import jakarta.persistence.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -19,15 +22,106 @@ public class AuthenticationServlet extends HttpServlet {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
 
-        boolean authOutcome = false;
-        
-        if (authType.equals("login")) {
-            authOutcome = this.loginUser(request, userType);
-        } else if (authType.equals("register")) {
-            authOutcome = this.registerUser(request, userType);
-        }
+        String mail = request.getParameter("email");
+        String password = request.getParameter("password");
 
+        boolean authOutcome = true;
+
+        if (authType.equals("login")) {
+            if (userType.equals("developer")) {
+
+                DeveloperAuthenticator devAuth = new DeveloperAuthenticator();
+                try {
+                    devAuth.loginUser(mail, password);
+                } catch (InvalidCredentialsException e) {
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("loggedIn", "true");
+                session.setAttribute("user",UserManager.getDeveloperByMail(mail));
+                session.setAttribute("userType", userType);
+
+            } else if (userType.equals("employer")) {
+                EmployerAuthenticator empAuth = new EmployerAuthenticator();
+                try {
+                    empAuth.loginUser(mail, password);
+                    System.out.println("Success: " + authOutcome);
+                } catch (InvalidCredentialsException e) {
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("loggedIn", "true");
+                session.setAttribute("user", UserManager.getEmployerByMail(mail));
+                session.setAttribute("userType", userType);
+            }
+        } else if (authType.equals("register")) {
+
+            final String firstname = request.getParameter("firstname");
+            final String lastname = request.getParameter("lastname");
+            final String bio = request.getParameter("bio");
+            //controlliamo mail e password passati dall'utente per verificare
+            //che rispettino il formato giusto
+            //Per employer: va aggiunto company name.
+            //Per developer: vanno aggiunte skill e lingue.
+            if (!this.validate(request)) {
+                authOutcome = false;
+                proceed(request, response, authType, authOutcome);
+            }
+            if (userType.equals("developer")) {
+                Developer dev = new Developer();
+                try {
+                    UserManager.createProfile(dev); //fallisce sempre
+                } catch (PersistenceException e) {
+                    //redirect pagina d'errore.
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                } catch (ValidationException e) {
+                    //redirect pagina d'errore.
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                }
+
+                HttpSession session = request.getSession();
+                session.setAttribute("isLoggedIn", "true");
+                session.setAttribute("user", dev);
+                session.setAttribute("userType", userType);
+            } else if (userType.equals("employer")) {
+                Employer emp = new Employer();
+                try {
+                    UserManager.createProfile(emp); //fallisce sempre
+                } catch (PersistenceException e) {
+                    //redirect a pagina d'errore.
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                } catch (ValidationException e) {
+                    //redirect a pagina d'errore
+                    authOutcome = false;
+                    proceed(request, response, authType, authOutcome);
+                    throw new RuntimeException(e);
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("isLoggedIn", "true");
+                session.setAttribute("user", emp);
+                session.setAttribute("userType", userType);
+            }
+        }
+        proceed(request, response, authType, authOutcome);
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //vuoto
+    }
+
+    private void proceed(HttpServletRequest request, HttpServletResponse response,
+                         String authType, Boolean authOutcome) throws ServletException, IOException {
         if (authOutcome) {
+            /*TODO cambiare
+             */
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else {
@@ -42,122 +136,15 @@ public class AuthenticationServlet extends HttpServlet {
         }
     }
 
-    /**
-     * TODO:
-     * - Implementare Authenticator: classe nel package domain che gestisce logica di login e logout
-     * - Implementare DeveloperDAO/Repository e EmployerDAO/Repository: classi che effettuano query al database
-     * */
-    private boolean loginUser(HttpServletRequest request, String userType) {
-        String mail = request.getParameter("mail");
-        String password = request.getParameter("password");
 
-        if (userType.equals("developer")) {
-            /**
-             * La logica per interagire col database deve essere spostata a livello data
-             * */
-            EntityManagerFactory dev_emf = Persistence.createEntityManagerFactory("turing_careersPU");
-            EntityManager dev_em = dev_emf.createEntityManager();
-            List<Developer> d = null;
-            try {
-                /**
-                 * La password dovrebbe essere cifrata
-                 * */
-                d = dev_em.createNamedQuery("findDevsByMailAndPassword", Developer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch (NoResultException exception) {
-                System.out.println("No dev found!!!");
-                exception.printStackTrace();
-
-                /**
-                 * gli errori vengono segnalati tramite exception
-                 * */
-                return false;
-            }
-        } else if (userType.equals("employer")) {
-            /**
-             * Stessa cosa di sopra, inoltre andrebbe creato un meccanismo per astrarre il processo essendo identico
-             * */
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
-            EntityManager em = emf.createEntityManager();
-            List<Employer> e = null;
-            try {
-                e = em.createNamedQuery("findEmplsByMailAndPassword", Employer.class).setParameter("mail", mail).setParameter("password", password).getResultList();
-            } catch (NoResultException exception) {
-                System.out.println("No dev founded!!!");
-                exception.printStackTrace();
-                return false;
-            }
-            if (e == null || e.size() != 1)
-                return false;
-            Employer emp = e.get(0);
-            HttpSession session = request.getSession();
-            session.setAttribute("loggedIn", "true");
-            session.setAttribute("user", emp);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean registerUser(HttpServletRequest request, String userType) {
-        final String firstname = request.getParameter("firstname");
-        final String lastname = request.getParameter("lastname");
-        final String mail = request.getParameter("email");
-        final String password = request.getParameter("password");
-
-        //controlliamo mail e password passati dall'utente per verificare
-        //che rispettino il giusto formato
-        if (!validate(request)) {
-            return false;
-        }
-
-        if (userType.equals("developer")) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction tx = em.getTransaction();
-            Developer dev = new Developer();
-            tx.begin();
-            //strano che la persist non generi eccezioni???? come faccio a sapere che ha
-            //avuto effettivamente successo???? devo controllare tramite query???
-            em.persist(dev);
-            tx.commit();
-            //si può effettuare un controllo aggiuntivo cercando il dev per mail e password
-            //se la query non genera un eccezzione allora ha trovato una corrispondenza e
-            //il commit ha avuto successo
-            HttpSession session = request.getSession();
-            session.setAttribute("isLoggedIn", "true");
-            session.setAttribute("utente", dev);
-            return true;
-        } else if (userType.equals("employer")) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("turing_careersPU");
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction tx = em.getTransaction();
-            Employer emp = new Employer();
-            tx.begin();
-            //strano che la persist non generi eccezzioni???? come faccio a sapere che ha
-            //avuto effettivamente successo???? devo controllare tramite query???
-            em.persist(emp);
-            tx.commit();
-            //si può effettuare un controllo aggiuntivo cercando il dev per mail e password
-            //se la query non genera un eccezzione allora ha trovato una corrispondenza e
-            //il commit ha avuto successo
-            HttpSession session = request.getSession();
-            session.setAttribute("isLoggedIn", "true");
-            session.setAttribute("utente", emp);
-            return true;
-        }
-        return false;
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //vuoto
-    }
-
+    //questo lo facciamo già in un package di validazione
     private boolean validate(HttpServletRequest request) {
 
         final String firstname = request.getParameter("firstname");
         final String lastname = request.getParameter("lastname");
-        final String mail = request.getParameter("email");
-        final String password = request.getParameter("bio");
-        final String bio = request.getParameter("password");
+        final String bio = request.getParameter("bio");
+        String mail = request.getParameter("mail");
+        String password = request.getParameter("password");
         Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
 
         if (firstname.length() == 0

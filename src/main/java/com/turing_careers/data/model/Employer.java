@@ -16,7 +16,8 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
     @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
-    @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail ")
+    @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail "),
+    @NamedQuery(name = "findEmployerById", query = "SELECT e FROM Employer e WHERE e.id = :id")
 })
 public class Employer implements User {
 
@@ -49,10 +50,11 @@ public class Employer implements User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     private List<Offer> offers;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "EmployerDeveloper",
-            joinColumns = @JoinColumn(name = "employerId")
+            joinColumns = @JoinColumn(name = "employerId"),
+            inverseJoinColumns = @JoinColumn(name = "developerId")
     )
     private List<Developer> savedDevelopers;
 

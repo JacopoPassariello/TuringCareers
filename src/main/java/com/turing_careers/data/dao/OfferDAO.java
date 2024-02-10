@@ -1,9 +1,9 @@
 package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public class OfferDAO extends DAO {
         ).orElse(null);
     }
 
-    public Offer getOfferById(int id) {
+    public Offer getOfferById(Long id) {
         return Optional.of(
                 super.em
                         .createNamedQuery("findOfferById", Offer.class)
@@ -38,27 +38,27 @@ public class OfferDAO extends DAO {
         ).orElse(null);
     }
 
-    public void addOffer(Offer offer) throws Exception {
+    public void addOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.persist(offer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeOffer(Offer offer) throws Exception {
+    public void removeOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(offer));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateOffer(Offer offer) throws Exception {
+    public void updateOffer(Offer offer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(offer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

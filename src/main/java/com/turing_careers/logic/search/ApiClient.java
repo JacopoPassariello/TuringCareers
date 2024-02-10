@@ -12,6 +12,7 @@ import java.util.Optional;
 
 /**
  * The Client for Recommendations API, builds the JSON Body to send in the request with RequestBody class.
+ * @author Antonino Lorenzo
  * */
 public class ApiClient {
     private static final String API_ENDPOINT  = "http://localhost:8000/";

@@ -2,6 +2,7 @@ package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
+import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.Skill;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class DeveloperDAO extends DAO {
         super();
     }
 
+    /**
+     * @return Istanza condivisa da tutti i DeveloperDAO
+     */
     public static synchronized DeveloperDAO getInstance() {
         if (instance == null)
             instance = new DeveloperDAO();
@@ -21,6 +25,9 @@ public class DeveloperDAO extends DAO {
         return instance;
     }
 
+    /**
+     * @return Una lista contenente ogni istanza di Developer
+     */
     public List<Developer> getDevelopers() {
         return Optional.of(
                 super.em
@@ -29,37 +36,68 @@ public class DeveloperDAO extends DAO {
         ).orElse(null);
     }
 
-    public Developer getDeveloperByMailAndPassword(String mail, String password) {
+    /**
+     * @param mail La e-mail da usare per recuperare il Developer
+     * @return L'istanza di developer contenente la e-mail passata come argomento
+     */
+    public Developer getDeveloperByMail(String mail) {
         return Optional.of(
                 super.em
-                        .createNamedQuery("findDevsByMailAndPassword", Developer.class)
+                        .createNamedQuery("findDeveloperByMail", Developer.class)
                         .setParameter("mail", mail)
-                        .setParameter("password", password)
+                        .getSingleResult()// Questo implica che mail è unique?
+        ).orElse(null);
+    }
+
+    /**
+     * @param id L'id da usare per recuperare il Developer
+     * @return L'istanza di developer contenente l'id passato come argomento
+     */
+    public Developer getDeveloperById(Long id) {
+        return Optional.of(
+                super.em
+                        .createNamedQuery("findDeveloperById", Developer.class)
+                        .setParameter("id", id)
                         .getSingleResult()
         ).orElse(null);
     }
 
-    public void addDeveloper(Developer developer) throws Exception {
+    /**
+     * Aggiunge uno sviluppatore al database
+     * @param developer L'istanza di sviluppatore da aggiungere
+     * @throws PersistenceException Lanciata quando avviene un errore nel tentativo di aggiunta.
+     */
+    public void addDeveloper(Developer developer) throws PersistenceException  {
         try {
             em.getTransaction().begin();
             em.persist(developer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void removeDeveloper(Developer developer) throws Exception {
+    /**
+     * Rimuove uno sviluppatore dal database
+     * @param developer L'istanza di sviluppatore da rimuovere
+     * @throws PersistenceException Lanciata quando avviene un errore nel tentativo di rimozione
+     */
+    public void removeDeveloper(Developer developer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.remove(em.merge(developer));
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
-    public void updateDeveloper(Developer developer) throws Exception {
+    /**
+     * Aggiorna lo stato di uno sviluppatore nel database
+     * @param developer L'istanza di sviluppatore da aggiornare
+     * @throws PersistenceException Lanciata quando avviene un errore nel tentativo di aggiornamento
+     */
+    public void updateDeveloper(Developer developer) throws PersistenceException {
         try {
             em.getTransaction().begin();
             em.merge(developer);
             em.getTransaction().commit();
-        } catch (Exception ex) { throw new Exception(ex); }
+        } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 }

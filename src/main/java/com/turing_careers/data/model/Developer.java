@@ -1,6 +1,8 @@
 package com.turing_careers.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 
 import java.util.List;
@@ -14,40 +16,51 @@ import java.util.List;
 @ToString
 @NamedQueries({
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
-    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
+    @NamedQuery(name = "findDeveloperByMail", query = "SELECT d FROM Developer d WHERE d.mail = :mail"),
+    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password"),
+    @NamedQuery(name = "findDeveloperById", query = "SELECT d FROM Developer d WHERE d.id = :id")
 })
 public class Developer implements User, Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "developerId", nullable = false)
+    @JsonProperty("_Developer__id")
     private Long id;
 
     @Column(name = "firstName", nullable = false)
+    @JsonProperty("_Developer__f_name")
     private String firstName;
 
     @Column(name = "lastName", nullable = false)
+    @JsonProperty("_Developer__l_name")
     private String lastName;
 
     @Column(name = "bio", nullable = false)
+    @JsonProperty("_Developer__bio")
     private String bio;
 
     @Column(name = "mail", nullable = false)
+    @JsonProperty("_Developer__mail")
     private String mail;
 
     @Column(name = "passwordAccount", nullable = false)
+    @JsonProperty("_Developer__psw")
     private String password;
 
     @OneToOne
     @JoinColumn(name = "locationId")
+    @JsonProperty("_Developer__location")
     private Location location;
 
     @ManyToMany
     @JoinTable(name = "DeveloperSkill")
+    @JsonProperty("_Developer__skills")
     private List<Skill> skills;
 
     @ManyToMany
     @JoinTable(name = "DeveloperLanguage")
+    @JsonProperty("_Developer__languages")
     private List<Language> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -14,6 +14,7 @@ import java.util.Optional;
 
 /**
  * Created by ClientFactory, serves as interface for ApiClient that manages the requests to Recommendations API.
+ * @author Antonino Lorenzo
  * */
 public class RecommenderEngine {
     private ClientType type;
@@ -25,16 +26,6 @@ public class RecommenderEngine {
      *
      * */
     public List<Developer> search(Offer offer) {
-        if (this.type != ClientType.DEVELOPER)
-            throw new InvalidParameterException();
-
-        return this.search(offer.getSkills());
-    }
-
-    /**
-     *
-     * */
-    public List<Developer> search(List<Skill> skills) {
         if (this.type != ClientType.DEVELOPER)
             throw new InvalidParameterException();
 

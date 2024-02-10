@@ -1,40 +1,52 @@
 package com.turing_careers.logic.offer;
 
 import com.turing_careers.data.dao.OfferDAO;
+import com.turing_careers.data.dao.PersistenceException;
+import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
+import com.turing_careers.data.model.User;
+import com.turing_careers.logic.validator.OfferValidator;
+import com.turing_careers.logic.validator.UserValidator;
+import com.turing_careers.logic.validator.ValidationException;
+
+import java.util.List;
+
 
 /**
  *
  * */
 public class OfferManager {
-    private static String STATE_OPEN = "OPEN";
-    private static String STATE_PAUSED = "PAUSED";
-    private static String STATE_CLOSED = "CLOSED";
 
-    public static void editOffer(Offer offer)  throws UpdateOfferException {
+    public static void editOffer(Offer offer)  throws PersistenceException, ValidationException {
+        OfferValidator.checkValidity(offer);
         OfferDAO updater = OfferDAO.getInstance();
-        try {
+        updater.updateOffer(offer);
+    }
+
+    public static void deleteOffer(Offer offer)  throws PersistenceException {
+        OfferDAO updater = OfferDAO.getInstance();
+        updater.removeOffer(offer);
+
+    }
+
+    public static void createOffer(Offer offer)  throws PersistenceException, ValidationException {
+        OfferValidator.checkValidity(offer);
+        OfferDAO updater = OfferDAO.getInstance();
+        updater.addOffer(offer);
+    }
+
+    public static void subscribeToOffer(Developer dev, Offer offer) throws PersistenceException, ValidationException {
+        OfferValidator.checkValidity(offer);
+        UserValidator.checkValidity(dev);
+        OfferDAO updater = OfferDAO.getInstance();
+        if (!offer.getSubscribedDevelopers().contains((dev))) {
+            offer.getSubscribedDevelopers().add(dev);
             updater.updateOffer(offer);
-        } catch (Exception e) {
-            throw new UpdateOfferException(e.getMessage());
         }
     }
 
-    public static void deleteOffer(Offer offer)  throws UpdateOfferException {
-        OfferDAO updater = OfferDAO.getInstance();
-        try {
-            updater.removeOffer(offer);
-        } catch (Exception e) {
-            throw new UpdateOfferException(e.getMessage());
-        }
-    }
-
-    public static void saveOffer(Offer offer)  throws UpdateOfferException {
-        OfferDAO updater = OfferDAO.getInstance();
-        try {
-            updater.addOffer(offer);
-        } catch (Exception e) {
-            throw new UpdateOfferException(e.getMessage());
-        }
+    public static Offer getOffer(Long offerId) {
+        OfferDAO retriever = OfferDAO.getInstance();
+        return retriever.getOfferById(offerId);
     }
 }

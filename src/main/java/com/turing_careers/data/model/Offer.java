@@ -19,6 +19,11 @@ import java.util.List;
 })
 public class Offer implements Item {
 
+    public static final String STATE_OPEN = "OPEN";
+    public static final String STATE_PAUSED = "PAUSED";
+    public static final String STATE_CLOSED = "CLOSED";
+    public static final String IN_PLACE = "ON_SITE";
+    public static final String REMOTE = "REMOTE";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
