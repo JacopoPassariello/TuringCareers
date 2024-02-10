@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "OfferServlet", value = "offers")
+@WebServlet(name = "OfferServlet", value = "/offers")
 public class OfferServlet extends HttpServlet {
 
     /**

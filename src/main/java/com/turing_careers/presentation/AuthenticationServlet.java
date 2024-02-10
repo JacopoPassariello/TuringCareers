@@ -1,5 +1,8 @@
 package com.turing_careers.presentation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;
 import com.turing_careers.logic.auth.*;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
@@ -47,36 +51,30 @@ public class AuthenticationServlet extends HttpServlet {
                 // Login
                 authenticator.loginUser(mail, password);
             } else if (authType.equals("register")) {
-                final String firstName = request.getParameter("firstname");
-                final String lastName = request.getParameter("lastname");
-
-                // Register Developer
                 if (userType.equals("developer")) {
-                    final String biography = request.getParameter("bio");
-
-                    if (!this.validate(request)) {
-                        authOutcome = false;
-                        proceed(request, response, authType, authOutcome);
-                    }
-
-                    // TODO: remove mockups
-                    Location loc = new Location("it", 32.0, 32.0);
-                    List<Skill> skills = new ArrayList<>();
-                    List<Language> languages = new ArrayList<>();
-
-                    // TODO: (Improvement) get User as JSON Object from clientside
-                    Developer dev = new Developer(
-                            firstName, lastName, biography,
-                            mail, password, loc, skills, languages
-
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.configure(
+                            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                            false
                     );
+                    String jsonString = request
+                            .getReader()
+                            .lines()
+                            .collect(
+                                    Collectors
+                                            .joining(System.lineSeparator())
+                            );
+
+                    Developer dev;
+                    try {
+                        dev = objectMapper.readValue(jsonString, Developer.class);
+                    } catch (JsonProcessingException json) {
+                        throw new ServletException("JSON Error: " + json);
+                    }
+                    System.out.println("Developer: " + dev);
                     authenticator.signupUser(dev);
-                }
-                // Register Employer
-                else {
-                    // TODO: remove mockups
-                    String company = "Turing Careers";
-                    Employer emp = new Employer(firstName, lastName, mail, password, company);
+                } else {
+                    // TODO: Employer signup
                 }
             } else {
                 // TODO: handle error
@@ -90,6 +88,15 @@ public class AuthenticationServlet extends HttpServlet {
         } catch (PersistenceException | Exception signupError) {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
+
+        System.out.println("Success");
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        //dispatcher.forward(request, response);
+        response.sendRedirect("index.jsp");
+    }
+        //} catch (JsonProcessingException jsonError) {
+        //    throw new ServletException("JSON Error: " + jsonError);
+
 
         // Old Code, don't delete until validation
         /*
@@ -178,7 +185,7 @@ public class AuthenticationServlet extends HttpServlet {
         }
         proceed(request, response, authType, authOutcome);
         */
-    }
+    //}
 
     private void proceed(HttpServletRequest request, HttpServletResponse response,
                          String authType, Boolean authOutcome) throws ServletException, IOException {
