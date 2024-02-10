@@ -44,4 +44,9 @@ public class OfferManager {
             updater.updateOffer(offer);
         }
     }
+
+    public static Offer getOffer(Long offerId) {
+        OfferDAO retriever = OfferDAO.getInstance();
+        return retriever.getOfferById(offerId);
+    }
 }

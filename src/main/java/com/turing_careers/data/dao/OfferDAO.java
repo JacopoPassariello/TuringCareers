@@ -29,7 +29,7 @@ public class OfferDAO extends DAO {
         ).orElse(null);
     }
 
-    public Offer getOfferById(int id) {
+    public Offer getOfferById(Long id) {
         return Optional.of(
                 super.em
                         .createNamedQuery("findOfferById", Offer.class)
