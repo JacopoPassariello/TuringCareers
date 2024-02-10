@@ -29,7 +29,7 @@ public class OfferSubscriptionServlet extends HttpServlet {
         Long offerId = Long.parseLong(req.getParameter("offerId"));
         Offer offer = OfferManager.getOffer(offerId);
 
-        if(userType.equals("developer")) {
+        if (userType.equals("developer")) {
             Developer dev = (Developer) req.getSession().getAttribute("user");
             try {
                 OfferManager.subscribeToOffer(dev, offer);
@@ -44,7 +44,7 @@ public class OfferSubscriptionServlet extends HttpServlet {
             }
             resp.setStatus(200);
         }
-        else if(userType.equals("employer")) {
+        else if (userType.equals("employer")) {
             List<Developer> subscribedDevelopers = offer.getSubscribedDevelopers();
 
             ObjectMapper objectMapper = new ObjectMapper();

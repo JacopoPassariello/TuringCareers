@@ -25,15 +25,15 @@ public class SearchDeveloperServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employer emp = null;
 
-        if(request.getSession().getAttribute("userType") == null) {
+        if (request.getSession().getAttribute("userType") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         }
 
         String userType = (String) request.getSession().getAttribute("userType");
 
-        if(userType.equals("employer")) {
-            if(request.getSession().getAttribute("user") == null) {
+        if (userType.equals("employer")) {
+            if (request.getSession().getAttribute("user") == null) {
                 response.setStatus(500);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request, response);
@@ -43,7 +43,7 @@ public class SearchDeveloperServlet extends HttpServlet {
 
             String query = request.getParameter("query");
 
-            if(!query.isEmpty() && !query.equals(" ")){
+            if (!query.isEmpty() && !query.equals(" ")) {
 
                 List<Offer> offers = new ArrayList<>();
                         /*
@@ -58,12 +58,12 @@ public class SearchDeveloperServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().print(offersJSON);
                 response.setStatus(200);
-            }else {
+            } else {
                 response.setStatus(400);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request, response);
             }
-        }else if (userType.equals("developer")) {
+        } else if (userType.equals("developer")) {
             response.setStatus(400);
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
