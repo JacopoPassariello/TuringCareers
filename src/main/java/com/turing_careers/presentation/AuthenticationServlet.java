@@ -51,30 +51,21 @@ public class AuthenticationServlet extends HttpServlet {
                 // Login
                 authenticator.loginUser(mail, password);
             } else if (authType.equals("register")) {
-                if (userType.equals("developer")) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    objectMapper.configure(
-                            DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-                            false
-                    );
-                    String jsonString = request
-                            .getReader()
-                            .lines()
-                            .collect(
-                                    Collectors
-                                            .joining(System.lineSeparator())
-                            );
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.configure(
+                        DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                        false
+                );
+                String jsonString = request.getReader().lines().collect(Collectors
+                        .joining(System.lineSeparator())
+                );
 
-                    Developer dev;
-                    try {
-                        dev = objectMapper.readValue(jsonString, Developer.class);
-                    } catch (JsonProcessingException json) {
-                        throw new ServletException("JSON Error: " + json);
-                    }
-                    System.out.println("Developer: " + dev);
+                if (userType.equals("developer")) {
+                    Developer dev = objectMapper.readValue(jsonString, Developer.class);
                     authenticator.signupUser(dev);
                 } else {
-                    // TODO: Employer signup
+                    Employer emp = objectMapper.readValue(jsonString, Employer.class);
+                    authenticator.signupUser(emp);
                 }
             } else {
                 // TODO: handle error
