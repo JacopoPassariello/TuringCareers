@@ -53,7 +53,7 @@ public class AuthServiceTest {
         try {
             authService.loginUser(
                     "antoniopagnotta__figo@gmail.com",
-                    "123456"
+                    "radiotElesborra1"
             );
         } catch (InvalidCredentialsException ex) {
             ex.printStackTrace();
