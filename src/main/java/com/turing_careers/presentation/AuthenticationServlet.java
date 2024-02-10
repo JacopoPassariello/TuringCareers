@@ -1,8 +1,7 @@
 package com.turing_careers.presentation;
 
 import com.turing_careers.data.dao.PersistenceException;
-import com.turing_careers.data.model.Developer;
-import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.*;
 import com.turing_careers.logic.auth.*;
 import com.turing_careers.logic.user.UserManager;
 import com.turing_careers.logic.validator.ValidationException;
@@ -12,21 +11,88 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
+
+    /**
+     * Expose user authentication functionality, based on authType parameter makes login or signup,
+     * based on userType makes login or signup of the specified profile type
+     * */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
         String userType = request.getParameter("userType");
+        boolean authOutcome = true;
 
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
 
-        boolean authOutcome = true;
+        // Create authenticator one time only
+        Authenticator authenticator;
+        if (userType.equals("developer"))
+            authenticator = new DeveloperAuthenticator();
+        else if (userType.equals("employer"))
+            authenticator = new EmployerAuthenticator();
+        else {
+            // TODO: handle error
+            throw new ServletException("Invalid UserType");
+        }
 
+        try {
+            if (authType.equals("login")) {
+                // Login
+                authenticator.loginUser(mail, password);
+            } else if (authType.equals("register")) {
+                final String firstName = request.getParameter("firstname");
+                final String lastName = request.getParameter("lastname");
+
+                // Register Developer
+                if (userType.equals("developer")) {
+                    final String biography = request.getParameter("bio");
+
+                    if (!this.validate(request)) {
+                        authOutcome = false;
+                        proceed(request, response, authType, authOutcome);
+                    }
+
+                    // TODO: remove mockups
+                    Location loc = new Location("it", 32.0, 32.0);
+                    List<Skill> skills = new ArrayList<>();
+                    List<Language> languages = new ArrayList<>();
+
+                    // TODO: (Improvement) get User as JSON Object from clientside
+                    Developer dev = new Developer(
+                            firstName, lastName, biography,
+                            mail, password, loc, skills, languages
+
+                    );
+                    authenticator.signupUser(dev);
+                }
+                // Register Employer
+                else {
+                    // TODO: remove mockups
+                    String company = "Turing Careers";
+                    Employer emp = new Employer(firstName, lastName, mail, password, company);
+                }
+            } else {
+                // TODO: handle error
+                throw new ServletException("Invalid AuthType");
+            }
+        } catch (InvalidCredentialsException invalidCredentials) {
+            throw new ServletException(
+                    "Invalid Credentials: " + mail + ": " + password +
+                            "\nError: " + invalidCredentials.getMessage()
+            );
+        } catch (PersistenceException | Exception signupError) {
+            throw new ServletException("Signup Error: " + signupError.getMessage());
+        }
+
+        // Old Code, don't delete until validation
+        /*
         if (authType.equals("login")) {
             if (userType.equals("developer")) {
 
@@ -111,10 +177,7 @@ public class AuthenticationServlet extends HttpServlet {
             }
         }
         proceed(request, response, authType, authOutcome);
-    }
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //vuoto
+        */
     }
 
     private void proceed(HttpServletRequest request, HttpServletResponse response,

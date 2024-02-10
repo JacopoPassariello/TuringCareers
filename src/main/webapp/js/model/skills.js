@@ -1,3 +1,7 @@
+class Skill {
+    // TODO: implement if required
+}
+
 $(document).ready(() => {
 
     const skillInput = $("#skill-input-text");

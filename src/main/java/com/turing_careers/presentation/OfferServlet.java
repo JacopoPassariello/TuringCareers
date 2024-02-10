@@ -7,12 +7,14 @@ import com.turing_careers.logic.offer.OfferManager;
 import com.turing_careers.logic.validator.ValidationException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+@WebServlet(name = "OfferServlet", value = "offers")
 public class OfferServlet extends HttpServlet {
 
     /**
@@ -37,14 +39,20 @@ public class OfferServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
 
         Offer offer = objectMapper.readValue(offerJSON, Offer.class);
+        System.out.println(offer);
+
+        // TODO: get Employer from session and add to offer, then persist
+        //  in this way offer creation do not reload the page.
+        /*
         try {
             OfferManager.createOffer(offer);
-        } catch (PersistenceException e) {
-            throw new RuntimeException(e);
-        } catch (ValidationException e) {
+        } catch (PersistenceException | ValidationException e) {
             throw new RuntimeException(e);
         }
+        */
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("employer_page.jsp");
+        // TODO: if nothing went wrong send success message, the client will
+        //  update the page with the created offer.
+        // RequestDispatcher dispatcher = req.getRequestDispatcher("employer_page.jsp");
     }
 }

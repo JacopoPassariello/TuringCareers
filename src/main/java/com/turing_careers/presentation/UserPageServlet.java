@@ -8,6 +8,7 @@ import com.turing_careers.logic.validator.UserValidator;
 import com.turing_careers.logic.validator.ValidationException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+@WebServlet(name = "UserPageServlet", value = "/user")
 public class UserPageServlet extends HttpServlet {
 
     /**
@@ -22,6 +24,9 @@ public class UserPageServlet extends HttpServlet {
      * */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO: remove if jsp are used
+        response.setContentType("text/html");
+
         String userType = (String) request.getSession().getAttribute("userType");
         Developer dev = null;
         Employer emp = null;
@@ -82,7 +87,9 @@ public class UserPageServlet extends HttpServlet {
                 request.setAttribute("noDevelopers", true);
             }
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
+            request.getRequestDispatcher("/employer_page.html").forward(request, response);
+            // TODO: remove if jsp are used
+            // RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
         }
     }
 
