@@ -1,4 +1,4 @@
-package unit;
+package unit.data_testing;
 
 import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.PersistenceException;

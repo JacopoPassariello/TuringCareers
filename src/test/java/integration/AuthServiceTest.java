@@ -5,6 +5,7 @@ import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.logic.auth.EmployerAuthenticator;
 import com.turing_careers.logic.auth.InvalidCredentialsException;
+import com.turing_careers.logic.validator.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +20,13 @@ public class AuthServiceTest {
                 "Tony",
                 "Loaf",
                 "antoniopagnotta__figo@gmail.com",
-                "123456",
+                "radiotElesborra1",
                 "Pagnotta Inc."
         );
 
         try {
             authService.signupUser(employer);
-        } catch (PersistenceException exception) {
+        } catch (PersistenceException | ValidationException exception) {
             exception.printStackTrace();
             fail("Unexpected exception occurred: " + exception.getMessage());
         }
@@ -52,7 +53,7 @@ public class AuthServiceTest {
         try {
             authService.loginUser(
                     "antoniopagnotta__figo@gmail.com",
-                    "123456"
+                    "radiotElesborra1"
             );
         } catch (InvalidCredentialsException ex) {
             ex.printStackTrace();

@@ -39,11 +39,7 @@ public class AuthenticationServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
-                /*TODO andrebbe fatto il retrieve dell'utente appena creato
-                   per verificare che sia andato tutto a buon fine
-                   e per passarlo alla sessione
-                   session.setAttribute("user", emp);
-                 */
+                session.setAttribute("user",UserManager.getDeveloperByMail(mail));
 
             } else if (userType.equals("employer")) {
                 EmployerAuthenticator empAuth = new EmployerAuthenticator();
@@ -56,11 +52,7 @@ public class AuthenticationServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
-                /*TODO andrebbe fatto il retrieve dell'utente appena creato
-                   per verificare che sia andato tutto a buon fine
-                   e per passarlo alla sessione
-                   session.setAttribute("user", emp);
-                 */
+                session.setAttribute("user", UserManager.getEmployerByMail(mail));
             }
         } else if (authType.equals("register")) {
 
@@ -69,6 +61,8 @@ public class AuthenticationServlet extends HttpServlet {
             final String bio = request.getParameter("bio");
             //controlliamo mail e password passati dall'utente per verificare
             //che rispettino il formato giusto
+            //Per employer: va aggiunto company name.
+            //Per developer: vanno aggiunte skill e lingue.
             if (!this.validate(request)) {
                 authOutcome = false;
                 proceed(request, response, authType, authOutcome);
@@ -76,16 +70,14 @@ public class AuthenticationServlet extends HttpServlet {
             if (userType.equals("developer")) {
                 Developer dev = new Developer();
                 try {
-                    UserManager.createProfile(dev);
+                    UserManager.createProfile(dev); //fallisce sempre
                 } catch (PersistenceException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
+                    //redirect pagina d'errore.
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 } catch (ValidationException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
+                    //redirect pagina d'errore.
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
@@ -97,16 +89,14 @@ public class AuthenticationServlet extends HttpServlet {
             } else if (userType.equals("employer")) {
                 Employer emp = new Employer();
                 try {
-                    UserManager.createProfile(emp);
+                    UserManager.createProfile(emp); //fallisce sempre
                 } catch (PersistenceException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
+                    //redirect a pagina d'errore.
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
                 } catch (ValidationException e) {
-                    //rivedere il comportamento in caso di eccezione
-                    //chiedere e frat
+                    //redirect a pagina d'errore
                     authOutcome = false;
                     proceed(request, response, authType, authOutcome);
                     throw new RuntimeException(e);
@@ -142,6 +132,8 @@ public class AuthenticationServlet extends HttpServlet {
         }
     }
 
+
+    //questo lo facciamo già in un package di validazione
     private boolean validate(HttpServletRequest request) {
 
         final String firstname = request.getParameter("firstname");

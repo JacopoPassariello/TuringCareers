@@ -30,23 +30,12 @@ public class DeveloperDAO extends DAO {
         ).orElse(null);
     }
 
-    public Developer getDeveloperByMailAndPassword(String mail, String password) {
-        return Optional.of(
-                super.em
-                        .createNamedQuery("findDevsByMailAndPassword", Developer.class)
-                        .setParameter("mail", mail)
-                        .setParameter("password", password)
-                        .getSingleResult()
-        ).orElse(null);
-    }
-
-
     public Developer getDeveloperByMail(String mail) {
         return Optional.of(
                 super.em
                         .createNamedQuery("findDeveloperByMail", Developer.class)
                         .setParameter("mail", mail)
-                        .getSingleResult()
+                        .getSingleResult()// Questo implica che mail è unique?
         ).orElse(null);
     }
 

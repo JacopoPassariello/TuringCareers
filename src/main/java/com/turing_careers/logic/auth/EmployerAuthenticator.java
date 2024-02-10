@@ -4,6 +4,8 @@ import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.User;
+import com.turing_careers.logic.validator.UserValidator;
+import com.turing_careers.logic.validator.ValidationException;
 
 import java.security.InvalidParameterException;
 
@@ -21,20 +23,18 @@ public class EmployerAuthenticator extends Authenticator {
 
         try {
             Employer emp = employerDAO.getEmployerByMail(email);
-            System.out.println(emp);
-            String psw = emp.getPassword();
-
-            encryptionStrategy.verify(password, psw);
+            encryptionStrategy.verify(password, emp.getPassword());
         } catch (InvalidCredentialsException invalidCredentials) {
             throw new InvalidCredentialsException(invalidCredentials.getMessage());
         }
     }
 
     @Override
-    public void signupUser(User user) throws InvalidParameterException, PersistenceException {
+    public void signupUser(User user) throws ValidationException, PersistenceException {
         if (!(user instanceof Employer))
-            throw new InvalidParameterException("EmployerAuthService: Not an Employer");
+            throw new ValidationException("EmployerAuthService: Not an Employer");
         Employer emp = (Employer) user;
+        UserValidator.checkValidity(emp);
 
         super.setEncryptionStrategy(new Argon2Encryption());
         String encryptedPassword = encryptionStrategy.encrypt(emp.getPassword());
