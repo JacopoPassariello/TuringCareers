@@ -20,13 +20,13 @@ public class DeveloperAuthenticator extends Authenticator {
     @Override
     public void loginUser(String email, String password) throws InvalidCredentialsException {
         super.setEncryptionStrategy(new Argon2Encryption());
-        String encryptedPassword = encryptionStrategy.encrypt(password);
+        DeveloperDAO developerDAO = DeveloperDAO.getInstance();
 
-        DeveloperDAO updater = DeveloperDAO.getInstance();
-        Developer dev = updater.getDeveloperByMail(email);
-        encryptionStrategy.verify(password, dev.getPassword());
-        if (dev == null) {
-            throw new InvalidCredentialsException("Developer is null!");
+        try {
+            Developer dev = developerDAO.getDeveloperByMail(email);
+            encryptionStrategy.verify(password, dev.getPassword());
+        } catch (InvalidCredentialsException invalidCredentials) {
+            throw new InvalidCredentialsException(invalidCredentials.getMessage());
         }
     }
 

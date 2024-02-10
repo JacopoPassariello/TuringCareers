@@ -29,16 +29,6 @@ public class EmployerDAO extends DAO {
         ).orElse(null);
     }
 
-    public Employer getEmployersByMailAndPassword(String mail, String password) {
-        return Optional.of(
-                super.em
-                        .createNamedQuery("findEmplsByMailAndPassword", Employer.class)
-                        .setParameter("mail", mail)
-                        .setParameter("password", password)
-                        .getSingleResult()
-        ).orElse(null);
-    }
-
     public Employer getEmployerByMail(String mail) {
         return Optional.of(
                 super.em
