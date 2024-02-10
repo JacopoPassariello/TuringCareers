@@ -26,7 +26,7 @@ public class DeveloperDAO extends DAO {
     }
 
     /**
-     * @return A list containing every instance of Developer
+     * @return Una lista contenente ogni istanza di Developer
      */
     public List<Developer> getDevelopers() {
         return Optional.of(
