@@ -38,7 +38,7 @@ public class SearchOfferServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         } else if (userType.equals("developer")) {
-            if(request.getSession().getAttribute("user") == null) {
+            if (request.getSession().getAttribute("user") == null) {
                 response.setStatus(500);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                 dispatcher.forward(request, response);
