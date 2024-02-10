@@ -48,7 +48,8 @@ public class Developer implements User, Item {
     @JsonProperty("_Developer__psw")
     private String password;
 
-    @OneToOne
+    // TODO: fix persist location when trying to create developer with new location
+    @ManyToOne//(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "locationId")
     @JsonProperty("_Developer__location")
     private Location location;
@@ -81,7 +82,7 @@ public class Developer implements User, Item {
         this.location = location;
         this.skills = skills;
         this.languages = languages;
-        this.savedOffers = savedOffers;
+        // this.savedOffers = savedOffers;
     }
 
     public void setId(Long id) {

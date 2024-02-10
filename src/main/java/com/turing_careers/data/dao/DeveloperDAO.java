@@ -3,6 +3,7 @@ package com.turing_careers.data.dao;
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.Location;
 import com.turing_careers.data.model.Skill;
 
 import java.util.List;
@@ -68,6 +69,31 @@ public class DeveloperDAO extends DAO {
      * @throws PersistenceException Lanciata quando avviene un errore nel tentativo di aggiunta.
      */
     public void addDeveloper(Developer developer) throws PersistenceException  {
+        // Create Location it was never found
+
+        LocationDAO locationDAO = LocationDAO.getInstance();
+        Location devLoc;
+        try {
+            // TODO: get by name
+            devLoc = locationDAO.getLocationByLatAndLon(
+                    developer.getLocation().getLat(),
+                    developer.getLocation().getLon()
+            );
+        } catch (Exception ex) {
+            System.out.println("Location Not Found, Adding: " + developer.getLocation().getName());
+            devLoc = new Location(
+                    developer.getLocation().getName(),
+                    developer.getLocation().getLat(),
+                    developer.getLocation().getLon()
+            );
+            devLoc = em.merge(devLoc);
+            locationDAO.addLocation(devLoc);
+        }
+
+        devLoc = locationDAO.getLocationByLatAndLon(devLoc.getLat(), devLoc.getLon());
+        System.out.println(devLoc);
+        developer.setLocation(devLoc);
+        System.out.println(developer);
         try {
             em.getTransaction().begin();
             em.persist(developer);

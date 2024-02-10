@@ -35,19 +35,26 @@ public class LocationDAO extends DAO {
         ).orElse(null);
     }
 
+    public Location getLocationById(Long id) {
+        return
+                super.em
+                .createNamedQuery("findLocationById", Location.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
     /**
      * @param lat La latitudine della Location da recuperare
      * @param lon La longitudine della location da recuperare
      * @return L'istanza di Location contenente lat e lon come coppia di latitudine e longitudine
      */
-    public Developer getLocationByLatAndLon(String lat, String lon) {
-        return Optional.of(
+    public Location getLocationByLatAndLon(Double lat, Double lon) throws PersistenceException{
+        return
                 super.em
-                        .createNamedQuery("findLocationLatAndLog", Developer.class)
-                        .setParameter("lat", lat)
-                        .setParameter("lon", lon)
-                        .getSingleResult()
-        ).orElse(null);
+                .createNamedQuery("findLocationLatAndLog", Location.class)
+                .setParameter("lat", lat)
+                .setParameter("lon", lon)
+                .getSingleResult();
     }
 
     /**
