@@ -5,15 +5,8 @@ $(document).ready(() => {
         offerForm.removeClass('display-none')
     })
 
-    /**
-     * Submit
-     * */
-    const titleInput = $("#offer-title")
-    const descriptionInput = $("#offer-description")
-    const locationInput = $("#locations-input-text")
     const undoButton = $("#offer-form-undo-button")
-    const skillTags = $("#skill-tags .skill-tag")
-    const languagesTags = $("#language-tags")
+    const submitButton = $("#offer-form-submit-button")
 
     undoButton.click(() => {
         // TODO: clean up offer form
@@ -21,8 +14,29 @@ $(document).ready(() => {
         offerForm.addClass('display-none')
     })
 
-    const submitButton = $("#offer-form-submit-button")
     submitButton.click(() => {
+        // Make POST request to create offer
+        $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/offers',
+            method: 'POST',
+            data: { offer: getOfferForm() },
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+            }
+        });
+    })
+
+    function getOfferForm() {
+        const titleInput = $("#offer-title")
+        const descriptionInput = $("#offer-description")
+        const locationInput = $("#locations-input-text")
+        const skillTags = $("#skill-tags .skill-tag")
+        const languagesTags = $("#language-tags")
+
         let title = titleInput.val()
         let description = descriptionInput.val()
         let locType = 'IN_PLACE'
@@ -41,7 +55,6 @@ $(document).ready(() => {
 
         let offer = new Offer(title, description, skills, locType, location, languages)
         console.log(JSON.stringify(offer))
-
-        // TODO: make ajax post
-    })
+        return offer;
+    }
 })

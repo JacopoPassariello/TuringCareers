@@ -24,6 +24,28 @@ $(document).ready(() => {
         });
     }).trigger('input');
 
+    function addLanguageTag(language) {
+        const locList = $("#language-tags")
+
+        let locTag = $("<li>")
+            .addClass('location-tag')
+            .attr('name', language['code'])
+
+        let name = $("<p>")
+            .addClass('no-select inter-regular')
+            .text(language['full'])
+
+        let close = $("<h3>")
+            .addClass('inter-regular')
+            .text('X')
+            .click(function() { // Use a regular function here
+                $(this).parent().remove(); // 'this' now refers to the clicked element
+            });
+
+        locTag.append(name, close)
+        locList.append(locTag)
+    }
+
     function suggestLanguage(input) {
         if ('italiano'.includes(input.toLowerCase()))
             updateLocationSuggestion(Languages.ITALIAN)
@@ -36,24 +58,6 @@ $(document).ready(() => {
     }
 
     function updateLocationSuggestion(lang) {
-        const locList = $("#language-tags")
-
-        let locTag = $("<li>")
-            .addClass('location-tag')
-            .attr('name', lang['code'])
-
-        let name = $("<p>")
-            .addClass('no-select inter-regular')
-            .text(lang['full'])
-
-        let close = $("<h3>")
-            .addClass('inter-regular')
-            .text('X')
-            .click(function() { // Use a regular function here
-                $(this).parent().remove(); // 'this' now refers to the clicked element
-            });
-
-        locTag.append(name, close)
-        locList.append(locTag)
+        addLanguageTag(lang);
     }
 })

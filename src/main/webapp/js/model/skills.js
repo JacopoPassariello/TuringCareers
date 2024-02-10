@@ -48,15 +48,25 @@ $(document).ready(() => {
     /**
      * Triggered on item click in suggestions
      * */
-    function addSkillTag() {
+    function addSkillTag(skill) {
+        const skillTags = $("#skill-tags")
 
-    }
+        let skillTag = $("<li>")
+            .addClass('skill-tag');
 
-    /**
-     * Triggered on close click in tag
-     * */
-    function removeSkillTag() {
+        let name = $("<p>")
+            .addClass('no-select inter-regular')
+            .text(skill)
 
+        let close = $("<h3>")
+            .addClass('inter-regular')
+            .text('X')
+            .click(function() {
+                $(this).parent().remove();
+            });
+
+        skillTag.append(name, close)
+        skillTags.append(skillTag)
     }
 
     /**
@@ -70,7 +80,6 @@ $(document).ready(() => {
             dataType: 'json'
         });
     }
-
 
     /**
      * Shows available skills
@@ -86,7 +95,11 @@ $(document).ready(() => {
             skills.forEach((item, index) => {
                 let matchingSkill = $("<p>")
                     .text(item)
-                    .addClass('inter-regular');
+                    .addClass('inter-regular')
+                    .click(function() {
+                        addSkillTag(item)
+                    });
+
                 skillsSuggestionsContainer.append(matchingSkill);
             })
         } else
