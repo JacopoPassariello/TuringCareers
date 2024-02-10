@@ -71,7 +71,8 @@ public class Developer implements User, Item {
     )
     private List<Offer> savedOffers;
 
-    public Developer(String firstName, String lastName, String bio, String mail, String password, Location location, List<Skill> skills, List<Language> languages, List<Offer> savedOffers) {
+    public Developer(String firstName, String lastName, String bio, String mail, String password,
+                     Location location, List<Skill> skills, List<Language> languages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
