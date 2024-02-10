@@ -22,7 +22,7 @@ public class UserPageServlet extends HttpServlet {
      * */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userType = request.getParameter("userType");
+        String userType = (String) request.getSession().getAttribute("userType");
         Developer dev = null;
         Employer emp = null;
 

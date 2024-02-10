@@ -40,6 +40,7 @@ public class AuthenticationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
                 session.setAttribute("user",UserManager.getDeveloperByMail(mail));
+                session.setAttribute("userType", userType);
 
             } else if (userType.equals("employer")) {
                 EmployerAuthenticator empAuth = new EmployerAuthenticator();
@@ -53,6 +54,7 @@ public class AuthenticationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", "true");
                 session.setAttribute("user", UserManager.getEmployerByMail(mail));
+                session.setAttribute("userType", userType);
             }
         } else if (authType.equals("register")) {
 
@@ -86,6 +88,7 @@ public class AuthenticationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
                 session.setAttribute("user", dev);
+                session.setAttribute("userType", userType);
             } else if (userType.equals("employer")) {
                 Employer emp = new Employer();
                 try {
@@ -104,6 +107,7 @@ public class AuthenticationServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
                 session.setAttribute("user", emp);
+                session.setAttribute("userType", userType);
             }
         }
         proceed(request, response, authType, authOutcome);
