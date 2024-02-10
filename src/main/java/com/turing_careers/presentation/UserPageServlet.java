@@ -73,6 +73,7 @@ public class UserPageServlet extends HttpServlet {
             } else {
                 request.setAttribute("noOffers", true);
             }
+            
 
             if (!developers.isEmpty()) {
                 request.setAttribute("noDevelopers", false);
