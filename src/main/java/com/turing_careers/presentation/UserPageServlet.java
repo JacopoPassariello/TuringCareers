@@ -22,19 +22,19 @@ public class UserPageServlet extends HttpServlet {
      * */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userType = request.getParameter("userType");
+        String userType = (String) request.getSession().getAttribute("userType");
         Developer dev = null;
         Employer emp = null;
 
-        if(request.getSession().getAttribute("user") == null){
+        if (request.getSession().getAttribute("user") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
-        }else{
-            if (userType.equals("developer"))
-                dev = (Developer) request.getSession().getAttribute("user");
-            else if (userType.equals("employer"))
-                emp = (Employer) request.getSession().getAttribute("user");
         }
+
+        if (userType.equals("developer"))
+            dev = (Developer) request.getSession().getAttribute("user");
+        else if (userType.equals("employer"))
+            emp = (Employer) request.getSession().getAttribute("user");
 
 
         if (userType.equals("developer")) {
@@ -45,21 +45,21 @@ public class UserPageServlet extends HttpServlet {
             if (!offers.isEmpty()) {
                 request.setAttribute("noOffers", false);
                 request.setAttribute("offers", offers);
-            }else{
+            } else {
                 request.setAttribute("noOffers", true);
             }
 
             if (!languages.isEmpty()) {
                 request.setAttribute("noLanguages", false);
                 request.setAttribute("languages", languages);
-            }else{
+            } else {
                 request.setAttribute("noLanguages", true);
             }
 
             if (location == null) {
                 request.setAttribute("noLocation", false);
                 request.setAttribute("location", location);
-            }else{
+            } else {
                 request.setAttribute("noLocation", true);
             }
             RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
@@ -70,14 +70,15 @@ public class UserPageServlet extends HttpServlet {
             if (!offers.isEmpty()) {
                 request.setAttribute("noOffers", false);
                 request.setAttribute("offers", offers);
-            }else{
+            } else {
                 request.setAttribute("noOffers", true);
             }
+
 
             if (!developers.isEmpty()) {
                 request.setAttribute("noDevelopers", false);
                 request.setAttribute("developers", developers);
-            }else{
+            } else {
                 request.setAttribute("noDevelopers", true);
             }
 
@@ -126,6 +127,7 @@ public class UserPageServlet extends HttpServlet {
 
                 UserValidator.checkValidity(dev);
                 UserManager.editProfile(dev);
+                request.setAttribute("user", dev);
 
             } else if (userType.equals("employer")) {
                 Employer emp =  (Employer) request.getSession().getAttribute("user");
@@ -136,6 +138,7 @@ public class UserPageServlet extends HttpServlet {
 
                 UserValidator.checkValidity(emp);
                 UserManager.editProfile(emp);
+                request.setAttribute("user", emp);
             }
         } catch (ValidationException e) {
             System.out.println("Parametri utente non validi.");

@@ -16,7 +16,8 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
     @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
-    @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail ")
+    @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail "),
+    @NamedQuery(name = "findEmployerById", query = "SELECT e FROM Employer e WHERE e.id = :id")
 })
 public class Employer implements User {
 
