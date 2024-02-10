@@ -26,10 +26,10 @@ public class UserPageServlet extends HttpServlet {
         Developer dev = null;
         Employer emp = null;
 
-        if(request.getSession().getAttribute("user") == null){
+        if(request.getSession().getAttribute("user") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
-        }else{
+        } else {
             if (userType.equals("developer"))
                 dev = (Developer) request.getSession().getAttribute("user");
             else if (userType.equals("employer"))
