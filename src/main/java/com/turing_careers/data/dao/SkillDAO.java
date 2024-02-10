@@ -12,6 +12,9 @@ public class SkillDAO extends DAO {
         super();
     }
 
+    /**
+     * @return Istanza condivisa da ogni SkillDAO
+     */
     public static synchronized SkillDAO getInstance() {
         if (instance == null)
             instance = new SkillDAO();
@@ -19,6 +22,9 @@ public class SkillDAO extends DAO {
         return instance;
     }
 
+    /**
+     * @return Una lista contenente ogni istanza di Skill
+     */
     public List<Skill> getSkills() {
         return Optional.of(
                 super.em
@@ -27,13 +33,22 @@ public class SkillDAO extends DAO {
         ).orElse(null);
     }
 
-    public List<Skill> getSkillsByName(String query) {
+    /**
+     * @param name Il nome della Skill da recuperare
+     * @return L'istanza di Skill contenente name come nome
+     */
+    public List<Skill> getSkillsByName(String name) {
         return super.em
                 .createNamedQuery("indexSkillsByName", Skill.class)
-                .setParameter("query", "%" + query + "%")
+                .setParameter("query", "%" + name + "%")
                 .getResultList();
     }
 
+    /**
+     * Aggiunge una Skill al database
+     * @param skill L'istanza di Skill da aggiungere
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiunta
+     */
     public void addSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
@@ -42,6 +57,11 @@ public class SkillDAO extends DAO {
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
+    /**
+     * Rimuove una Skill dal database
+     * @param skill L'ìstanza di Skill da rimuovere
+     * @throws PersistenceException Lanciata quando avviene un errore durante la rimozione
+     */
     public void removeSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
@@ -50,6 +70,11 @@ public class SkillDAO extends DAO {
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
     }
 
+    /**
+     * Aggiorna una Skill nel database
+     * @param skill L'istanza di Skill da aggiornare
+     * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiornamento
+     */
     public void updateSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();
