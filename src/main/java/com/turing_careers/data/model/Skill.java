@@ -10,6 +10,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
+@NamedQueries({
+        @NamedQuery(name="indexSkillsByName", query = "SELECT s FROM Skill s WHERE s.skillName LIKE :query")
+})
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

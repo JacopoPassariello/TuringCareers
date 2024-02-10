@@ -18,29 +18,38 @@ $(document).ready(() => {
     })
 
     /**
-     * Switch Setup
+     * User Type Setup
      * */
+    const firstForm = $("#first-form")
     const userTypeForm = $("#user-type-form")
-    const userDeveloperButton = $("#account-type-employer")
-    const userEmployerButton = $("#account-type-developer")
+    const userDeveloperButton = $("#account-type-developer")
+    const userEmployerButton = $("#account-type-employer")
     let userTypeDeveloper = false;
     let userTypeEmployer = false;
+
+    const secondFormDeveloper = $("#second-form")
+    const secondFormEmployer = $("#second-form-employer")
+    let secondForm;
 
     userDeveloperButton.click(() => {
         userTypeForm.addClass('display-none')
         firstForm.removeClass('display-none')
         userTypeDeveloper = true;
+        secondForm = secondFormDeveloper;
     })
 
     userEmployerButton.click(() => {
         userTypeForm.addClass('display-none')
         firstForm.removeClass('display-none')
         userTypeEmployer = true;
+        secondForm = secondFormEmployer;
     })
 
 
-    const firstForm = $("#first-form")
-    const secondForm = $("#second-form")
+    /**
+     * Switch Setup
+     * */
+    const submitButton = $("#register-submit")
     let switchFormLeft = $(".switch-form-left")
     let switchFormRight = $(".switch-form-right")
     let current = 1
@@ -49,6 +58,8 @@ $(document).ready(() => {
             current = 2
             firstForm.addClass('display-none')
             secondForm.removeClass('display-none')
+            switchFormRight.text('')
+            submitButton.removeClass('display-none')
         }
     })
 
@@ -57,6 +68,8 @@ $(document).ready(() => {
             current = 1
             secondForm.addClass('display-none')
             firstForm.removeClass('display-none')
+            switchFormRight.text('chevron_right')
+            submitButton.addClass('display-none')
         }
         else if (current === 1) {
             firstForm.addClass('display-none')

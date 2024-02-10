@@ -1,18 +1,27 @@
 $(document).ready(() => {
-    /**
-     * Skill Text Input
-     * */
+
     const skillInput = $("#skill-input-text");
     const skillsAutocompleteSection = $("#skills-autocomplete-section");
 
+    /**
+     * Listener to text input
+     * */
     skillInput.on('input', () => {
         // Suggest skills while input
         let userInput = skillInput.val();
-        if (userInput.length > 0) {
+        if (userInput.length > 2) {
             skillsAutocompleteSection.removeClass('display-none')
-            // TODO: query servlet to get matching skills
-            let matchingSkills = ['Java', 'Javascript'];
-            updateSkillsSuggestions(matchingSkills);
+            console.log('input: ' + userInput)
+            getSkills(userInput).then(matchingSkills => {
+                console.log('Matching skills: ')
+                console.log(matchingSkills)
+                if (matchingSkills)
+                    updateSkillsSuggestions(matchingSkills);
+                else
+                    console.log("Empty skills list")
+            }).catch(error => {
+                console.error("Error getting skills:", error);
+            });
         } else
             skillsAutocompleteSection.addClass('display-none')
 
@@ -24,6 +33,42 @@ $(document).ready(() => {
     }).trigger('input');
 
     /**
+     * Listener to suggestion list items
+     * */
+
+    /**
+     * Listener to tag close button
+     * */
+
+
+    /**
+     * Triggered on item click in suggestions
+     * */
+    function addSkillTag() {
+
+    }
+
+    /**
+     * Triggered on close click in tag
+     * */
+    function removeSkillTag() {
+
+    }
+
+    /**
+     * Triggered on input of Skill
+     * @param query: user input
+     * */
+    function getSkills(query) {
+        return $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/suggest-skills',
+            data: {skillsQuery: query},
+            dataType: 'json'
+        });
+    }
+
+
+    /**
      * Shows available skills
      * @param skills: a not empty list of skills
      * */
@@ -32,16 +77,20 @@ $(document).ready(() => {
         skillsSuggestionsContainer.empty();
 
         if (skills.length > 0) {
+            // remove suggestion error
+
             skills.forEach((item, index) => {
                 let matchingSkill = $("<p>")
                     .text(item)
                     .addClass('inter-regular');
                 skillsSuggestionsContainer.append(matchingSkill);
             })
-        }
+        } else
+            noMatchSkillsSuggestions()
     }
 
-    /**
-     * Location Text Input
-     * */
+    function noMatchSkillsSuggestions() {
+        // add suggestion-error class
+    }
+
 })

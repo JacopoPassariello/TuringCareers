@@ -66,7 +66,7 @@
             </div>
         </form>
         <!-- Developer Form -->
-        <form id="second-form" class="register-form-wrapper  fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+        <form id="second-form" class="register-form-wrapper fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
             <div id="register-form-2-wrapper">
                 <div id="register-form-2">
                     <div id="form-2-inputs" class="">
@@ -84,10 +84,10 @@
                                             </ul>
                                             <input id="skill-input-text" type="text" class="inter-regular" >
                                         </div>
-                                        <div id="add-skill-button">
+                                        <!--<div id="add-skill-button">
                                             <p class="no-select inter-regular">Add</p>
                                             <i class="bi bi-plus-circle"></i>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div id="skills-autocomplete-section" class="autocomplete-section">
                                         <ul id="skills-autocomplete-list" class="autocomplete-suggestions"></ul>
@@ -124,11 +124,14 @@
                         <div class="register-switch-form">
                             <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
                             <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
-                            <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                            <button type="submit" id="register-submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </form>
+        <form id="second-form-employer" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
+
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>

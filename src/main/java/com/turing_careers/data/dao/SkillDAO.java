@@ -27,6 +27,14 @@ public class SkillDAO extends DAO {
         ).orElse(null);
     }
 
+    public List<Skill> getSkillsByName(String query) {
+        System.out.println("Query to skills: " + query);
+        return super.em
+                .createNamedQuery("indexSkillsByName", Skill.class)
+                .setParameter("query", "%" + query + "%")
+                .getResultList();
+    }
+
     public void addSkill(Skill skill) throws PersistenceException {
         try {
             em.getTransaction().begin();

@@ -31,7 +31,6 @@ $(document).ready(() => {
     function updateLocationSuggestions(locations) {
         const locationsSuggestionsContainer = $("#locations-autocomplete-list");
         locationsSuggestionsContainer.empty();
-        console.log('Called')
 
         if (locations.length > 0) {
             // remove suggestion error
