@@ -29,12 +29,12 @@ public class UserPageServlet extends HttpServlet {
         if(request.getSession().getAttribute("user") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
-        } else {
-            if (userType.equals("developer"))
-                dev = (Developer) request.getSession().getAttribute("user");
-            else if (userType.equals("employer"))
-                emp = (Employer) request.getSession().getAttribute("user");
         }
+
+        if (userType.equals("developer"))
+            dev = (Developer) request.getSession().getAttribute("user");
+        else if (userType.equals("employer"))
+            emp = (Employer) request.getSession().getAttribute("user");
 
 
         if (userType.equals("developer")) {
@@ -126,6 +126,7 @@ public class UserPageServlet extends HttpServlet {
 
                 UserValidator.checkValidity(dev);
                 UserManager.editProfile(dev);
+                request.setAttribute("user", dev);
 
             } else if (userType.equals("employer")) {
                 Employer emp =  (Employer) request.getSession().getAttribute("user");
@@ -136,6 +137,7 @@ public class UserPageServlet extends HttpServlet {
 
                 UserValidator.checkValidity(emp);
                 UserManager.editProfile(emp);
+                request.setAttribute("user", emp);
             }
         } catch (ValidationException e) {
             System.out.println("Parametri utente non validi.");
