@@ -1,5 +1,6 @@
 package com.turing_careers.presentation;
 
+import com.turing_careers.data.model.Employer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +15,9 @@ public class OfferSubscriptionServlet extends HttpServlet {
      * */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        Employer employer = (Employer) req.getSession().getAttribute("user");
+
+
     }
 
     /**

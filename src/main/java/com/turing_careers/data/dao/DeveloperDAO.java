@@ -46,7 +46,7 @@ public class DeveloperDAO extends DAO {
                 super.em
                         .createNamedQuery("findDeveloperByMail", Developer.class)
                         .setParameter("mail", mail)
-                        .getSingleResult()
+                        .getSingleResult()// Questo implica che mail è unique?
         ).orElse(null);
     }
 

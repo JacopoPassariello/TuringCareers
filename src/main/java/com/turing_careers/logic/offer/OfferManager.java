@@ -9,6 +9,8 @@ import com.turing_careers.logic.validator.OfferValidator;
 import com.turing_careers.logic.validator.UserValidator;
 import com.turing_careers.logic.validator.ValidationException;
 
+import java.util.List;
+
 
 /**
  *

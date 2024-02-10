@@ -102,8 +102,25 @@ public class UserManager {
         if (!employer.getSavedDevelopers().contains(developer)) {
             employer.getSavedDevelopers().add(developer);
             updater.updateEmployer(employer);
-
         }
+    }
+    /**
+     * @author Jacopo Passariello
+     * @param mail indirizzo e-mail del developer usato per il retrieve.
+     * @return il profilo di developer a cui corrisponde l'indirizzo e-mail.
+     */
+    public static Developer getDeveloperByMail(String mail) {
+        DeveloperDAO retriever = DeveloperDAO.getInstance();
+        return retriever.getDeveloperByMail(mail);
+    }
+    /**
+     * @author Jacopo Passariello
+     * @param mail indirizzo e-mail dell'employer usato per il retrieve.
+     * @return il profilo dell'employer a cui corrisponde l'indirizzo e-mail.
+     */
+    public static Employer getEmployerByMail(String mail) {
+        EmployerDAO retriever = EmployerDAO.getInstance();
+        return retriever.getEmployerByMail(mail);
     }
     /*
     public static Developer retrieveDeveloperByMail(String mail) throws UpdateProfileException, PersistenceException {
