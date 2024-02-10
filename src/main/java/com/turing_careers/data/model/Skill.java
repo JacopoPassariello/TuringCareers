@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @NamedQueries({
-        @NamedQuery(name="indexSkillsByName", query = "SELECT s FROM Skill s WHERE s.skillName LIKE :query")
+    @NamedQuery(name = "indexSkillsByName", query = "SELECT s FROM Skill s WHERE s.skillName LIKE :query"),
 })
 public class Skill {
     @Id

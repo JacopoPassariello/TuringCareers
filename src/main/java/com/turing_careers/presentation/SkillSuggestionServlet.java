@@ -26,7 +26,6 @@ public class SkillSuggestionServlet extends HttpServlet {
         }
 
         List<Skill> skills = SkillMatcher.getSuggestions(query);
-        System.out.println("Size: " + skills.size());
         if (skills.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             return;

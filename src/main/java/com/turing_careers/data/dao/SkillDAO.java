@@ -28,7 +28,6 @@ public class SkillDAO extends DAO {
     }
 
     public List<Skill> getSkillsByName(String query) {
-        System.out.println("Query to skills: " + query);
         return super.em
                 .createNamedQuery("indexSkillsByName", Skill.class)
                 .setParameter("query", "%" + query + "%")
