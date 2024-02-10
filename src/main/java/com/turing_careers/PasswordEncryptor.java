@@ -19,7 +19,7 @@ public class PasswordEncryptor {
 
         Argon2Encryption encryptor = new Argon2Encryption();
 
-        for(Developer dev : devs) {
+        for (Developer dev : devs) {
             dev.setPassword(encryptor.encrypt(dev.getPassword()));
             try {
                 devdao.updateDeveloper(dev);
@@ -28,7 +28,7 @@ public class PasswordEncryptor {
             }
         }
 
-        for(Employer emp : emps) {
+        for (Employer emp : emps) {
             emp.setPassword(encryptor.encrypt(emp.getPassword()));
             try {
                 empdao.updateEmployer(emp);

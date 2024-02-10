@@ -29,16 +29,6 @@ public class RecommenderEngine {
         if (this.type != ClientType.DEVELOPER)
             throw new InvalidParameterException();
 
-        return this.search(offer.getSkills());
-    }
-
-    /**
-     *
-     * */
-    public List<Developer> search(List<Skill> skills) {
-        if (this.type != ClientType.DEVELOPER)
-            throw new InvalidParameterException();
-
         return new ArrayList<>();
     }
 

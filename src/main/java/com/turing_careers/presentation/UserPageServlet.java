@@ -26,7 +26,7 @@ public class UserPageServlet extends HttpServlet {
         Developer dev = null;
         Employer emp = null;
 
-        if(request.getSession().getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
         }
@@ -45,21 +45,21 @@ public class UserPageServlet extends HttpServlet {
             if (!offers.isEmpty()) {
                 request.setAttribute("noOffers", false);
                 request.setAttribute("offers", offers);
-            }else{
+            } else {
                 request.setAttribute("noOffers", true);
             }
 
             if (!languages.isEmpty()) {
                 request.setAttribute("noLanguages", false);
                 request.setAttribute("languages", languages);
-            }else{
+            } else {
                 request.setAttribute("noLanguages", true);
             }
 
             if (location == null) {
                 request.setAttribute("noLocation", false);
                 request.setAttribute("location", location);
-            }else{
+            } else {
                 request.setAttribute("noLocation", true);
             }
             RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
@@ -70,14 +70,15 @@ public class UserPageServlet extends HttpServlet {
             if (!offers.isEmpty()) {
                 request.setAttribute("noOffers", false);
                 request.setAttribute("offers", offers);
-            }else{
+            } else {
                 request.setAttribute("noOffers", true);
             }
+            
 
             if (!developers.isEmpty()) {
                 request.setAttribute("noDevelopers", false);
                 request.setAttribute("developers", developers);
-            }else{
+            } else {
                 request.setAttribute("noDevelopers", true);
             }
 
