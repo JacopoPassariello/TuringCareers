@@ -45,7 +45,6 @@ public class SearchOfferServlet extends HttpServlet {
             }
             dev = (Developer) request.getSession().getAttribute("user");
 
-
             String query = request.getParameter("query");
 
             if(!query.isEmpty() && !query.equals(" ")){
