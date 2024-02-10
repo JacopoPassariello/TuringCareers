@@ -39,6 +39,15 @@ public class DeveloperDAO extends DAO {
         ).orElse(null);
     }
 
+    public Developer getDeveloperById(Long id) {
+        return Optional.of(
+                super.em
+                        .createNamedQuery("findDeveloperById", Developer.class)
+                        .setParameter("id", id)
+                        .getSingleResult()
+        ).orElse(null);
+    }
+
     public void addDeveloper(Developer developer) throws PersistenceException  {
         try {
             em.getTransaction().begin();

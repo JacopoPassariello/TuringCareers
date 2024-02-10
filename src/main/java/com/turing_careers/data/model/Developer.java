@@ -2,6 +2,7 @@ package com.turing_careers.data.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 
 import java.util.List;
@@ -16,7 +17,8 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "findAllDevelopers", query = "SELECT d FROM Developer d"),
     @NamedQuery(name = "findDeveloperByMail", query = "SELECT d FROM Developer d WHERE d.mail = :mail"),
-    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password")
+    @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password"),
+    @NamedQuery(name = "findDeveloperById", query = "SELECT d FROM Developer d WHERE d.id = :id")
 })
 public class Developer implements User, Item {
 

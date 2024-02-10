@@ -38,6 +38,15 @@ public class EmployerDAO extends DAO {
         ).orElse(null);
     }
 
+    public Employer getEmployerById(Long id) {
+        return Optional.of(
+                super.em
+                        .createNamedQuery("findEmployerById", Employer.class)
+                        .setParameter("id", id)
+                        .getSingleResult()
+        ).orElse(null);
+    }
+
     public void addEmployer(Employer employer) throws PersistenceException {
         try {
             em.getTransaction().begin();
