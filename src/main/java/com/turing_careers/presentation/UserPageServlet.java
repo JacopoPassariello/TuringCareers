@@ -90,64 +90,61 @@ public class UserPageServlet extends HttpServlet {
      * */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        String newFirstName = "";
-        String newLastName = "";
-        String newMail = "";
-        String newPassword = "";
+        // TODO: response set type: text-plain (success | failed)
 
+        // Verify parameters
         String userType = request.getParameter("userType");
-
-        Boolean outcome = true;
-
-        if (request.getParameter("newFirstName") != null  || request.getParameter("newFirstName").equals("") || request.getParameter("newFirstName").equals(" ")) {
-            newFirstName =  request.getParameter("newFirstName");
-            outcome = false;
-        }
-        if (request.getParameter("newLastName") != null  || request.getParameter("newLastName").equals("") || request.getParameter("newLastName").equals(" ")) {
-            newLastName = request.getParameter("newLastName");
-            outcome = false;
-        }
-        if (request.getParameter("newMail") != null  || request.getParameter("newMail").equals("") || request.getParameter("newMail").equals(" ")) {
-            newMail = request.getParameter("newEmail");
-            outcome = false;
-        }
-        if (request.getParameter("newPassword") != null  || request.getParameter("newPassword").equals("") || request.getParameter("newPassword").equals(" ")) {
-            newPassword = request.getParameter("newPassword");
-            outcome = false;
+        if (userType == null || userType.trim().isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        } else if (request.getParameter("newFirstName") == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        } else if (request.getParameter("newLastName") == null ) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        } else if (request.getParameter("newMail") == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        } else if (request.getParameter("newPassword") == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
 
-        if(outcome) {
-            if(userType.equals("developer")){
-
+        // Try update
+        String newFirstName =  request.getParameter("newFirstName");
+        String newLastName = request.getParameter("newLastName");
+        String newMail = request.getParameter("newEmail");
+        String newPassword = request.getParameter("newPassword");
+        try {
+            if (userType.equals("developer")) {
                 Developer dev =  (Developer) request.getSession().getAttribute("user");
+                dev.setFirstName(newFirstName);
+                dev.setLastName(newLastName);
+                dev.setMail(newMail);
+                dev.setPassword(newPassword);
 
-                try {
-                    dev.setFirstName(newFirstName);
-                    dev.setLastName(newLastName);
-                    dev.setMail(newMail);
-                    dev.setPassword(newPassword);
-                    UserValidator.checkValidity(dev);
-                    UserManager.editProfile(dev);
-                } catch (ValidationException e) {
-                    System.out.println("Parametri utente non validi.");
-                } catch (PersistenceException e) {
-                    System.out.println("Errore nell'user manager per la persistenza.");
-                }
-            }else if(userType.equals("employer")){
+                UserValidator.checkValidity(dev);
+                UserManager.editProfile(dev);
+
+            } else if (userType.equals("employer")) {
                 Employer emp =  (Employer) request.getSession().getAttribute("user");
-                try {
-                    emp.setFirstName(newFirstName);
-                    emp.setLastName(newLastName);
-                    emp.setMail(newMail);
-                    emp.setPassword(newPassword);
-                    UserValidator.checkValidity(emp);
-                    UserManager.editProfile(emp);
-                } catch (ValidationException e) {
-                    System.out.println("Parametri utente non validi.");
-                } catch (PersistenceException e) {
-                    System.out.println("Errore nell'user manager per la persistenza.");
-                }
+                emp.setFirstName(newFirstName);
+                emp.setLastName(newLastName);
+                emp.setMail(newMail);
+                emp.setPassword(newPassword);
+
+                UserValidator.checkValidity(emp);
+                UserManager.editProfile(emp);
             }
+        } catch (ValidationException e) {
+            System.out.println("Parametri utente non validi.");
+            // TODO: send failed
+        } catch (PersistenceException e) {
+            System.out.println("Errore nell'user manager per la persistenza.");
+            // TODO: send failed
         }
+
+        // TODO: send success
     }
 }
