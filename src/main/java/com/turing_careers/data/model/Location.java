@@ -36,8 +36,11 @@ public class Location {
     @JsonProperty("_Location__lon")
     private Double lon;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private List<Developer> developers;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
+    private List<Offer> offers;
 
     public Location(String name, Double lat, Double lon) {
         this.name = name;

@@ -51,7 +51,7 @@ public class Offer implements Item {
     @JsonProperty("_Offer__employer")
     private Employer employer;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "locationId")
     @JsonProperty("_Offer__location")
     private Location location;

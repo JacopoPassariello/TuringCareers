@@ -221,13 +221,13 @@ public class CreateOfferTest {
                 Offer.STATE_OPEN,
                 Offer.ON_SITE,
                 this.employer,
-                null,
-                new ArrayList<>(),
-                new ArrayList<>()
+                this.correctLocation,
+                this.correctSkills,
+                this.correctLanguages
         );
         OfferDAO dao = OfferDAO.getInstance();
         Assertions.assertDoesNotThrow(
-                () -> dao.addOffer(offer),
+                () -> OfferManager.createOffer(offer),
                 "Exception thrown"
         );
     }
