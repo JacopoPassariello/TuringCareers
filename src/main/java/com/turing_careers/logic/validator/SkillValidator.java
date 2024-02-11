@@ -23,9 +23,15 @@ public class SkillValidator {
         SkillDAO validator = SkillDAO.getInstance();
         List<Skill> dbSkills = validator.getSkills();
         for (Skill s : skillList) {
-            if (!dbSkills.contains(s)) {
-                throw new ValidationException("Input skill is not present in DB!");
+            boolean valid = false;
+            for (Skill dbs : dbSkills) {
+                if (s.getSkillName().equals(dbs.getSkillName()) && s.getSkillType().equals(dbs.getSkillType())) {
+                    valid = true;
+                    s.setSkillId(dbs.getSkillId());
+                    break;
+                }
             }
+            if (!valid) throw new ValidationException("Input skill is not present in DB!");
         }
     }
 }
