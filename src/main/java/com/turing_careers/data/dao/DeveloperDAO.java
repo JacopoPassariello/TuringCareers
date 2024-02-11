@@ -71,7 +71,6 @@ public class DeveloperDAO extends DAO {
         LocationDAO locationDAO = LocationDAO.getInstance();
         Location devLoc;
         try {
-            // TODO: get by name ??????????
             devLoc = locationDAO.getLocationByLatAndLon(
                     developer.getLocation().getLat(),
                     developer.getLocation().getLon()
@@ -83,14 +82,9 @@ public class DeveloperDAO extends DAO {
                     developer.getLocation().getLat(),
                     developer.getLocation().getLon()
             );
-            // devLoc = em.merge(devLoc);
-            locationDAO.addLocation(devLoc);
+            locationDAO.addLocation(devLoc); // TODO: amma capi che non funziona
         }
-        /*
-        devLoc = locationDAO.getLocationByLatAndLon(devLoc.getLat(), devLoc.getLon());
-        System.out.println(devLoc);
-        developer.setLocation(devLoc);
-        System.out.println(developer);*/
+
         try {
             em.getTransaction().begin();
 
@@ -100,7 +94,7 @@ public class DeveloperDAO extends DAO {
             for (Language l : developer.getLanguages())
                 em.merge(l);
 
-            em.merge(developer.getLocation());
+            em.persist(developer.getLocation());
 
             em.persist(developer);
             em.getTransaction().commit();

@@ -62,6 +62,7 @@ public class AuthenticationServlet extends HttpServlet {
 
                 if (userType.equals("developer")) {
                     Developer dev = objectMapper.readValue(jsonString, Developer.class);
+                    System.out.println(dev);
                     authenticator.signupUser(dev);
                 } else {
                     Employer emp = objectMapper.readValue(jsonString, Employer.class);
@@ -80,7 +81,6 @@ public class AuthenticationServlet extends HttpServlet {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
 
-        System.out.println("Success");
         String redirectUrl = "index.jsp";
         String jsonResponse = "{\"redirectUrl\": \"" + redirectUrl + "\"}";
         response.setContentType("application/json");

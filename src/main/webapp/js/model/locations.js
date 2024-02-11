@@ -6,8 +6,8 @@ class Location {
     toJSON() {
         return {
             _Location__name: this.name,
-            _Location__lat: 41.9027, // TODO : get lat and lon
-            _Location__lon: 12.4962
+            _Location__lat: 1, // TODO : get lat and lon
+            _Location__lon: 2
         }
     }
 
