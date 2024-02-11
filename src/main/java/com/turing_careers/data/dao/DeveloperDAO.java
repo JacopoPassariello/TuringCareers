@@ -86,14 +86,14 @@ public class DeveloperDAO extends DAO {
                     developer.getLocation().getLat(),
                     developer.getLocation().getLon()
             );
-            devLoc = em.merge(devLoc);
+            // devLoc = em.merge(devLoc);
             locationDAO.addLocation(devLoc);
         }
-
+        /*
         devLoc = locationDAO.getLocationByLatAndLon(devLoc.getLat(), devLoc.getLon());
         System.out.println(devLoc);
         developer.setLocation(devLoc);
-        System.out.println(developer);
+        System.out.println(developer);*/
         try {
             em.getTransaction().begin();
             em.persist(developer);
