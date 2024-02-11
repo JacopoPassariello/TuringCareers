@@ -39,7 +39,7 @@ public class CreateOfferTest {
                 new Skill("Metallurgia", "Non Valida")
         ));
 
-        this.correctLocation = new Location("Monteforte Irpino, AV", 1d, 2d);
+        this.correctLocation = new Location("83024 Monteforte Irpino AV, Italia", 1d, 2d);
         this.incorrectLocation = new Location("Marina di Avellino, AV", 5d, 5d);
 
         this.correctLanguages = new ArrayList<>();
@@ -47,8 +47,6 @@ public class CreateOfferTest {
         correctLanguages.add(ldao.getLanguageByLanguageCode("en_UK"));
 
         this.incorrectLanguages = new ArrayList<>(List.of(new Language("ks_WO")));
-
-        this.correctLocation = new Location("Monteforte Irpino, AV", 1d, 1d);
 
         this.employer = edao.getEmployerById(1L);
     }
@@ -225,6 +223,7 @@ public class CreateOfferTest {
                 this.correctSkills,
                 this.correctLanguages
         );
+        System.out.println(correctLocation.getName());
         Assertions.assertDoesNotThrow(
                 () -> OfferManager.createOffer(offer),
                 "Exception thrown"
