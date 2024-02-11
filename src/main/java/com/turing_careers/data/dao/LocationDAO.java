@@ -48,7 +48,7 @@ public class LocationDAO extends DAO {
      * @param lon La longitudine della location da recuperare
      * @return L'istanza di Location contenente lat e lon come coppia di latitudine e longitudine
      */
-    public Location getLocationByLatAndLon(Double lat, Double lon) throws PersistenceException{
+    public Location getLocationByLatAndLon(Double lat, Double lon) throws PersistenceException {
         return
                 super.em
                 .createNamedQuery("findLocationLatAndLog", Location.class)
