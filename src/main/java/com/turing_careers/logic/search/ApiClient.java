@@ -7,6 +7,8 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Optional;
 
@@ -18,6 +20,10 @@ public class ApiClient {
     private static final String API_ENDPOINT  = "http://localhost:8000/";
     private RequestBody requestBody;
     private Client requestClient;
+
+    public ApiClient() {
+        this.requestClient = ClientBuilder.newClient();
+    }
 
     public ApiClient(Item item) {
         this.requestClient = ClientBuilder.newClient();
@@ -31,6 +37,18 @@ public class ApiClient {
 
     public ApiClient(String query, User user) {
         this.requestClient = ClientBuilder.newClient();
+        this.requestBody = new RequestBody(query, user);
+    }
+
+    public void setRequestBody(Item item) {
+        this.requestBody = new RequestBody(item);
+    }
+
+    public void setRequestBody(String query) {
+        this.requestBody = new RequestBody(query);
+    }
+
+    public void setRequestBody(String query, User user) {
         this.requestBody = new RequestBody(query, user);
     }
 
