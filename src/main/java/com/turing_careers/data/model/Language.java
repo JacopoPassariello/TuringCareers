@@ -27,8 +27,10 @@ public class Language {
     @JsonProperty("_Language__code")
     private String languageCode;
     @ManyToMany(mappedBy = "languages")
+    @ToString.Exclude
     private List<Offer> offerList;
     @ManyToMany(mappedBy = "languages")
+    @ToString.Exclude
     private List<Developer> developerList;
 
     public Language(String languageCode) {

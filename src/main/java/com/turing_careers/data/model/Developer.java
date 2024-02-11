@@ -61,6 +61,7 @@ public class Developer implements User, Item {
             inverseJoinColumns = @JoinColumn(name = "skillId")
     )
     @JsonProperty("_Developer__skills")
+    @ToString.Exclude
     private List<Skill> skills;
 
     @ManyToMany
@@ -70,6 +71,7 @@ public class Developer implements User, Item {
             inverseJoinColumns = @JoinColumn(name ="languageId")
     )
     @JsonProperty("_Developer__languages")
+    @ToString.Exclude
     private List<Language> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -78,6 +80,7 @@ public class Developer implements User, Item {
             joinColumns = @JoinColumn(name = "offerId"),
             inverseJoinColumns = @JoinColumn(name = "developerId")
     )
+    @ToString.Exclude
     private List<Offer> savedOffers;
 
     public Developer(String firstName, String lastName, String bio, String mail, String password,

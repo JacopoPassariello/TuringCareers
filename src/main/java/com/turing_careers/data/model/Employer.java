@@ -48,6 +48,7 @@ public class Employer implements User {
     private String companyName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
+    @ToString.Exclude
     private List<Offer> offers;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -56,6 +57,7 @@ public class Employer implements User {
             joinColumns = @JoinColumn(name = "employerId"),
             inverseJoinColumns = @JoinColumn(name = "developerId")
     )
+    @ToString.Exclude
     private List<Developer> savedDevelopers;
 
     public Employer(String firstName, String lastName, String mail, String password, String companyName) {

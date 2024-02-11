@@ -2,6 +2,7 @@ package com.turing_careers.data.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 @ToString
 @NamedQueries({
     @NamedQuery(name = "findAllOffers", query = "SELECT o FROM Offer o"),
-    @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id")
+    @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id"),
+    @NamedQuery(name = "searchOffer", query = "SELECT o FROM Offer o WHERE o.title LIKE '%' || :query || '%' OR o.description LIKE '%' || :query || '%'")
 })
 public class Offer implements Item {
 
@@ -63,6 +65,7 @@ public class Offer implements Item {
             inverseJoinColumns = @JoinColumn(name = "skillId")
     )
     @JsonProperty("_Offer__skills")
+    @ToString.Exclude
     private List<Skill> skills;
 
     @ManyToMany
@@ -72,9 +75,11 @@ public class Offer implements Item {
             inverseJoinColumns = @JoinColumn(name = "languageId")
     )
     @JsonProperty("_Offer__languages")
+    @ToString.Exclude
     private List<Language> languages;
 
     @ManyToMany(mappedBy = "savedOffers", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Developer> subscribedDevelopers;
 
 

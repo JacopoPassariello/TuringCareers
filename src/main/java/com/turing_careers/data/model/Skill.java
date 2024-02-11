@@ -35,7 +35,9 @@ public class Skill {
         this.skillType = skillType;
     }
     @ManyToMany(mappedBy = "skills")
+    @ToString.Exclude
     private List<Offer> offerList;
     @ManyToMany(mappedBy = "skills")
+    @ToString.Exclude
     private List<Developer> developerList;
 }

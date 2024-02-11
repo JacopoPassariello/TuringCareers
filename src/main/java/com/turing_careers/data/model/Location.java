@@ -37,9 +37,11 @@ public class Location {
     private Double lon;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Developer> developers;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Offer> offers;
 
     public Location(String name, Double lat, Double lon) {
