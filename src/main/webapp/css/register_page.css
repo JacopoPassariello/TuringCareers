@@ -231,3 +231,23 @@
     width: 100%;
 }
 
+#second-form-employer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#register-form-employer {
+    width: 80%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+}
+
+
+#emp-company-wrapper .input-container {
+    width: 100%;
+}
+

@@ -125,6 +125,45 @@ $(document).ready(() => {
         }
     });
 
+    const employerSubmit = $("#emp-register-submit")
+    employerSubmit.click(() => {
+        const firstName = $("#firstname").val()
+        const lastName = $("#lastname").val()
+        const mail = $("#email").val()
+        const psw = $("#password-input").val()
+        const company = $("#company").val()
+
+        let employer = new Employer(firstName, lastName, mail, psw, company)
+        if (!employer.validate()) {
+            console.log('Invalid Employer')
+        } else {
+            return $.ajax({
+                url: 'http://localhost:8080/TuringCareers_war/AuthenticationServlet?' +
+                    'userType=' + encodeURIComponent('employer') +
+                    '&authType=' + encodeURIComponent('register'),
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(employer),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        // Handle
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('There was a problem with the AJAX request:', errorThrown);
+                    // TODO: reload page with error
+                }
+            });
+        }
+    });
+
+    function registerEmployer() {
+
+    }
+
     /**
      * TODO: cleanup
      * */

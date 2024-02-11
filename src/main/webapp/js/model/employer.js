@@ -8,6 +8,17 @@ class Employer {
     }
 
     validate() {
+        const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+        for (let key of Object.keys(this)) {
+            if (!this[key])
+                return false;
+            if (key === 'empMail' && !emailPattern.test(this[key]))
+                return false
+            if (key === 'empPassword') {
+                // TODO: test password
+            }
+        }
         return true;
     }
 

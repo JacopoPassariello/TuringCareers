@@ -35,14 +35,12 @@
                         <input type="hidden" name="type" value="register">
                         <div class="input-container input-text ic1">
                             <input id="firstname" name="firstname" class="input inter-regular" type="text" placeholder="Nome" />
-                            <div class="cut"></div>
                         </div>
                         <div class="input-container input-text ic2">
                             <input id="lastname" name="lastname" class="input inter-regular" type="text" placeholder="Cognome" />
                         </div>
                         <div class="input-container input-text ic2">
                             <input id="email" name="email" class="input inter-regular" type="email" placeholder="Email" />
-                            <div class="cut cut-short"></div>
                         </div>
                         <div id="password-container" class="input-container">
                             <div style="position: relative" class="input-text">
@@ -122,15 +120,32 @@
                 </div>
             </div>
         </div>
-        <form id="second-form-employer" class="register-form-wrapper display-none fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post">
-
-        </form>
+        <!-- Employer Form -->
+        <div id="second-form-employer" class="register-form-wrapper display-none fade-in">
+              <!--action="AuthenticationServlet" onsubmit="return registerEmployer()" method="post">-->
+            <div id="register-form-employer">
+                <div id="emp-company-wrapper">
+                    <h3 class="no-select inter-regular">Company</h3>
+                    <div class="input-container input-text ic2">
+                        <input id="company" class="input inter-regular" placeholder="Company" />
+                    </div>
+                </div>
+                <div class="register-switch-form-wrapper" >
+                    <div class="register-switch-form">
+                        <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                        <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                        <button  id="emp-register-submit" class="register-submit-button submit-button inter-bold">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/pages/register_page.js"></script>
     <script type="text/javascript" src="js/model/skills.js"></script>
     <script type="text/javascript" src="js/model/locations.js"></script>
     <script type="text/javascript" src="js/model/developer.js"></script>
+    <script type="text/javascript" src="js/model/employer.js"></script>
     <script type="text/javascript" src="js/model/languages.js"></script>
 </body>
 </html>
