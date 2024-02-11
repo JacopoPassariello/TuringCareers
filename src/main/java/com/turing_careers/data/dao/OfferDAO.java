@@ -52,6 +52,16 @@ public class OfferDAO extends DAO {
     }
 
     /**
+     *
+     * */
+    public List<Offer> getOfferByQuery(String query) {
+        return super.em
+                .createNamedQuery("searchOffer", Offer.class)
+                .setParameter("query", query.toLowerCase())
+                .getResultList();
+    }
+
+    /**
      * Aggiunge una Offer al database
      * @param offer L'istanza di Offer da aggiungere
      * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiunta

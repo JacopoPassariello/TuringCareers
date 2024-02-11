@@ -37,4 +37,14 @@ public class TestOfferDAO {
         Assertions.assertFalse(offers.isEmpty());
         System.out.println(offers);
     }
+
+    @Test
+    public void searchOfferTest() {
+        OfferDAO offerDAO = OfferDAO.getInstance();
+        List<Offer> offers = offerDAO.getOfferByQuery("Web Developer");
+        System.out.println("Length: " + offers.size());
+        for (Offer o : offers) {
+            System.out.println(o);
+        }
+    }
 }

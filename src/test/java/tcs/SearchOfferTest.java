@@ -10,8 +10,13 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.mockito.Mockito;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 /**
  * Implementation of TCS_RS_1, see Test Case Specification.
@@ -78,14 +83,21 @@ public class SearchOfferTest {
     @Test
     @Order(1)
     public void searchOfferQueryError() {
-        List<Offer> offers;
+        Assertions.assertThrows(
+                InvalidParameterException.class,
+                () -> searchOfferEngine.search(nnQuery, devCorrect)
+        );
     }
 
     @Test
     @Order(2)
     public void searchOfferNullDeveloper() {
         Developer devNull = null;
-        List<Offer> offers;
+        when(client.sendRequest(anyString()))
+                .thenReturn(Optional.of(clientReturn));
+
+        List<Offer> offers = searchOfferEngine.search(query, devNull);
+        Assertions.assertNotNull(offers);
     }
 
     @Test
@@ -102,8 +114,11 @@ public class SearchOfferTest {
                 skills,
                 languageList
         );
+        when(client.sendRequest(anyString()))
+                .thenReturn(Optional.of(clientReturn));
 
-        List<Offer> offers;
+        List<Offer> offers = searchOfferEngine.search(query, devNullSkills);
+        Assertions.assertNotNull(offers);
     }
 
     @Test
@@ -120,13 +135,20 @@ public class SearchOfferTest {
                 skills,
                 languageList
         );
+        when(client.sendRequest(anyString()))
+                .thenReturn(Optional.of(clientReturn));
 
-        List<Offer> offers;
+        List<Offer> offers = searchOfferEngine.search(query, devEmptySkills);
+        Assertions.assertNotNull(offers);
     }
 
     @Test
     @Order(5)
     public void searchOfferSuccess() {
-        List<Offer> offers;
+        when(client.sendRequest(anyString()))
+                .thenReturn(Optional.of(clientReturn));
+
+        List<Offer> offers = searchOfferEngine.search(query, devCorrect);
+        Assertions.assertNotNull(offers);
     }
 }
