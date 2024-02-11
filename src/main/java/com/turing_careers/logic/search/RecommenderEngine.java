@@ -18,8 +18,14 @@ import java.util.Optional;
  * */
 public class RecommenderEngine {
     private ClientType type;
+    private ApiClient client;
     public RecommenderEngine(ClientType type) {
         this.type = type;
+        this.client = new ApiClient();
+    }
+
+    public void setClient(ApiClient client) {
+        this.client = client;
     }
 
     /**
@@ -41,7 +47,7 @@ public class RecommenderEngine {
         if (this.type != ClientType.OFFER)
             throw new InvalidParameterException();
 
-        ApiClient client = new ApiClient(query, user);
+        this.client.setRequestBody(query, user);
         Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
 
         List<Offer> offerList = new ArrayList<>();
