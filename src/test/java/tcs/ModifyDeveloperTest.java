@@ -54,6 +54,8 @@ public class ModifyDeveloperTest {
                 new Skill("C++", "Programming Language"),
                 new Skill("Metallurgia", "Non Valida")
         ));
+
+        this.correctLanguages = new ArrayList<>();
         correctLanguages.add(languageDAO.getLanguageByLanguageCode("it_IT"));
         correctLanguages.add(languageDAO.getLanguageByLanguageCode("en_UK"));
 
@@ -203,7 +205,7 @@ public class ModifyDeveloperTest {
                 this.password,
                 this.location,
                 this.correctSkills,
-                this.incorrectLanguages
+                this.correctLanguages
         );
         Assertions.assertDoesNotThrow(
                 () -> UserManager.createProfile(developer),
