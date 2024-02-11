@@ -49,7 +49,7 @@ public class Developer implements User, Item {
     private String password;
 
     // TODO: fix persist location when trying to create developer with new location
-    @ManyToOne//(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH)//(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "locationId")
     @JsonProperty("_Developer__location")
     private Location location;
