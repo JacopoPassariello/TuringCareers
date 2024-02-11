@@ -55,12 +55,20 @@ public class Developer implements User, Item {
     private Location location;
 
     @ManyToMany
-    @JoinTable(name = "DeveloperSkill")
+    @JoinTable(
+            name = "DeveloperSkill",
+            joinColumns = @JoinColumn(name = "developerId"),
+            inverseJoinColumns = @JoinColumn(name = "skillId")
+    )
     @JsonProperty("_Developer__skills")
     private List<Skill> skills;
 
     @ManyToMany
-    @JoinTable(name = "DeveloperLanguage")
+    @JoinTable(
+            name = "DeveloperLanguage",
+            joinColumns = @JoinColumn(name = "developerId"),
+            inverseJoinColumns = @JoinColumn(name ="languageId")
+    )
     @JsonProperty("_Developer__languages")
     private List<Language> languages;
 

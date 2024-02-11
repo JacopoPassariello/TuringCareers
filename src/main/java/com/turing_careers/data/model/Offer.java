@@ -57,12 +57,20 @@ public class Offer implements Item {
     private Location location;
 
     @ManyToMany
-    @JoinTable(name = "OfferSkill")
+    @JoinTable(
+            name = "OfferSkill",
+            joinColumns = @JoinColumn(name = "offerId"),
+            inverseJoinColumns = @JoinColumn(name = "skillId")
+    )
     @JsonProperty("_Offer__skills")
     private List<Skill> skills;
 
     @ManyToMany
-    @JoinTable(name = "OfferLanguage")
+    @JoinTable(
+            name = "OfferLanguage",
+            joinColumns = @JoinColumn(name = "offerId"),
+            inverseJoinColumns = @JoinColumn(name = "languageId")
+    )
     @JsonProperty("_Offer__languages")
     private List<Language> languages;
 
