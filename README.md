@@ -1,5 +1,3 @@
-<style>
-</style>
 <div style="display: flex; justify-content: center; align-items: center; border-bottom:2px solid gray">
     <img id="logo" src="./Documentazione/static/text_logo.svg" alt="" style="padding: 20px 0; width: 45%; height: 45%">
 </div>
