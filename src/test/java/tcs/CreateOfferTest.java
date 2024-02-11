@@ -225,7 +225,6 @@ public class CreateOfferTest {
                 this.correctSkills,
                 this.correctLanguages
         );
-        OfferDAO dao = OfferDAO.getInstance();
         Assertions.assertDoesNotThrow(
                 () -> OfferManager.createOffer(offer),
                 "Exception thrown"
