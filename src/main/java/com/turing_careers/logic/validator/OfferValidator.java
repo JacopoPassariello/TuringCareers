@@ -26,5 +26,6 @@ public class OfferValidator {
         //CHECKME: blocco di codice per validazione di skill language
         SkillValidator.validateSkills(offer.getSkills());
         LanguageValidator.validateLanguages(offer.getLanguages());
+        LocationValidator.validateLocation(offer.getLocation());
     }
 }
