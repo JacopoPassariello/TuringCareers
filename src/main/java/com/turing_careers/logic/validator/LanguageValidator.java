@@ -24,9 +24,15 @@ public class LanguageValidator {
         LanguageDAO validator = LanguageDAO.getInstance();
         List<Language> dbLangs = validator.getLanguages();
         for (Language l : languageList) {
-            if (!dbLangs.contains(l)) {
-                throw new ValidationException("Input Langugage is not present in DB!");
+            boolean valid = false;
+            for (Language dbl : dbLangs) {
+                if (l.getLanguageCode().equals(dbl.getLanguageCode())) {
+                    valid = true;
+                    l.setId(dbl.getId());
+                    break;
+                }
             }
+            if (!valid) throw new ValidationException("Input Langugage is not present in DB!");
         }
 
     }

@@ -3,7 +3,6 @@ package com.turing_careers.data.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class Offer implements Item {
     public static final String STATE_OPEN = "OPEN";
     public static final String STATE_PAUSED = "PAUSED";
     public static final String STATE_CLOSED = "CLOSED";
-    public static final String IN_PLACE = "ON_SITE";
+    public static final String ON_SITE = "ON_SITE";
     public static final String REMOTE = "REMOTE";
 
     @Id
