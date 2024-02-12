@@ -1,7 +1,6 @@
 package com.turing_careers.logic.suggestions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.turing_careers.data.model.Location;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

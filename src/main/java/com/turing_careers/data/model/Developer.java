@@ -44,15 +44,12 @@ public class Developer implements User, Item {
     @JsonProperty("_Developer__mail")
     private String mail;
 
+    @Column(name = "locationName")
+    private String location;
+
     @Column(name = "passwordAccount", nullable = false)
     @JsonProperty("_Developer__psw")
     private String password;
-
-    // TODO: fix persist location when trying to create developer with new location
-    @ManyToOne(cascade = CascadeType.REFRESH)//(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Developer__location")
-    private Location location;
 
     @ManyToMany
     @JoinTable(
@@ -84,7 +81,7 @@ public class Developer implements User, Item {
     private List<Offer> savedOffers;
 
     public Developer(String firstName, String lastName, String bio, String mail, String password,
-                     Location location, List<Skill> skills, List<Language> languages) {
+                     String location, List<Skill> skills, List<Language> languages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;

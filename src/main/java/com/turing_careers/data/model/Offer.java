@@ -48,15 +48,13 @@ public class Offer implements Item {
     @JsonProperty("_Offer__location_type")
     private String locationType;
 
+    @Column(name = "locationName")
+    private String location;
+
     @ManyToOne
     @JoinColumn(name = "employerId")
     @JsonProperty("_Offer__employer")
     private Employer employer;
-
-    @ManyToOne
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Offer__location")
-    private Location location;
 
     @ManyToMany
     @JoinTable(
@@ -83,7 +81,7 @@ public class Offer implements Item {
     private List<Developer> subscribedDevelopers;
 
 
-    public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
+    public Offer(String title, String description, String state, String locationType, Employer employer, String location, List<Skill> skills, List<Language> languages) {
         this.title = title;
         this.description = description;
         this.state = state;

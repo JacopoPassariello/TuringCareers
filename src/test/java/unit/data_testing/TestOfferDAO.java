@@ -1,7 +1,6 @@
 package unit.data_testing;
 
 import com.turing_careers.data.dao.EmployerDAO;
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.OfferDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;

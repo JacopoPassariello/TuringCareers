@@ -42,7 +42,6 @@ public class UserValidator {
         //CHECKME: nuovo blocco di codice per la validazione di skill e language
         LanguageValidator.validateLanguages(user.getLanguages());
         SkillValidator.validateSkills(user.getSkills());
-
     }
 
     /**
