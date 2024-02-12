@@ -75,9 +75,9 @@ git clone https://github.com/antoninoLorenzo/RecommenderSystem_TC.git
 pip install -r requirements.txt
 ```
 3. Esegui il seguente comando tramite un terminale bash specificando l'indirizzo su cui è stato 
-effettuato il deploy del del database come [ip:port], poi il nume utente e la password:
+effettuato il deploy del del database come [ip:port/connection] (es. localhost:3306/turing_careers), poi il nume utente e la password:
 ```
-nohup python launcher.py —db-address [ip:port] —db-user [Nome Utente] —db-psw [Password] > log.txt & echo $! > pid.txt
+nohup python launcher.py —db-address [ip:port/connection] —db-user [Nome Utente] —db-psw [Password] > log.txt & echo $! > pid.txt
 ```
 
 
