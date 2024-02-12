@@ -68,7 +68,7 @@ public class AuthenticationServlet extends HttpServlet {
                     Developer dev = objectMapper.readValue(jsonString, Developer.class);
                     System.out.println(dev);
                     dev = (Developer) authenticator.signupUser(dev);
-                    System.out.println("Developer Post-Auth: \n" +dev);
+                    System.out.println("Developer Post-Auth: \n" + dev);
                     request.getSession().setAttribute("userType", userType);
                     request.getSession().setAttribute("user", dev);
                 } else {
