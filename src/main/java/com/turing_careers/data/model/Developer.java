@@ -45,6 +45,7 @@ public class Developer implements User, Item {
     private String mail;
 
     @Column(name = "locationName")
+    @JsonProperty("_Developer__location")
     private String location;
 
     @Column(name = "passwordAccount", nullable = false)
