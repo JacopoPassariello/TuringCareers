@@ -49,6 +49,7 @@ public class Offer implements Item {
     private String locationType;
 
     @Column(name = "locationName")
+    @JsonProperty("_Offer__location")
     private String location;
 
     @ManyToOne

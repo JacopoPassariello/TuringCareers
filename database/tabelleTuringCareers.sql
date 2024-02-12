@@ -42,7 +42,7 @@ CREATE TABLE Offer
     ,offerDescription TEXT NOT NULL
     ,locationType VARCHAR(10) NOT NULL
     ,employerId INT NOT NULL
-    ,locationId VARCHAR(255)
+    ,locationName VARCHAR(255)
     ,PRIMARY KEY (offerId)
     ,FOREIGN KEY (employerId) REFERENCES Employer(employerId)
     ,FULLTEXT(title, offerDescription)

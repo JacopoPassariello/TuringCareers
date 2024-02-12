@@ -48,15 +48,15 @@ public class SearchOfferTest {
                 "\"_Offer__description\":\"desc\",\"_Offer__employer\":{\"_Employer__id\":1,\"_Employer__f_name\":" +
                 "\"Antonino\",\"_Employer__l_name\":\"Lorenzo\",\"_Employer__mail\":\"anton@gmail.com\",\"_Employer" +
                 "__psw\":\"S3cur3Pas@s\",\"_Employer__company\":\"asd\"},\"_Offer__location_type\":\"Remote\",\"_Of" +
-                "fer__location\":{\"_Location__id\":1,\"_Location__name\":\"Avellino Italia\",\"_Location__lat\":12" +
-                "3,\"_Location__lon\":124},\"_Offer__skills\":[{\"_Skill__id\":1,\"_Skill__name\":\"Python\",\"_Ski" +
+                "fer__location\":\"Avellino Italia\"," +
+                "\"_Offer__skills\":[{\"_Skill__id\":1,\"_Skill__name\":\"Python\",\"_Ski" +
                 "ll__type\":\"Programming Language\"}],\"_Offer__languages\":[{\"_Language__id\":1,\"_Language__cod" +
                 "e\":\"it\"}]},{\"_Offer__id\":1,\"_Offer__title\":\"Web Developer\",\"_Offer__state\":\"active\",\"" +
                 "_Offer__description\":\"desc\",\"_Offer__employer\":{\"_Employer__id\":1,\"_Employer__f_name\":\"An" +
                 "tonino\",\"_Employer__l_name\":\"Lorenzo\",\"_Employer__mail\":\"anton@gmail.com\",\"_Employer__psw" +
                 "\":\"S3cur3Pas@s\",\"_Employer__company\":\"asd\"},\"_Offer__location_type\":\"Remote\",\"_Offer__l" +
-                "ocation\":{\"_Location__id\":1,\"_Location__name\":\"Avellino Italia\",\"_Location__lat\":123,\"_Lo" +
-                "cation__lon\":124},\"_Offer__skills\":[{\"_Skill__id\":1,\"_Skill__name\":\"Python\",\"_Skill__type" +
+                "ocation\":\"Avellino Italia\"," +
+                "\"_Offer__skills\":[{\"_Skill__id\":1,\"_Skill__name\":\"Python\",\"_Skill__type" +
                 "\":\"Programming Language\"}],\"_Offer__languages\":[{\"_Language__id\":1,\"_Language__code\":\"it\"" +
                 "}]}]\n";
 
@@ -74,7 +74,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );
@@ -110,7 +110,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );
@@ -131,7 +131,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );

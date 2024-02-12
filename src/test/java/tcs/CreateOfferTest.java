@@ -16,8 +16,8 @@ import java.util.List;
 public class CreateOfferTest {
     private List<Skill> correctSkills;
     private List<Skill> incorrectSkills;
-    private Location correctLocation;
-    private Location incorrectLocation;
+    private String correctLocation;
+    private String incorrectLocation;
     private List<Language> correctLanguages;
     private List<Language> incorrectLanguages;
     private Employer employer;
@@ -39,8 +39,8 @@ public class CreateOfferTest {
                 new Skill("Metallurgia", "Non Valida")
         ));
 
-        this.correctLocation = new Location("83024 Monteforte Irpino AV, Italia", 1d, 2d);
-        this.incorrectLocation = new Location("Marina di Avellino, AV", 5d, 5d);
+        this.correctLocation = "Monteforte Irpino, AV";
+        this.incorrectLocation = "";
 
         this.correctLanguages = new ArrayList<>();
         correctLanguages.add(ldao.getLanguageByLanguageCode("it_IT"));
@@ -223,7 +223,7 @@ public class CreateOfferTest {
                 this.correctSkills,
                 this.correctLanguages
         );
-        System.out.println(correctLocation.getName());
+
         Assertions.assertDoesNotThrow(
                 () -> OfferManager.createOffer(offer),
                 "Exception thrown"

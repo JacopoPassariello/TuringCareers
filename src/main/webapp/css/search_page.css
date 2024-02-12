@@ -31,7 +31,8 @@
     }
 
     #search-main {
-        margin-top: 13dvh;
+        margin-top: 20dvh;
+        padding-bottom: 2dvh !important;
     }
 }
 
@@ -273,6 +274,7 @@
 .of-offer-button div:active {
     margin-top: 2px;
 }
+
 
 #search-main {
     padding-bottom: 12dvh;

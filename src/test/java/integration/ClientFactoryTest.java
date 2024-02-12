@@ -38,8 +38,7 @@ public class ClientFactoryTest {
         List<Language> languages = new ArrayList<>();
         languages.add(lang);
 
-        Location devLoc = new Location("Roma", 1.0, 2.0);
-        devLoc.setId(1000L);
+        String devLoc = "Roma";
 
         Developer dev = new Developer(
                 1L,
