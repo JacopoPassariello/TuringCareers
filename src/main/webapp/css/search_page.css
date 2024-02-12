@@ -197,6 +197,11 @@
     width: 80%;
 }
 
+.of-offer-card-header .of-offer-head p{
+    font-weight:600;
+    font-size:18px;
+    padding-bottom:3px;
+}
 .of-offer-head h3{
     font-size: 16px;
 }
