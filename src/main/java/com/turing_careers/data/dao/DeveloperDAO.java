@@ -66,25 +66,6 @@ public class DeveloperDAO extends DAO {
      * @throws PersistenceException Lanciata quando avviene un errore nel tentativo di aggiunta.
      */
     public void addDeveloper(Developer developer) throws PersistenceException  {
-        // Create Location it was never found
-
-        LocationDAO locationDAO = LocationDAO.getInstance();
-        Location devLoc;
-        try {
-            devLoc = locationDAO.getLocationByLatAndLon(
-                    developer.getLocation().getLat(),
-                    developer.getLocation().getLon()
-            );
-        } catch (Exception ex) {
-            System.out.println("Location Not Found, Adding: " + developer.getLocation().getName());
-            devLoc = new Location(
-                    developer.getLocation().getName(),
-                    developer.getLocation().getLat(),
-                    developer.getLocation().getLon()
-            );
-            locationDAO.addLocation(devLoc); // TODO: amma capi che non funziona
-        }
-
         try {
             em.getTransaction().begin();
 
@@ -93,8 +74,6 @@ public class DeveloperDAO extends DAO {
 
             for (Language l : developer.getLanguages())
                 em.merge(l);
-
-            em.persist(developer.getLocation());
 
             em.persist(developer);
             em.getTransaction().commit();

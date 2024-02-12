@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.dao.DeveloperDAO;
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;
 import org.junit.jupiter.api.Assertions;

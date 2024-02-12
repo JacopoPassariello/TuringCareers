@@ -1,10 +1,6 @@
 package unit.data_testing;
 
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.PersistenceException;
-import com.turing_careers.data.dao.SkillDAO;
-import com.turing_careers.data.model.Location;
-import com.turing_careers.data.model.Skill;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ParameterResolutionException;

@@ -1,9 +1,7 @@
 package tcs;
 
 import com.turing_careers.data.dao.LanguageDAO;
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.model.*;
-import com.turing_careers.logic.offer.OfferManager;
 import com.turing_careers.logic.user.UserManager;
 import com.turing_careers.logic.validator.ValidationException;
 import org.junit.jupiter.api.*;
