@@ -49,7 +49,9 @@ public class AuthenticationServlet extends HttpServlet {
         try {
             if (authType.equals("login")) {
                 // Login
-                authenticator.loginUser(mail, password);
+                User u = authenticator.loginUser(mail, password);
+                request.getSession().setAttribute("userType", userType);
+                request.getSession().setAttribute("user", u);
             } else if (authType.equals("register")) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 objectMapper.configure(
@@ -62,11 +64,16 @@ public class AuthenticationServlet extends HttpServlet {
 
                 if (userType.equals("developer")) {
                     Developer dev = objectMapper.readValue(jsonString, Developer.class);
+
                     System.out.println(dev);
-                    authenticator.signupUser(dev);
+                    dev = (Developer) authenticator.signupUser(dev);
+                    request.getSession().setAttribute("userType", userType);
+                    request.getSession().setAttribute("user", dev);
                 } else {
                     Employer emp = objectMapper.readValue(jsonString, Employer.class);
-                    authenticator.signupUser(emp);
+                    emp = (Employer) authenticator.signupUser(emp);
+                    request.getSession().setAttribute("userType", userType);
+                    request.getSession().setAttribute("user", emp);
                 }
             } else {
                 // TODO: handle error
