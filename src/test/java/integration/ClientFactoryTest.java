@@ -57,7 +57,7 @@ public class ClientFactoryTest {
         List<Offer> offers = new ClientFactory()
                 .setType(ClientType.OFFER)
                 .getRecommenderEngine()
-                .search("Web Developer", dev);
+                .search("Machine Learning", dev);
 
         Assertions.assertNotNull(offers);
         for (Offer offer : offers)
