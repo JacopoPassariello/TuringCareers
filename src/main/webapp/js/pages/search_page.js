@@ -43,14 +43,39 @@ $(document).ready(() => {
     searchButtonDesktop.click(() =>{
         let userInput = searchInputDesktop.val()
         if (userInput.length > 0) {
+            console.log('Query: ' + userInput)
             queryOffers(userInput)
         }
     })
 
     function queryOffers(query) {
-        // TODO: get developer to send
         // TODO: ajax query
-        updateList([1, 2, 3, 4], 'offer')
+        return $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/search/offers?' +
+                'query=' + encodeURIComponent(query),
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(''),
+            dataType: 'json',
+            success: function(response) {
+                let devs = []
+                for (let item of response) {
+
+                    devs.push(new Offer(
+                        item['_Offer__title'] ? item['_Offer__title'].slice(2, -1) : '',
+                        item['_Offer__description'] ? item['_Offer__description'].slice(2, -1) : '',
+                        item['_Offer__skills'] ? item['_Offer__skills'].slice(2, -1) : '',
+                        item['_Offer__location_type'] ? item['_Offer__location_type'].slice(2, -1) : '',
+                        item['_Offer__location'],
+                        item['_Offer__languages'] ? item['_Offer__languages'].slice(2, -1) : ''
+                    ))
+                }
+                updateList(devs, 'offer')
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
     }
 
 
@@ -64,7 +89,7 @@ $(document).ready(() => {
                    .addClass('item-card');
 
                if (type === 'offer')
-                   item_card.append(createOfferCard(item, item_card));
+                   createOfferCard(item, item_card);
                else if (type === 'developer')
                    item_card.append(createDeveloperCard(item, item_card));
 
@@ -85,7 +110,7 @@ $(document).ready(() => {
             .text('Azienda X')
         let title = $("<h1>")
             .addClass('of-offer-tile inter-bold no-select')
-            .text('Software Developer')
+            .text(item.title)
         header.append(employer, title)
         headerWrapper.append(header)
 
@@ -98,7 +123,7 @@ $(document).ready(() => {
         let meta = $("<div>")
             .addClass('of-offer-card-meta inter-regular no-select')
         let location = $("<h3>")
-            .text()
+            .text(item.loc)
         meta.append(location)
 
         let content = $("<div>")
@@ -108,7 +133,7 @@ $(document).ready(() => {
             .addClass('of-offer-desc-preview')
         let description = $("<p>")
             .addClass('inter-light')
-            .text('Hello World')
+            .text(item.description.slice(0, 40) + '...')
         descriptionWrapper.append(description)
 
         let buttonSection = $("<div>")
