@@ -1,7 +1,10 @@
 package com.turing_careers.data.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +22,7 @@ import java.util.List;
     @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail "),
     @NamedQuery(name = "findEmployerById", query = "SELECT e FROM Employer e WHERE e.id = :id")
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Employer implements User {
 
     @Id
@@ -49,6 +53,7 @@ public class Employer implements User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employer")
     @ToString.Exclude
+    @JsonManagedReference("employerOffers")
     private List<Offer> offers;
 
     @ManyToMany(fetch = FetchType.LAZY)
