@@ -7,7 +7,7 @@
 
   <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
   <link rel="stylesheet" type="text/css" href="css/commons.css"/>
-  <link rel="stylesheet" type="text/css" href="css/search_page.css"/>
+  <link rel="stylesheet" type="text/css" href="css/developer_page.css"/>
   <link rel="stylesheet" href="css/employer_page.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -41,107 +41,25 @@
 
   <div class="profile-content-wrapper">
     <div class="profile-content">
-      <div id="manager-header">
-        <h3 class="inter-bold no-select">Offerte</h3>
-        <div id="create-offer-button">
-          <i class="bi bi-plus"></i>
-          <p class="inter-regular">Crea Offerta</p>
-        </div>
+      <div id="manager-header" style="margin-top: 15pt">
+        <h3 class="inter-bold no-select">Offerte Salvate</h3>
       </div>
-      <!-- TODO: add offers -->
-      <!-- Offer Form
-      <div id="create-offer-form-wrapper" class="">
-        <div id="create-offer-form">
-          <div id="offer-main" class="offer-section">
-            <h3 class="no-select inter-regular">Title</h3>
-            <div class="input-container input-text ic2">
-              <input id="offer-title" class="offer-input inter-regular" placeholder="Title" />
-            </div>
-            <h3 class="no-select inter-regular">Description</h3>
-            <div class="input-container input-text ic2">
-                                <textarea id="offer-description" class="offer-input inter-regular"
-                                          placeholder="Description"></textarea>
-            </div>
-          </div>
-          <div id="offer-meta" class="offer-section">
-            <!- Skill Input
-            <div id="dev-skills-input">
-              <h3 class="no-select inter-regular">Skill</h3>
-              <div class="autocomplete-wrapper">
-                <div id="skill-tags-section">
-                  <div id="skill-tags-wrapper">
-                    <ul id="skill-tags">
-                      <li class="skill-tag">
-                        <p class="no-select inter-regular">Python</p>
-                        <h3 class="no-select inter-regular">X</h3>
-                      </li>
-                    </ul>
-                    <input id="skill-input-text" type="text" class="inter-regular" >
-                  </div>
-                </div>
-                <div id="skills-autocomplete-section" class="autocomplete-section">
-                  <ul id="skills-autocomplete-list" class="autocomplete-suggestions"></ul>
-                </div>
-              </div>
-            </div>
-            <!-- Location Input
-            <div id="dev-locations-input">
-              <h3 class="no-select inter-regular">Location</h3>
-              <div class="autocomplete-wrapper">
-                <div>
-                  <input id="locations-input-text" type="text" class="input inter-regular" placeholder="Location">
-                </div>
-                <div id="locations-autocomplete-section" class="autocomplete-section display-none">
-                  <ul id="locations-autocomplete-list" class="autocomplete-suggestions"></ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- Languages
-            <div id="languages-input-wrapper">
-              <h3 class="no-select inter-regular">Language</h3>
-              <div class="autocomplete-wrapper">
-                <div id="languages-input">
-                  <div id="language-tags-wrapper">
-                    <ul id="language-tags">
-                      <!--
-                      <li class="location-tag">
-                          <p class="no-select inter-regular">Italiano</p>
-                          <h3 class="no-select inter-regular">X</h3>
-                      </li>
-                    </ul>
-                    <input id="languages-input-text" type="text" class="inter-regular" placeholder="Languages">
-                  </div>
-                </div>
-                <div id="languages-autocomplete-section" class="autocomplete-section display-none">
-                  <ul id="languages-autocomplete-list" class="autocomplete-suggestions"></ul>
-                </div>
-              </div>
-            </div>
-
-            <div id="offer-form-submit-wrapper">
-              <div id="offer-form-submit">
-                <button id="offer-form-submit-button" class="input-text inter-regular">
-                  Create
-                </button>
-              </div>
-              <div id="offer-form-undo">
-                <button id="offer-form-undo-button" class="offer-input inter-regular">
-                  Undo
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>-->
-      <div class="item-card" style="padding: 10pt; margin: 10pt">
+      <div class="item-card">
         <div class="of-offer-card-header">
           <div class="of-offer-head no-select">
             <h3 class="of-offer-employer-name inter-medium">Azienda X</h3>
             <h1 class="of-offer-tile inter-bold no-select">Software Developer</h1>
           </div>
           <div class="of-offer-bookmark">
+            <i class="bi bi-bookmarks-fill"></i>
+            <i class="bi bi-x"></i>
+            <!--
+            <i class="bi bi-x-octagon-fill"></i>
             <i class="bi bi-bookmark"></i>
+            <i class="bi bi-x-octagon"></i>
+            <i class="bi bi-x-lg"></i>
+            <i class="bi bi-x-square"></i>
+            -->
           </div>
         </div>
         <div class="of-offer-card-meta inter-regular no-select">
@@ -167,7 +85,8 @@
             <h1 class="of-offer-tile inter-bold no-select">Software Developer</h1>
           </div>
           <div class="of-offer-bookmark">
-            <i class="bi bi-bookmark"></i>
+            <i class="bi bi-bookmarks-fill"></i>
+            <i class="bi bi-x"></i>
           </div>
         </div>
         <div class="of-offer-card-meta inter-regular no-select">
