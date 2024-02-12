@@ -17,20 +17,23 @@ public class EmployerAuthenticator extends Authenticator {
     public EmployerAuthenticator() { super(); }
 
     @Override
-    public void loginUser(String email, String password) throws InvalidCredentialsException {
+    public Employer loginUser(String email, String password) throws InvalidCredentialsException {
         super.setEncryptionStrategy(new Argon2Encryption());
         EmployerDAO employerDAO = EmployerDAO.getInstance();
 
+        Employer emp;
         try {
-            Employer emp = employerDAO.getEmployerByMail(email);
+            emp = employerDAO.getEmployerByMail(email);
             encryptionStrategy.verify(password, emp.getPassword());
         } catch (InvalidCredentialsException invalidCredentials) {
             throw new InvalidCredentialsException(invalidCredentials.getMessage());
         }
+
+        return emp;
     }
 
     @Override
-    public void signupUser(User user) throws ValidationException, PersistenceException {
+    public Employer signupUser(User user) throws ValidationException, PersistenceException {
         if (!(user instanceof Employer))
             throw new ValidationException("EmployerAuthService: Not an Employer");
         Employer emp = (Employer) user;
@@ -41,6 +44,8 @@ public class EmployerAuthenticator extends Authenticator {
         emp.setPassword(encryptedPassword);
 
         EmployerDAO employerDAO = EmployerDAO.getInstance();
-        employerDAO.addEmployer((Employer) user);
+        employerDAO.addEmployer(emp);
+
+        return emp;
     }
 }

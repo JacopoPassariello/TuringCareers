@@ -12,13 +12,13 @@ public abstract class Authenticator {
     /**
      *
      * */
-    public abstract void loginUser(String email, String password) throws InvalidCredentialsException;
+    public abstract User loginUser(String email, String password) throws InvalidCredentialsException;
 
 
     /**
      *
      * */
-    public abstract void signupUser(User user) throws Exception, PersistenceException;
+    public abstract User signupUser(User user) throws Exception, PersistenceException;
 
     /**
      *
