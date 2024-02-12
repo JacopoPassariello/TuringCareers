@@ -75,6 +75,7 @@
 #mb-nav-wrap {
     position: fixed;
     bottom: 0;
+    background-color: var(--white);
 }
 
 #mb-nav {
@@ -119,6 +120,7 @@
     margin-bottom: 10dvh;
     border-top: 2px solid var(--light-gray);
     box-shadow: -5px 0 10px rgba(44, 50, 56, 0.2);
+    background-color: var(--white);
 }
 
 .mb-nav-menu-button {
