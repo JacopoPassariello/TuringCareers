@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +15,7 @@ import java.util.List;
 @NamedQueries({
     @NamedQuery(name = "indexSkillsByName", query = "SELECT s FROM Skill s WHERE s.skillName LIKE :query"),
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +37,13 @@ public class Skill {
     }
     @ManyToMany(mappedBy = "skills")
     @ToString.Exclude
+    // @JsonBackReference("offerSkills")
+    @JsonIgnore
     private List<Offer> offerList;
+
     @ManyToMany(mappedBy = "skills")
     @ToString.Exclude
+    // @JsonBackReference("developerSkills")
+    @JsonIgnore
     private List<Developer> developerList;
 }
