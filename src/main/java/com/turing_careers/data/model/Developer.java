@@ -68,7 +68,7 @@ public class Developer implements User, Item {
     @JoinTable(
             name = "DeveloperLanguage",
             joinColumns = @JoinColumn(name = "developerId"),
-            inverseJoinColumns = @JoinColumn(name ="languageId")
+            inverseJoinColumns = @JoinColumn(name = "languageId")
     )
     @JsonProperty("_Developer__languages")
     @ToString.Exclude
