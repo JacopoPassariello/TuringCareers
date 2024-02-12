@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +16,7 @@ import java.util.List;
     @NamedQuery(name = "findAllLanguages", query = "SELECT l FROM Language l"),
     @NamedQuery(name = "findLanguageByLanguageCode", query = "SELECT l FROM Language l WHERE l.languageCode = :languageCode")
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +27,17 @@ public class Language {
     @Column(name = "languageCode", nullable = false)
     @JsonProperty("_Language__code")
     private String languageCode;
+
     @ManyToMany(mappedBy = "languages")
     @ToString.Exclude
+    // @JsonManagedReference("languageOffer")
+    @JsonIgnore
     private List<Offer> offerList;
+
     @ManyToMany(mappedBy = "languages")
     @ToString.Exclude
+    // @JsonManagedReference("languageDeveloper")
+    @JsonIgnore
     private List<Developer> developerList;
 
     public Language(String languageCode) {

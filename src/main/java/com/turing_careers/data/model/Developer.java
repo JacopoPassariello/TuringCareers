@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jdk.jfr.Name;
 import lombok.*;
@@ -20,6 +20,7 @@ import java.util.List;
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password"),
     @NamedQuery(name = "findDeveloperById", query = "SELECT d FROM Developer d WHERE d.id = :id")
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Developer implements User, Item {
 
     @Id
@@ -60,6 +61,7 @@ public class Developer implements User, Item {
     )
     @JsonProperty("_Developer__skills")
     @ToString.Exclude
+    // @JsonManagedReference("developerSkills")
     private List<Skill> skills;
 
     @ManyToMany
@@ -70,6 +72,7 @@ public class Developer implements User, Item {
     )
     @JsonProperty("_Developer__languages")
     @ToString.Exclude
+    // @JsonManagedReference("languageDeveloper")
     private List<Language> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -79,6 +82,8 @@ public class Developer implements User, Item {
             inverseJoinColumns = @JoinColumn(name = "developerId")
     )
     @ToString.Exclude
+    // @JsonBackReference("developerOffers")
+    @JsonIgnore
     private List<Offer> savedOffers;
 
     public Developer(String firstName, String lastName, String bio, String mail, String password,

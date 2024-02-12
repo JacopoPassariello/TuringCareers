@@ -95,7 +95,7 @@ $(document).ready(() => {
             skills.push(new Skill(skillText));
         });
 
-        let dev = new Developer(firstName, lastName, '', mail, psw, new Location(location), skills, [new Languages('italiano')])
+        let dev = new Developer(firstName, lastName, '', mail, psw, location, skills, [new Languages('italiano')])
         // console.log('Input Developer: ' + JSON.stringify(dev))
 
         // TODO: validation should be done inside Developer validate method
