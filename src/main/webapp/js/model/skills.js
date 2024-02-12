@@ -1,3 +1,18 @@
+class Skill {
+    constructor(skill) {
+        this.skill = skill;
+        this.type = 'Programming Language'
+    }
+
+    toJSON() {
+        return {
+            _Skill_id: 3,
+            _Skill__name: this.skill,
+            _Skill__type: this.type
+        }
+    }
+}
+
 $(document).ready(() => {
 
     const skillInput = $("#skill-input-text");
@@ -7,6 +22,11 @@ $(document).ready(() => {
      * Listener to text input
      * */
     skillInput.on('input', () => {
+        // shrink/grow text field on input
+        skillInput.css({
+            'width': ($(this)[0].scrollWidth) + 'px'
+        });
+
         // Suggest skills while input
         let userInput = skillInput.val();
         if (userInput.length > 2) {
@@ -24,13 +44,9 @@ $(document).ready(() => {
             });
         } else
             skillsAutocompleteSection.addClass('display-none')
-
-        // shrink/grow text field on input
-        $(this).css({
-            'width': 'auto',
-            'width': ($(this)[0].scrollWidth) + 'px'
-        });
     }).trigger('input');
+
+
 
     /**
      * Listener to suggestion list items
@@ -44,15 +60,25 @@ $(document).ready(() => {
     /**
      * Triggered on item click in suggestions
      * */
-    function addSkillTag() {
+    function addSkillTag(skill) {
+        const skillTags = $("#skill-tags")
 
-    }
+        let skillTag = $("<li>")
+            .addClass('skill-tag');
 
-    /**
-     * Triggered on close click in tag
-     * */
-    function removeSkillTag() {
+        let name = $("<p>")
+            .addClass('no-select inter-regular')
+            .text(skill)
 
+        let close = $("<h3>")
+            .addClass('inter-regular')
+            .text('X')
+            .click(function() {
+                $(this).parent().remove();
+            });
+
+        skillTag.append(name, close)
+        skillTags.append(skillTag)
     }
 
     /**
@@ -66,7 +92,6 @@ $(document).ready(() => {
             dataType: 'json'
         });
     }
-
 
     /**
      * Shows available skills
@@ -82,7 +107,11 @@ $(document).ready(() => {
             skills.forEach((item, index) => {
                 let matchingSkill = $("<p>")
                     .text(item)
-                    .addClass('inter-regular');
+                    .addClass('inter-regular')
+                    .click(function() {
+                        addSkillTag(item)
+                    });
+
                 skillsSuggestionsContainer.append(matchingSkill);
             })
         } else

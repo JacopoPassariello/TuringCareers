@@ -2,6 +2,8 @@ package com.turing_careers.logic.search;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.turing_careers.data.dao.DeveloperDAO;
+import com.turing_careers.data.dao.OfferDAO;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Offer;
 import com.turing_careers.data.model.Skill;
@@ -18,8 +20,14 @@ import java.util.Optional;
  * */
 public class RecommenderEngine {
     private ClientType type;
+    private ApiClient client;
     public RecommenderEngine(ClientType type) {
         this.type = type;
+        this.client = new ApiClient();
+    }
+
+    public void setClient(ApiClient client) {
+        this.client = client;
     }
 
     /**
@@ -39,9 +47,18 @@ public class RecommenderEngine {
      * */
     public List<Offer> search(String query, Developer user) throws RuntimeException {
         if (this.type != ClientType.OFFER)
-            throw new InvalidParameterException();
+            throw new InvalidParameterException("Client should be ClientType.OFFER");
 
-        ApiClient client = new ApiClient(query, user);
+        if (query == null || query.isEmpty())
+            throw new InvalidParameterException("Invalid query, empty or none");
+
+        if (user == null || user.getSkills() == null || user.getSkills().isEmpty()) {
+            // TODO: log error
+            return OfferDAO.getInstance()
+                    .getOfferByQuery(query);
+        }
+
+        this.client.setRequestBody(query, user);
         Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
 
         List<Offer> offerList = new ArrayList<>();

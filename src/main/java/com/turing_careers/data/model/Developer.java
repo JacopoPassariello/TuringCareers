@@ -44,23 +44,32 @@ public class Developer implements User, Item {
     @JsonProperty("_Developer__mail")
     private String mail;
 
+    @Column(name = "locationName")
+    @JsonProperty("_Developer__location")
+    private String location;
+
     @Column(name = "passwordAccount", nullable = false)
     @JsonProperty("_Developer__psw")
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Developer__location")
-    private Location location;
-
     @ManyToMany
-    @JoinTable(name = "DeveloperSkill")
+    @JoinTable(
+            name = "DeveloperSkill",
+            joinColumns = @JoinColumn(name = "developerId"),
+            inverseJoinColumns = @JoinColumn(name = "skillId")
+    )
     @JsonProperty("_Developer__skills")
+    @ToString.Exclude
     private List<Skill> skills;
 
     @ManyToMany
-    @JoinTable(name = "DeveloperLanguage")
+    @JoinTable(
+            name = "DeveloperLanguage",
+            joinColumns = @JoinColumn(name = "developerId"),
+            inverseJoinColumns = @JoinColumn(name = "languageId")
+    )
     @JsonProperty("_Developer__languages")
+    @ToString.Exclude
     private List<Language> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -69,9 +78,11 @@ public class Developer implements User, Item {
             joinColumns = @JoinColumn(name = "offerId"),
             inverseJoinColumns = @JoinColumn(name = "developerId")
     )
+    @ToString.Exclude
     private List<Offer> savedOffers;
 
-    public Developer(String firstName, String lastName, String bio, String mail, String password, Location location, List<Skill> skills, List<Language> languages, List<Offer> savedOffers) {
+    public Developer(String firstName, String lastName, String bio, String mail, String password,
+                     String location, List<Skill> skills, List<Language> languages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
@@ -80,7 +91,7 @@ public class Developer implements User, Item {
         this.location = location;
         this.skills = skills;
         this.languages = languages;
-        this.savedOffers = savedOffers;
+        // this.savedOffers = savedOffers;
     }
 
     public void setId(Long id) {

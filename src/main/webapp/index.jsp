@@ -3,9 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Hello, world!</title>
+    <title>Turing Careers</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
+    <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
     <link rel="stylesheet" type="text/css" href="css/commons.css"/>
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
 </head>
@@ -66,7 +67,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-<script src="js/navbar.js"></script>
+<script src="js/shared/navbar.js"></script>
 =======
     <h1>Hello World!</h1>
     <script>

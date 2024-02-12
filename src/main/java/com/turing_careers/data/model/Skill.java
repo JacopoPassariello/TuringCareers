@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Skill")
 @Getter
@@ -32,4 +34,10 @@ public class Skill {
         this.skillName = name;
         this.skillType = skillType;
     }
+    @ManyToMany(mappedBy = "skills")
+    @ToString.Exclude
+    private List<Offer> offerList;
+    @ManyToMany(mappedBy = "skills")
+    @ToString.Exclude
+    private List<Developer> developerList;
 }

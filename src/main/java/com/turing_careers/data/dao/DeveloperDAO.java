@@ -1,9 +1,7 @@
 package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
-import com.turing_careers.data.model.Developer;
-import com.turing_careers.data.model.Employer;
-import com.turing_careers.data.model.Skill;
+import com.turing_careers.data.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +68,13 @@ public class DeveloperDAO extends DAO {
     public void addDeveloper(Developer developer) throws PersistenceException  {
         try {
             em.getTransaction().begin();
+
+            for (Skill s : developer.getSkills())
+                em.merge(s);
+
+            for (Language l : developer.getLanguages())
+                em.merge(l);
+
             em.persist(developer);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }

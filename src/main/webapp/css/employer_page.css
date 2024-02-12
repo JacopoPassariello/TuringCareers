@@ -1,0 +1,259 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {  }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {  }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #employer-page-main {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .profile-header {
+        flex-direction: row !important;
+        justify-content: space-between;
+    }
+
+    .name-wrapper {
+        justify-content: start;
+    }
+
+    .user-modify-wrapper {
+        display: flex !important;
+        justify-content: end !important;
+    }
+
+    #create-offer-form {
+        flex-direction: row !important;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
+
+
+.profile-header-wrapper {
+    width: 100%;
+    height: 25dvh;
+    border-bottom: 2px solid var(--purple);
+}
+
+.profile-header {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.user-name {
+    font-size: 32px;
+}
+
+.user-email p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: -20px;
+}
+
+.user-email p i {
+    font-size: 18px;
+}
+
+.user-modify-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.user-modify p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-content-wrapper {
+    width: 100%;
+    min-height: 3rem;
+    background-color: var(--light-gray);
+    display: flex;
+    justify-content: center;
+}
+
+.profile-content {
+    width: 80%;
+    min-height: 60dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 20px 0;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(44, 50, 56, 0.4);
+}
+
+#manager-header {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#manager-header h3 {
+    font-size: 24px;
+}
+
+#create-offer-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+}
+
+#create-offer-button:hover {
+    opacity: 0.6;
+}
+
+#create-offer-button i {
+    font-size: 26px;
+    margin-bottom: 2px;
+}
+
+#create-offer-form-wrapper {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#create-offer-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.offer-section {
+    width: 100%;
+}
+
+#offer-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.offer-input {
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: 0;
+    border-radius: 12px;
+
+    font-size: 18px;
+    padding-left: 12px;
+}
+
+#offer-description {
+    resize: none;
+    height: 400px;
+    padding-top: 12px;
+}
+
+#create-offer-form-wrapper {
+    padding-bottom: 12px;
+}
+
+#locations-input-text {
+    font-size: 18px;
+    padding-left: 12px;
+}
+
+
+#language-tags-wrapper {
+
+}
+
+#languages-input-text {
+    height: 50px;
+    border: 0;
+    margin-top: 0;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+}
+
+#location-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#location-tags {
+    list-style-type: none;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    margin: 0
+}
+
+.location-tag {
+    background-color: rgba(195, 202, 210, 0.4);
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 0 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+#offer-form-submit-wrapper {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+#offer-form-submit-button {
+    cursor: pointer;
+    width: 100%;
+    padding: 12px 28px;
+    font-size: 16px;
+    background-color: var(--white);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#offer-form-submit-button:hover {
+    background-color: var(--purple);
+    color: var(--white);
+}
+
+#offer-form-undo-button {
+    width: 100%;
+    padding: 12px 28px;
+    font-size: 16px;
+    background-color: var(--white);
+    border: 0;
+}
+
+#offer-form-undo-button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

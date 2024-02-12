@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Language")
 @Getter
@@ -24,6 +26,12 @@ public class Language {
     @Column(name = "languageCode", nullable = false)
     @JsonProperty("_Language__code")
     private String languageCode;
+    @ManyToMany(mappedBy = "languages")
+    @ToString.Exclude
+    private List<Offer> offerList;
+    @ManyToMany(mappedBy = "languages")
+    @ToString.Exclude
+    private List<Developer> developerList;
 
     public Language(String languageCode) {
         this.languageCode = languageCode;

@@ -11,6 +11,11 @@ import java.util.regex.Pattern;
  * @author Jacopo Passariello
  */
 public class UserValidator {
+
+    private static Pattern MAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+    private static Pattern PASS_PATTERN = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+");
+    private static Pattern NAME_PATTERN = Pattern.compile("^\\s+");
+
     /**
      * Controlla la validità dei campi dell'utente
      * @author Claudio Gaudino, Jacopo Passariello
@@ -18,20 +23,18 @@ public class UserValidator {
      * @throws ValidationException Lanciata quando l'entità contiene almeno un campo contenente un valore non valido.
      */
     public static void checkValidity(Developer user) throws ValidationException {
-        Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
-        Pattern namePattern = Pattern.compile("^\\s+");
-
-
         if (user == null
                 || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
-                || namePattern.matcher(user.getFirstName()).matches()
+                || NAME_PATTERN.matcher(user.getFirstName()).matches()
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
-                || namePattern.matcher(user.getLastName()).matches()
+                || NAME_PATTERN.matcher(user.getLastName()).matches()
                 || user.getBio().length() > 2048
                 || user.getMail().length() == 0
-                || !mailPattern.matcher(user.getMail()).matches()
+                || !MAIL_PATTERN.matcher(user.getMail()).matches()
+                || user.getPassword().length() < 8
+                || !PASS_PATTERN.matcher(user.getPassword()).matches()
                 || user.getSkills().isEmpty()
                 || user.getLanguages().isEmpty()
                 || user.getLocation() == null // Aggiunto check su location
@@ -39,7 +42,6 @@ public class UserValidator {
         //CHECKME: nuovo blocco di codice per la validazione di skill e language
         LanguageValidator.validateLanguages(user.getLanguages());
         SkillValidator.validateSkills(user.getSkills());
-
     }
 
     /**
@@ -48,19 +50,18 @@ public class UserValidator {
      * @throws ValidationException Lanciata quando l'entità contiene almeno un campo contenente un valore non valido.
      */
     public static void checkValidity(Employer user) throws ValidationException {
-        Pattern mailPattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
-        Pattern namePattern = Pattern.compile("^\\s+");
-
         if (user == null
                 || user.getFirstName().length() == 0
                 || user.getFirstName().length() > 32
-                || namePattern.matcher(user.getFirstName()).matches()
+                || NAME_PATTERN.matcher(user.getFirstName()).matches()
                 || user.getLastName().length() == 0
                 || user.getLastName().length() > 64
-                || namePattern.matcher(user.getLastName()).matches()
+                || NAME_PATTERN.matcher(user.getLastName()).matches()
                 || user.getCompanyName().length() == 0
                 || user.getCompanyName().length() > 64
-                || !mailPattern.matcher(user.getMail()).matches()
+                || !MAIL_PATTERN.matcher(user.getMail()).matches()
+                || user.getPassword().length() < 8
+                || !PASS_PATTERN.matcher(user.getPassword()).matches()
         ) throw new ValidationException("Employer parameters are not valid!");
     }
 }

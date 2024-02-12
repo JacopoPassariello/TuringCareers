@@ -63,6 +63,10 @@ body {
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Edge */
 }
 
+#dsk-nav-wrap {
+    min-height: 120pt;
+}
+
 .hover-dissolve:hover {
     opacity: 60%;
 }
@@ -74,7 +78,7 @@ body {
 }
 
 .display-none{
-    display: none;
+    display: none !important;
 }
 
 .search-icon{
@@ -161,3 +165,100 @@ body {
     color: var(--purple);
     border-color: var(--purple);
 }
+
+/* autocomplete */
+.autocomplete-wrapper {
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+}
+
+.autocomplete-section {
+    border-top: 1px solid var(--light-gray);
+}
+
+.autocomplete-suggestions {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 16px;
+}
+
+#skill-tags-section {
+    width: 100%;
+}
+
+#skill-tags-wrapper {
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#skill-tags {
+    list-style-type: none;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    margin: 0
+}
+
+.skill-tag {
+    background-color: rgba(195, 202, 210, 0.4);
+    border: 2px solid var(--light-gray);
+    border-radius: 6px 12px;
+    padding:  14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.skill-tag p {
+    color: var(--black);
+    font-size: 16px;
+    margin: 0;
+}
+
+.skill-tag h3 {
+    cursor: pointer;
+    color: var(--dark-gray);
+    font-size: 1px;
+    margin: 0;
+}
+
+#skill-input-text {
+    width: 120px;
+    height: 30px;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+}
+
+#skills-autocomplete-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#locations-input-text {
+    height: 50px;
+    outline: none;
+    border: 0;
+    border-radius: 12px;
+}
+
+.location-suggestion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location-suggestion i {
+    color: var(--purple);
+}
+
+.suggestion-error {
+    border: 2px solid #c92626 !important;
+}
+

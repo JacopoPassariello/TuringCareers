@@ -8,6 +8,7 @@
 
     #dsk-nav-wrap {
         opacity: 0;
+        display: none;
     }
 }
 
@@ -21,7 +22,9 @@
 
     #dsk-nav-wrap {
         opacity: 0;
+        display: none;
     }
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -31,9 +34,10 @@
     }
 
     #dsk-nav-wrap {
+        display: block;
         top: 0;
         opacity: 100;
-        height: 12dvh;
+        height: 10dvh;
         border-bottom: 2px solid var(--light-gray);
 
         transition: border-bottom-color 0.25s ease-in-out;
@@ -66,6 +70,16 @@
     display: grid;
     align-items: center;
     justify-items: center;
+}
+
+#mb-nav-wrap {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--white);
+}
+
+#dsk-nav-wrap {
+    background-color: var(--white);
 }
 
 #mb-nav {
@@ -106,10 +120,11 @@
     width: 33vw;
     height: 150px;
     position: fixed;
-    bottom:0;
+    bottom: 0;
     margin-bottom: 10dvh;
     border-top: 2px solid var(--light-gray);
     box-shadow: -5px 0 10px rgba(44, 50, 56, 0.2);
+    background-color: var(--white);
 }
 
 .mb-nav-menu-button {
@@ -140,9 +155,14 @@
 
 .dsk-nav-btn{
     display: flex;
+    align-items: center;
     gap: 18px;
     font-size: 18px;
     color: var(--purple);
+}
+
+.dsk-nav-btn p {
+    font-size: 16px;
 }
 
 #dsk-nav-account-button{
@@ -151,6 +171,8 @@
     border-radius: 6px;
     cursor: pointer;
     transition: box-shadow 0.25s ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
 #dsk-nav-account-button:hover {
@@ -162,8 +184,7 @@
 }
 
 .dsk-account-icon {
-    padding-top: 11px;
-    font-size: 26px;
+    font-size: 24px;
 }
 
 
@@ -171,6 +192,10 @@
 #dsk-nav-search-bar{
     display: flex;
     gap: 20px;
+}
+
+.search-icon {
+    font-size: 26px;
 }
 
 #dsk-search-input{

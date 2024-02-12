@@ -11,14 +11,23 @@ public class OfferValidator {
      * @throws ValidationException Lanciata quando l'entità contiene almeno un campo contenente un valore non valido.
      */
     public static void checkValidity(Offer offer) throws ValidationException {
+        if (offer.getLocationType() == null) {
+            throw new ValidationException("Offer input is not valid!");
+        }
+        if (offer.getLocationType().equals(Offer.ON_SITE)) {
+            if (offer.getLocation() == null || offer.getLocation().isEmpty()) {
+                throw new ValidationException("Offer input is not valid!");
+            }
+        }
         if (offer == null
-                || offer.getDescription().isEmpty()
-                || offer.getTitle().isEmpty()
+                || offer.getTitle().length() < 8
+                || offer.getTitle().length() > 64
+                || offer.getDescription().length() < 32
+                || offer.getDescription().length() > 5120
                 || offer.getSkills().size() == 0
                 || offer.getLanguages().size() == 0
                 || offer.getLocationType().isEmpty()
                 || offer.getEmployer() == null
-                || offer.getLocationType().equals(Offer.IN_PLACE) && offer.getLocation() == null
         ) throw new ValidationException("Offer input is not valid!");
 
         //CHECKME: blocco di codice per validazione di skill language

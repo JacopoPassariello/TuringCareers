@@ -2,8 +2,8 @@ package com.turing_careers.data.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
-import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 
 import java.util.List;
 
@@ -15,14 +15,15 @@ import java.util.List;
 @ToString
 @NamedQueries({
     @NamedQuery(name = "findAllOffers", query = "SELECT o FROM Offer o"),
-    @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id")
+    @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id"),
+    @NamedQuery(name = "searchOffer", query = "SELECT o FROM Offer o WHERE o.title LIKE '%' || :query || '%' OR o.description LIKE '%' || :query || '%'")
 })
 public class Offer implements Item {
 
     public static final String STATE_OPEN = "OPEN";
     public static final String STATE_PAUSED = "PAUSED";
     public static final String STATE_CLOSED = "CLOSED";
-    public static final String IN_PLACE = "ON_SITE";
+    public static final String ON_SITE = "ON_SITE";
     public static final String REMOTE = "REMOTE";
 
     @Id
@@ -47,31 +48,41 @@ public class Offer implements Item {
     @JsonProperty("_Offer__location_type")
     private String locationType;
 
+    @Column(name = "locationName")
+    @JsonProperty("_Offer__location")
+    private String location;
+
     @ManyToOne
     @JoinColumn(name = "employerId")
     @JsonProperty("_Offer__employer")
     private Employer employer;
 
-    @OneToOne
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Offer__location")
-    private Location location;
-
     @ManyToMany
-    @JoinTable(name = "OfferSkill")
+    @JoinTable(
+            name = "OfferSkill",
+            joinColumns = @JoinColumn(name = "offerId"),
+            inverseJoinColumns = @JoinColumn(name = "skillId")
+    )
     @JsonProperty("_Offer__skills")
+    @ToString.Exclude
     private List<Skill> skills;
 
     @ManyToMany
-    @JoinTable(name = "OfferLanguage")
+    @JoinTable(
+            name = "OfferLanguage",
+            joinColumns = @JoinColumn(name = "offerId"),
+            inverseJoinColumns = @JoinColumn(name = "languageId")
+    )
     @JsonProperty("_Offer__languages")
+    @ToString.Exclude
     private List<Language> languages;
 
     @ManyToMany(mappedBy = "savedOffers", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Developer> subscribedDevelopers;
 
 
-    public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
+    public Offer(String title, String description, String state, String locationType, Employer employer, String location, List<Skill> skills, List<Language> languages) {
         this.title = title;
         this.description = description;
         this.state = state;

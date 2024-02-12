@@ -2,16 +2,6 @@ drop database if exists turing_careers;
 create database turing_careers;
 use turing_careers;
 
-#Location (locationId, loc_name, lat, lon)
-CREATE TABLE Location
-(
-    locationId INT NOT NULL AUTO_INCREMENT
-    ,loc_name VARCHAR(255) NOT NULL
-    ,lat FLOAT NOT NULL
-    ,lon FLOAT NOT NULL
-    ,PRIMARY KEY (locationId)
-);
-
 
 #Developer (developerId, firstName, lastName, bio, mail, passwordAccount)
 CREATE TABLE Developer
@@ -22,10 +12,9 @@ CREATE TABLE Developer
     ,bio TEXT NOT NULL
     ,mail VARCHAR(255) NOT NULL
     ,passwordAccount VARCHAR(255) NOT NULL
-    ,locationId INT NOT NULL
+    ,locationName VARCHAR(255) NOT NULL
     ,PRIMARY KEY (developerId)
     ,UNIQUE KEY (mail)
-    ,FOREIGN KEY (locationId) REFERENCES Location(locationId)
     ,FULLTEXT(bio)
 );
 
@@ -53,10 +42,9 @@ CREATE TABLE Offer
     ,offerDescription TEXT NOT NULL
     ,locationType VARCHAR(10) NOT NULL
     ,employerId INT NOT NULL
-    ,locationId INT
+    ,locationName VARCHAR(255)
     ,PRIMARY KEY (offerId)
     ,FOREIGN KEY (employerId) REFERENCES Employer(employerId)
-    ,FOREIGN KEY (locationId) REFERENCES Location(locationId)
     ,FULLTEXT(title, offerDescription)
 );
 
