@@ -74,7 +74,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );
@@ -110,7 +110,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );
@@ -131,7 +131,7 @@ public class SearchOfferTest {
                 "bio",
                 "anton@gmail.com",
                 "S3cur3Pass_w0rd",
-                new Location(),
+                "",
                 skills,
                 languageList
         );
