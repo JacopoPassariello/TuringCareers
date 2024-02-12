@@ -1,5 +1,7 @@
-<div style="display: flex; justify-content: center; align-items: center; border-bottom:2px solid gray" href="https://www.youtube.com/watch?v=xvFZjo5PgG0">
-    <img id="logo" src="./Documentazione/static/text_logo.svg" alt="" style="padding: 20px 0; width: 45%; height: 45%">
+<div style="display: flex; justify-content: center; align-items: center; border-bottom:2px solid gray">
+    <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">
+        <img id="logo" src="./Documentazione/static/text_logo.svg" alt="" style="padding: 20px 0; width: 45%; height: 45%">
+    </a>
 </div>
 
 # Turing Careers
