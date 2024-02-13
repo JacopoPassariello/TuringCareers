@@ -1,4 +1,4 @@
-package com.turing_careers.logic.validator;
+package com.turing_careers.logic.utils;
 
 import com.turing_careers.data.dao.LanguageDAO;
 import com.turing_careers.data.model.Language;

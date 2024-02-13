@@ -1,6 +1,10 @@
-package com.turing_careers.logic.validator;
+package com.turing_careers.logic.offer;
 
 import com.turing_careers.data.model.Offer;
+import com.turing_careers.logic.utils.LanguageValidator;
+import com.turing_careers.logic.utils.SkillValidator;
+import com.turing_careers.logic.utils.ValidationException;
+
 /**
  * Classe che implementa la validazione di un oggetto Offer.
  */

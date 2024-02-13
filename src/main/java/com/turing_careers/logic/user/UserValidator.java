@@ -1,7 +1,10 @@
-package com.turing_careers.logic.validator;
+package com.turing_careers.logic.user;
 
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.logic.utils.LanguageValidator;
+import com.turing_careers.logic.utils.SkillValidator;
+import com.turing_careers.logic.utils.ValidationException;
 
 
 import java.util.regex.Pattern;

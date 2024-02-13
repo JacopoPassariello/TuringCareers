@@ -1,23 +1,15 @@
 package com.turing_careers.presentation;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;
 import com.turing_careers.logic.auth.*;
-import com.turing_careers.logic.user.UserManager;
-import com.turing_careers.logic.validator.ValidationException;
-import jakarta.persistence.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")

@@ -1,4 +1,4 @@
-package com.turing_careers.logic.suggestions;
+package com.turing_careers.logic.utils;
 
 import com.turing_careers.data.dao.SkillDAO;
 import com.turing_careers.data.model.Skill;

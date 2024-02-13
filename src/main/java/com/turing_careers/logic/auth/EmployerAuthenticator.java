@@ -4,10 +4,8 @@ import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.User;
-import com.turing_careers.logic.validator.UserValidator;
-import com.turing_careers.logic.validator.ValidationException;
-
-import java.security.InvalidParameterException;
+import com.turing_careers.logic.user.UserValidator;
+import com.turing_careers.logic.utils.ValidationException;
 
 /**
  * @author Antonino Lorenzo

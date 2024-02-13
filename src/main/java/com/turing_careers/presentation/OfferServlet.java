@@ -1,10 +1,8 @@
 package com.turing_careers.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Offer;
 import com.turing_careers.logic.offer.OfferManager;
-import com.turing_careers.logic.validator.ValidationException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

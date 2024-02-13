@@ -5,11 +5,7 @@ import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.logic.auth.Argon2Encryption;
-import com.turing_careers.logic.validator.LanguageValidator;
-import com.turing_careers.logic.validator.SkillValidator;
-import com.turing_careers.logic.validator.UserValidator;
-import com.turing_careers.logic.validator.ValidationException;
+import com.turing_careers.logic.utils.ValidationException;
 
 
 /**

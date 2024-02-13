@@ -1,4 +1,4 @@
-package com.turing_careers.logic.validator;
+package com.turing_careers.logic.utils;
 
 import lombok.experimental.StandardException;
 

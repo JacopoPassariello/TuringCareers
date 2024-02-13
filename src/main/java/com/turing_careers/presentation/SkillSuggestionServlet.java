@@ -2,7 +2,7 @@ package com.turing_careers.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.model.Skill;
-import com.turing_careers.logic.suggestions.SkillMatcher;
+import com.turing_careers.logic.utils.SkillMatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
