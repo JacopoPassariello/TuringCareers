@@ -45,7 +45,7 @@ public class UserPageServlet extends HttpServlet {
         if (userType.equals("developer")) {
             List<Offer> offers = dev.getSavedOffers();
             List<Language> languages = dev.getLanguages();
-            Location  location = dev.getLocation();
+            String location = dev.getLocation();
 
             if (!offers.isEmpty()) {
                 request.setAttribute("noOffers", false);

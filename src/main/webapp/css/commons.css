@@ -63,6 +63,10 @@ body {
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Edge */
 }
 
+#dsk-nav-wrap {
+    min-height: 120pt;
+}
+
 .hover-dissolve:hover {
     opacity: 60%;
 }

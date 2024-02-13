@@ -1,9 +1,7 @@
 package tcs;
 
 import com.turing_careers.data.dao.LanguageDAO;
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.model.*;
-import com.turing_careers.logic.offer.OfferManager;
 import com.turing_careers.logic.user.UserManager;
 import com.turing_careers.logic.validator.ValidationException;
 import org.junit.jupiter.api.*;
@@ -28,7 +26,7 @@ public class ModifyDeveloperTest {
     //Non-tested variables.
     private String mail;
     private String password;
-    private Location location;
+    private String location;
 
 
     @BeforeAll
@@ -61,7 +59,7 @@ public class ModifyDeveloperTest {
 
         this.incorrectLanguages = new ArrayList<>(List.of(new Language("ks_WO")));
 
-        this.location = new Location("Napoli",40.80,14.26);
+        this.location = "Napoli";
         this.mail = "francofranchi@gmail.com";
         this.password = "francofranchi123_";
 

@@ -1,5 +1,5 @@
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {  }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -25,6 +25,15 @@
     .of-offer-card {
         width: 50%;
     }
+
+    #item-cards-list {
+        width: 50% !important;
+    }
+
+    #search-main {
+        margin-top: 20dvh;
+        padding-bottom: 2dvh !important;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -45,6 +54,11 @@
     border-radius: 6px;
 }
 
+.item-card {
+    padding: 10pt;
+    margin: 10pt;
+}
+
 .search-icon {
     cursor: pointer;
     width: 10%;
@@ -57,7 +71,7 @@
     opacity: 80%;
 }
 
-#mb-of-searchbar-input {
+#mb-searchbar-input {
     width: 90%;
     height: 40px;
     outline: none;
@@ -153,32 +167,69 @@
 }
 
 /* OFFERS */
-#of-list {
-    width: 85vw;
+#of-list-wrap {
+    width: 100%;
 }
 
-.of-offer-card {
+#item-cards-list {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-card {
     border: 2px solid var(--light-gray);
     border-radius: 6px;
     padding: 1.5rem 24px;
-    box-shadow: 0 2px 10px rgba(33, 38, 44, 0.1);
+    box-shadow: 0 2px 4px rgba(33, 38, 44, 0.1);
     transition: box-shadow 0.2s ease;
+}
+
+.item-card:hover {
+    box-shadow: 0 4px 6px rgba(33, 38, 44, 0.2);
 }
 
 .of-offer-card:hover {
     box-shadow: 0 2px 10px rgba(33, 38, 44, 0.2);
 }
 
-.of-offer-head {
-    color: var(--black);
+.of-offer-card-header {
+    display: flex;
 }
 
+.of-offer-head {
+    color: var(--black);
+    width: 80%;
+}
+
+.of-offer-card-header .of-offer-head p{
+    font-weight:600;
+    font-size:18px;
+    padding-bottom:3px;
+}
 .of-offer-head h3{
     font-size: 16px;
 }
 
 .of-offer-head h1{
     font-size: 24px;
+}
+
+.of-offer-bookmark {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.of-offer-bookmark i {
+    cursor: pointer;
+    font-size: 26px;
+}
+
+.of-offer-bookmark i:hover {
+    opacity: 0.7;
 }
 
 .of-offer-card-meta {
@@ -229,3 +280,7 @@
     margin-top: 2px;
 }
 
+
+#search-main {
+    padding-bottom: 12dvh;
+}

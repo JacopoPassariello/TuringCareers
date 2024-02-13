@@ -46,10 +46,13 @@ public class AuthenticationServlet extends HttpServlet {
             throw new ServletException("Invalid UserType");
         }
 
+        System.out.println("Logging " + userType);
         try {
             if (authType.equals("login")) {
                 // Login
-                authenticator.loginUser(mail, password);
+                User u = authenticator.loginUser(mail, password);
+                request.getSession().setAttribute("userType", userType);
+                request.getSession().setAttribute("user", u);
             } else if (authType.equals("register")) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 objectMapper.configure(
@@ -59,14 +62,20 @@ public class AuthenticationServlet extends HttpServlet {
                 String jsonString = request.getReader().lines().collect(Collectors
                         .joining(System.lineSeparator())
                 );
-
+                System.out.println(jsonString);
                 if (userType.equals("developer")) {
+                    System.out.println("Registering developer");
                     Developer dev = objectMapper.readValue(jsonString, Developer.class);
                     System.out.println(dev);
-                    authenticator.signupUser(dev);
+                    dev = (Developer) authenticator.signupUser(dev);
+                    System.out.println("Developer Post-Auth: \n" + dev);
+                    request.getSession().setAttribute("userType", userType);
+                    request.getSession().setAttribute("user", dev);
                 } else {
                     Employer emp = objectMapper.readValue(jsonString, Employer.class);
-                    authenticator.signupUser(emp);
+                    emp = (Employer) authenticator.signupUser(emp);
+                    request.getSession().setAttribute("userType", userType);
+                    request.getSession().setAttribute("user", emp);
                 }
             } else {
                 // TODO: handle error
@@ -81,6 +90,7 @@ public class AuthenticationServlet extends HttpServlet {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
 
+        System.out.println("success");
         String redirectUrl = "index.jsp";
         String jsonResponse = "{\"redirectUrl\": \"" + redirectUrl + "\"}";
         response.setContentType("application/json");

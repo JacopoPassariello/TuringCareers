@@ -21,20 +21,22 @@ public class DeveloperAuthenticator extends Authenticator {
     }
 
     @Override
-    public void loginUser(String email, String password) throws InvalidCredentialsException {
+    public Developer loginUser(String email, String password) throws InvalidCredentialsException {
         super.setEncryptionStrategy(new Argon2Encryption());
         DeveloperDAO developerDAO = DeveloperDAO.getInstance();
-
+        Developer dev;
         try {
-            Developer dev = developerDAO.getDeveloperByMail(email);
+            dev = developerDAO.getDeveloperByMail(email);
             encryptionStrategy.verify(password, dev.getPassword());
         } catch (InvalidCredentialsException invalidCredentials) {
             throw new InvalidCredentialsException(invalidCredentials.getMessage());
         }
+
+        return dev;
     }
 
     @Override
-    public void signupUser(User user) throws PersistenceException, InvalidParameterException, ValidationException {
+    public Developer signupUser(User user) throws PersistenceException, InvalidParameterException, ValidationException {
         if (!(user instanceof Developer))
             throw new InvalidParameterException("DeveloperAuthService: Not a developer");
         Developer dev = (Developer) user;
@@ -46,5 +48,7 @@ public class DeveloperAuthenticator extends Authenticator {
 
         DeveloperDAO developerDAO = DeveloperDAO.getInstance();
         developerDAO.addDeveloper(dev);
+
+        return dev;
     }
 }

@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jdk.jfr.Name;
 import lombok.*;
@@ -20,6 +20,7 @@ import java.util.List;
     @NamedQuery(name = "findDevsByMailAndPassword", query = "SELECT d FROM Developer d WHERE d.mail = :mail  AND d.password = :password"),
     @NamedQuery(name = "findDeveloperById", query = "SELECT d FROM Developer d WHERE d.id = :id")
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Developer implements User, Item {
 
     @Id
@@ -44,15 +45,13 @@ public class Developer implements User, Item {
     @JsonProperty("_Developer__mail")
     private String mail;
 
+    @Column(name = "locationName")
+    @JsonProperty("_Developer__location")
+    private String location;
+
     @Column(name = "passwordAccount", nullable = false)
     @JsonProperty("_Developer__psw")
     private String password;
-
-    // TODO: fix persist location when trying to create developer with new location
-    @ManyToOne(cascade = CascadeType.REFRESH)//(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Developer__location")
-    private Location location;
 
     @ManyToMany
     @JoinTable(
@@ -62,16 +61,18 @@ public class Developer implements User, Item {
     )
     @JsonProperty("_Developer__skills")
     @ToString.Exclude
+    // @JsonManagedReference("developerSkills")
     private List<Skill> skills;
 
     @ManyToMany
     @JoinTable(
             name = "DeveloperLanguage",
             joinColumns = @JoinColumn(name = "developerId"),
-            inverseJoinColumns = @JoinColumn(name ="languageId")
+            inverseJoinColumns = @JoinColumn(name = "languageId")
     )
     @JsonProperty("_Developer__languages")
     @ToString.Exclude
+    // @JsonManagedReference("languageDeveloper")
     private List<Language> languages;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -81,10 +82,12 @@ public class Developer implements User, Item {
             inverseJoinColumns = @JoinColumn(name = "developerId")
     )
     @ToString.Exclude
+    // @JsonBackReference("developerOffers")
+    @JsonIgnore
     private List<Offer> savedOffers;
 
     public Developer(String firstName, String lastName, String bio, String mail, String password,
-                     Location location, List<Skill> skills, List<Language> languages) {
+                     String location, List<Skill> skills, List<Language> languages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;

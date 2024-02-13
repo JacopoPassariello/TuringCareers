@@ -2,11 +2,9 @@ package com.turing_careers.data.dao;
 
 import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.Language;
-import com.turing_careers.data.model.Location;
 import com.turing_careers.data.model.Offer;
 import com.turing_careers.data.model.Skill;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,25 +65,6 @@ public class OfferDAO extends DAO {
      * @throws PersistenceException Lanciata quando avviene un errore durante l'aggiunta
      */
     public void addOffer(Offer offer) throws PersistenceException {
-        LocationDAO locationDAO = LocationDAO.getInstance();
-        Location devLoc;
-        try {
-            // TODO: get by name ??????????
-            devLoc = locationDAO.getLocationByLatAndLon(
-                    offer.getLocation().getLat(),
-                    offer.getLocation().getLon()
-            );
-        } catch (Exception ex) {
-            System.out.println("Location Not Found, Adding: " + offer.getLocation().getName());
-            devLoc = new Location(
-                    offer.getLocation().getName(),
-                    offer.getLocation().getLat(),
-                    offer.getLocation().getLon()
-            );
-            // devLoc = em.merge(devLoc);
-            locationDAO.addLocation(devLoc);
-        }
-
         try {
             em.getTransaction().begin();
 
@@ -94,9 +73,6 @@ public class OfferDAO extends DAO {
 
             for (Language l : offer.getLanguages())
                 em.merge(l);
-
-            if (offer.getLocationType().equals(Offer.ON_SITE))
-                em.persist(offer.getLocation());
 
             em.persist(offer);
             em.getTransaction().commit();

@@ -1,11 +1,8 @@
 package unit.data_testing;
 
 import com.turing_careers.data.dao.LanguageDAO;
-import com.turing_careers.data.dao.LocationDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Language;
-import com.turing_careers.data.model.Location;
-import org.glassfish.jersey.message.internal.LanguageTag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

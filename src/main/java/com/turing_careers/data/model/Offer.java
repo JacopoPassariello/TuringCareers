@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jdk.jfr.Name;
 import lombok.*;
@@ -18,6 +18,7 @@ import java.util.List;
     @NamedQuery(name = "findOfferById", query = "SELECT o FROM Offer o WHERE o.id = :id"),
     @NamedQuery(name = "searchOffer", query = "SELECT o FROM Offer o WHERE o.title LIKE '%' || :query || '%' OR o.description LIKE '%' || :query || '%'")
 })
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offer implements Item {
 
     public static final String STATE_OPEN = "OPEN";
@@ -48,15 +49,15 @@ public class Offer implements Item {
     @JsonProperty("_Offer__location_type")
     private String locationType;
 
+    @Column(name = "locationName")
+    @JsonProperty("_Offer__location")
+    private String location;
+
     @ManyToOne
     @JoinColumn(name = "employerId")
     @JsonProperty("_Offer__employer")
+    @JsonBackReference("employerOffers")
     private Employer employer;
-
-    @ManyToOne
-    @JoinColumn(name = "locationId")
-    @JsonProperty("_Offer__location")
-    private Location location;
 
     @ManyToMany
     @JoinTable(
@@ -66,6 +67,7 @@ public class Offer implements Item {
     )
     @JsonProperty("_Offer__skills")
     @ToString.Exclude
+    // @JsonManagedReference("offerSkills")
     private List<Skill> skills;
 
     @ManyToMany
@@ -76,14 +78,16 @@ public class Offer implements Item {
     )
     @JsonProperty("_Offer__languages")
     @ToString.Exclude
+    // @JsonManagedReference("languageOffer")
     private List<Language> languages;
 
     @ManyToMany(mappedBy = "savedOffers", fetch = FetchType.LAZY)
     @ToString.Exclude
+    // @JsonManagedReference("developerOffers")
     private List<Developer> subscribedDevelopers;
 
 
-    public Offer(String title, String description, String state, String locationType, Employer employer, Location location, List<Skill> skills, List<Language> languages) {
+    public Offer(String title, String description, String state, String locationType, Employer employer, String location, List<Skill> skills, List<Language> languages) {
         this.title = title;
         this.description = description;
         this.state = state;
