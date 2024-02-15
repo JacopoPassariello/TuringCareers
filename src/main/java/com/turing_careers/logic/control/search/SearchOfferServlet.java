@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet incaricata di esporre le funzionalità di ricerca delle offerte
+ */
 @WebServlet(name = "searchOfferServlet", value = "/search/offers")
 public class SearchOfferServlet extends HttpServlet {
 

@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Servlet incaricata di esporre le funzionalità di ricerca di sviluppatori
+ */
 public class SearchDeveloperServlet extends HttpServlet {
     /**
-     * Fornisce le funzionalità relative alla ricerca di Developer, controllando
-     * che l'accesso sia consentito solo ai Datori di Lavoro.
-     * */
+     * Fornisce le funzionalità relative alla ricerca di Developer, controllando che l'accesso sia consentito solo ai Datori di Lavoro.
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Employer emp = null;
