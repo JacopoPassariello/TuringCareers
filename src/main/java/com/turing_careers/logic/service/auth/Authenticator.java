@@ -18,7 +18,7 @@ public abstract class Authenticator {
     /**
      *
      * */
-    public abstract User signupUser(User user) throws Exception, PersistenceException;
+    public abstract User signupUser(User user) throws PersistenceException;
 
     /**
      *

@@ -15,13 +15,14 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+/**
+ * Servlet incaricata di eseguire il login e la registrazione di un utente
+ */
 @WebServlet(name = "AuthenticationServlet", value = "/AuthenticationServlet")
 public class AuthenticationServlet extends HttpServlet {
-
     /**
-     * Expose user authentication functionality, based on authType parameter makes login or signup,
-     * based on userType makes login or signup of the specified profile type
-     * */
+     * Espone la funzionalità di autenticazione di un utente, scegliendo tra login e registrazione in base al parametro authType per un tipo di utente specificato da userType
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String authType = request.getParameter("authType");
@@ -81,7 +82,7 @@ public class AuthenticationServlet extends HttpServlet {
                     "Invalid Credentials: " + mail + ": " + password +
                             "\nError: " + invalidCredentials.getMessage()
             );
-        } catch (PersistenceException | Exception signupError) {
+        } catch (PersistenceException signupError) {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
 

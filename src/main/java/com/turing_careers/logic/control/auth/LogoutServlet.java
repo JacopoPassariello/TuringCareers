@@ -6,8 +6,15 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * Servlet incaricata di eseguire il logout di un utente
+ */
 @WebServlet(name = "LogoutServlet", value = "/logout")
 public class LogoutServlet extends HttpServlet {
+
+    /**
+     * Espone la funzionalità di logout di un utente
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // invalidate session
@@ -16,11 +23,6 @@ public class LogoutServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request,response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //vuoto
     }
 }
 
