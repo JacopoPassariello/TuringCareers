@@ -5,16 +5,12 @@
 </div>
 
 # Turing Careers
-...
 
 ### Chi Siamo
 - <a href="https://github.com/JacopoPassariello">@JacopoPassariello</a>
 - <a href="https://github.com/antoninoLorenzo">@antoninoLorenzo</a>
 - <a href="https://github.com/ClaudioGaudino">@ClaudioGaudino</a>
 - <a href="https://github.com/apagnotta">@apagnotta</a>
-
-## Funzionalità
-...
 
 ## Installazione
 Essendo sistema Turing Careers è composto da una componente Core realizzato in Java e da una API 
