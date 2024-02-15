@@ -7,6 +7,9 @@ import com.turing_careers.data.model.Skill;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe che implementa la gestione della persistenza dell'entità data.model.Offer
+ */
 public class OfferDAO extends DAO {
 
     private static OfferDAO instance;
@@ -15,6 +18,7 @@ public class OfferDAO extends DAO {
     }
 
     /**
+     * Implementazione del design pattern Singleton
      * @return Istanza condivisa da tutti gli OfferDAO
      */
     public static synchronized OfferDAO getInstance() {

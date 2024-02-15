@@ -5,6 +5,9 @@ import com.turing_careers.data.model.Employer;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe che implementa la gestione della persistenza dell'entità data.model.Employer
+ */
 public class EmployerDAO extends DAO {
 
     private static EmployerDAO instance;
@@ -13,6 +16,7 @@ public class EmployerDAO extends DAO {
     }
 
     /**
+     * Implementazione del design pattern Singleton
      * @return Istanza condivisa da tutti gli EmployerDAO
      */
     public static synchronized EmployerDAO getInstance() {

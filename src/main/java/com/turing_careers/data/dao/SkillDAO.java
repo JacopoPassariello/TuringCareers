@@ -5,6 +5,9 @@ import com.turing_careers.data.model.Skill;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe che implementa la gestione della persistenza dell'entità data.model.Skill
+ */
 public class SkillDAO extends DAO {
     private static SkillDAO instance;
     private SkillDAO() {
@@ -12,6 +15,7 @@ public class SkillDAO extends DAO {
     }
 
     /**
+     * Implementazione del design pattern Singleton
      * @return Istanza condivisa da ogni SkillDAO
      */
     public static synchronized SkillDAO getInstance() {
