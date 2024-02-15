@@ -1,4 +1,4 @@
-package com.turing_careers;
+package com.turing_careers.data.model.utils;
 
 import com.turing_careers.data.dao.DeveloperDAO;
 import com.turing_careers.data.dao.EmployerDAO;

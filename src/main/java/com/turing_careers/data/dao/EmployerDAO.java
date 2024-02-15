@@ -1,7 +1,5 @@
 package com.turing_careers.data.dao;
 
-import com.turing_careers.data.DAO;
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 
 import java.util.List;

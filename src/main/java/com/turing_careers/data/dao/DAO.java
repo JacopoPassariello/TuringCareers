@@ -1,4 +1,4 @@
-package com.turing_careers.data;
+package com.turing_careers.data.dao;
 
 import jakarta.persistence.*;
 
