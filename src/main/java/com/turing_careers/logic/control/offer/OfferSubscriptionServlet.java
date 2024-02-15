@@ -15,12 +15,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet incaricata di esporre le funzionalità relative all'iscrizione di sviluppatori ad offerte
+ */
 @WebServlet(name = "OfferSubscriptionServlet", value = "/OfferSubscriptions")
 public class OfferSubscriptionServlet extends HttpServlet {
 
     /**
      * Mostra ai datori di lavoro gli sviluppatori interessati ad una offerta e permette agli sviluppatori di salvare una offerta
-     * */
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userType = (String) req.getSession().getAttribute("userType");

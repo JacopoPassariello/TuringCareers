@@ -12,12 +12,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet incaricata di esporre le funzionalità di interazione utente-offerta
+ */
 @WebServlet(name = "OfferServlet", value = "/offers")
 public class OfferServlet extends HttpServlet {
 
     /**
-     * Ritorna la pagina dell'offerta
-     * */
+     * Ritorna la pagina dell'offerta richiesta dal parametro offer_id
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long offerId = Long.parseLong(req.getParameter("offer_id"));
@@ -29,7 +32,7 @@ public class OfferServlet extends HttpServlet {
     }
 
     /**
-     * Permette al datore di lavoro di creare/modificare l'offerta
+     * Permette al datore di lavoro di creare/modificare un'offerta
      * */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
