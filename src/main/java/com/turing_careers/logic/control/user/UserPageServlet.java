@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet incaricata di esporre le funzionalità di visualizzazione e modifica di un profilo
+ */
 @WebServlet(name = "UserPageServlet", value = "/user")
 public class UserPageServlet extends HttpServlet {
 
