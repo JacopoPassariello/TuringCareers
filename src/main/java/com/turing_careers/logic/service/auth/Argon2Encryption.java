@@ -3,8 +3,8 @@ package com.turing_careers.logic.service.auth;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 
 /**
- * @author Antonino Lorenzo
- * */
+ * Classe wrapper di Argon2PasswordEncoder di springframework
+ */
 public class Argon2Encryption implements EncryptionStrategy {
 
     private static Argon2PasswordEncoder encoder;
@@ -28,6 +28,11 @@ public class Argon2Encryption implements EncryptionStrategy {
         }
     }
 
+    /**
+     * Cripta la stringa passata come argomento e la restituisce
+     * @param str La stringa da criptare
+     * @return La stringa criptata
+     */
     @Override
     public String encrypt(String str) {
         return encoder.encode(str);
