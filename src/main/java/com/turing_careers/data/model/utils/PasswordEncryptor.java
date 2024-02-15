@@ -9,6 +9,9 @@ import com.turing_careers.logic.service.auth.Argon2Encryption;
 
 import java.util.List;
 
+/**
+ * Classe utilizzata per l'inizializzazione del Database prima del lancio del sistema, per criptare le password di tutti gli account mock pre-registrati
+ */
 public class PasswordEncryptor {
     public static void main(String[] args) {
         DeveloperDAO devdao = DeveloperDAO.getInstance();

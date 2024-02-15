@@ -6,6 +6,10 @@ import lombok.*;
 
 import java.util.List;
 
+
+/**
+ * Modella l'entità persistente Language
+ */
 @Entity
 @Table(name = "Language")
 @Getter

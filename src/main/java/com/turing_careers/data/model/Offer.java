@@ -7,6 +7,9 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * Modella l'entità persistente Offer
+ */
 @Entity
 @Table(name = "Offer")
 @Getter

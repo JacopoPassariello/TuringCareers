@@ -1,6 +1,6 @@
 package com.turing_careers.data.model;
 
 /**
- * Mockup interface to build abstract classes that interact with both Developer and Employer
+ * Marking Interface utilizzata per identificare le Entity rappresentanti profili di utenti del sistema
  */
 public interface User { }
