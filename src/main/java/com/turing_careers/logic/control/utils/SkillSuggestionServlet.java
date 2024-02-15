@@ -12,8 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servlet incaricata di esporre la funzionalità di autocompletamento delle skill all'interno dei form che lo richiedono
+ */
 @WebServlet(name = "skillSuggestionServlet", value = "/suggest-skills")
 public class SkillSuggestionServlet extends HttpServlet {
+    /**
+     * Espone la funzionalità di autocompletamento delle skill basandosi sul parametro skillsQuery
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
