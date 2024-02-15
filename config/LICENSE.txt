@@ -1,4 +1,0 @@
-/*
- * Copyright (c) 2024 Turing Careers
- * All rights reserved.
- */
