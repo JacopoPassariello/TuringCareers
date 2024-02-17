@@ -8,6 +8,7 @@ import com.turing_careers.logic.service.auth.Authenticator;
 import com.turing_careers.logic.service.auth.DeveloperAuthenticator;
 import com.turing_careers.logic.service.auth.EmployerAuthenticator;
 import com.turing_careers.logic.service.auth.InvalidCredentialsException;
+import com.turing_careers.logic.service.utils.ValidationException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -82,7 +83,7 @@ public class AuthenticationServlet extends HttpServlet {
                     "Invalid Credentials: " + mail + ": " + password +
                             "\nError: " + invalidCredentials.getMessage()
             );
-        } catch (PersistenceException signupError) {
+        } catch (PersistenceException | ValidationException signupError) {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
 
