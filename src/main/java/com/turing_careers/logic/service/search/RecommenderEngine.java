@@ -1,6 +1,7 @@
 package com.turing_careers.logic.service.search;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.dao.OfferDAO;
 import com.turing_careers.data.model.Developer;
@@ -34,6 +35,23 @@ public class RecommenderEngine {
     public List<Developer> search(Offer offer) {
         if (this.type != ClientType.DEVELOPER)
             throw new InvalidParameterException();
+
+        this.client.setRequestBody(offer);
+        Optional<String> itemsOpt = client.sendRequest("/engine/v1/developers");
+        if (itemsOpt.isPresent()) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                return Arrays.asList(
+                    objectMapper
+                            .readValue(
+                                    itemsOpt.get(),
+                                    Developer[].class
+                            )
+                );
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         return new ArrayList<>();
     }
