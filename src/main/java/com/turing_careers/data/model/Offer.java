@@ -90,7 +90,8 @@ public class Offer implements Item {
     private List<Developer> subscribedDevelopers;
 
 
-    public Offer(String title, String description, String state, String locationType, Employer employer, String location, List<Skill> skills, List<Language> languages) {
+    public Offer(String title, String description, String state, String locationType,
+                 Employer employer, String location, List<Skill> skills, List<Language> languages) {
         this.title = title;
         this.description = description;
         this.state = state;
