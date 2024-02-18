@@ -1,26 +1,13 @@
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    .profile-content-wrapper {
-        margin-bottom: 10dvh;
-    }
-}
+@media only screen and (max-width: 600px) {  }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .profile-content-wrapper {
-        margin-bottom: 10dvh;
-    }
-}
+@media only screen and (min-width: 600px) {  }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .profile-content-wrapper {
-        margin-bottom: 0;
-    }
 
     #employer-page-main {
-        position: absolute;
-        bottom: 0;
         width: 100%;
     }
 
@@ -37,10 +24,6 @@
         display: flex !important;
         justify-content: end !important;
     }
-
-    #create-offer-form {
-        flex-direction: row !important;
-    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -51,10 +34,9 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {}
 
-
 .profile-header-wrapper {
     width: 100%;
-    height: 25dvh;
+    padding: 40px 0;
     border-bottom: 2px solid var(--purple);
 }
 
@@ -73,14 +55,15 @@
 }
 
 .user-name {
-    font-size: 32px;
+    font-size: 28px;
 }
+
 
 .user-info-wrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: 8px;
+    margin-top: 18px;
 }
 
 .user-info p {
@@ -88,10 +71,11 @@
     align-items: center;
     gap: 8px;
     margin-top: -20px;
+    font-size: 16px;
 }
 
 .user-info p i {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .user-modify-wrapper {
@@ -104,15 +88,15 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 16px;
 }
 
 .profile-content-wrapper {
     width: 100%;
-    min-height: 3rem;
+    min-height: 70dvh;
     background-color: var(--light-gray);
     display: flex;
     justify-content: center;
-    padding-bottom: 8px;
 }
 
 .profile-content {
@@ -160,13 +144,6 @@
     width: 90%;
     display: flex;
     justify-content: space-between;
-}
-
-#create-offer-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 
 .offer-section {
@@ -293,23 +270,130 @@
     animation: fadeIn 0.1s ease-in 0s  1 normal none running;
 }
 
+#emp-offer-form-wrap {
+    width: 85%;
+    height: 100%;
+    justify-content: start !important;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+#create-offer-form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 992px) {
+    #create-offer-content {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #create-offer-content {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+#create-offer-content {
+    width: 100%;
+    gap: 12px;
+}
+
+.form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input {
+    outline: none;
+    border-radius: 12px;
+}
+
+input[name="title"] {
+    width: 100%;
+}
+
+input[name="location"] {
+    width: 100%;
+}
+
+.offer-form-label {
+    font-size: 18px;
+}
+
+#loc-type-wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#create-offer-buttons {
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+#create-offer-delete {
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    margin-top: 8px;
+
+    border: none;
+    background-color: var(--white);
+}
+
+#create-offer-delete:hover {
+    color: var(--error);
+}
+
 #emp-offers-wrap {
     width: 85%;
     height: 100%;
     justify-content: start !important;
     padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+#offers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#offers-header button {
+    font-size: 18px;
+    outline: none;
+    border: 0;
+    background-color: var(--white);
+}
+
+#offers-header h2 {
+    font-size: 20px;
+    margin-bottom: 0;
 }
 
 #emp-offers-list {
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
 #empty-offer-list {
-    height: 80%;
+    height: 90%;
 }
 
 .item-card {

@@ -2,19 +2,22 @@ $(document).ready(() => {
     /**
      * Offer Form
      * */
-    const createOfferButton = $("#create-offer-button")
-    const offerForm = $("#create-offer-form-wrapper")
+    const offerMain = $("#emp-offers-wrap")
+    const createOfferButton = $("#offer-form-open-button")
+    const offerForm = $("#emp-offer-form-wrap")
     createOfferButton.click(() => {
         offerForm.removeClass('display-none')
+        offerMain.addClass('display-none')
     })
 
-    const undoButton = $("#offer-form-undo-button")
-    const submitButton = $("#offer-form-submit-button")
+    const undoButton = $("#create-offer-submit")
+    const submitButton = $("#create-offer-delete")
 
     undoButton.click(() => {
         // TODO: clean up offer form
         // TODO: notify user
         offerForm.addClass('display-none')
+        offerMain.removeClass('display-none')
     })
 
     submitButton.click(() => {

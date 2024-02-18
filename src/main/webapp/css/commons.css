@@ -7,6 +7,7 @@
     --black: #21262C;
     --purple: #533DA1;
     --orange: #FF785B;
+    --error: #d20000;
 }
 
 @font-face {
@@ -68,7 +69,33 @@ body {
 }
 
 .hover-dissolve:hover {
-    opacity: 60%;
+    opacity: 60% !important;
+}
+
+.navbar-toggle {
+    border: 0;
+    background-color: var(--white);
+}
+
+#tc-navbar {
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.show-nav div {
+
+}
+
+#tc-navbar:hover {
+    border-bottom: 2px solid var(--purple);
+}
+
+.nav-hamburger {
+    font-size: 32px;
+    color: var(--purple);
+}
+
+.test {
+    padding-bottom: 200px;
 }
 
 .flex-center{
