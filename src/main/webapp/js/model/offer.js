@@ -1,15 +1,19 @@
 class Offer {
-    constructor(title, description, skills, locType, loc, languages) {
+    constructor(title, description, employer, skills, locType, location, languages) {
         this.title = title;
         this.description = description;
+        this.employer = employer;
         this.skills = skills;
         this.languages = languages;
-
         this.locType = locType;
-        if (locType === 'IN_PLACE')
-            this.location = loc;
+        if (locType === 'OnSite')
+            this.location = location;
         else
             this.location = undefined;
+    }
+
+    setId(offer_id) {
+        this.id = offer_id
     }
 
     validate() {
@@ -19,13 +23,14 @@ class Offer {
 
     toJSON() {
         return {
+            _Offer__id: this.id ? this.id : 1,
             _Offer__title: this.title,
             _Offer__description: this.description,
             _Offer__state: 'ACTIVE',
-            _Offer_location_type: this.locType,
-            _Offer_location: this.location,
-            _Offer_employer: '',
-            _Offer_languages: this.languages,
+            _Offer__location_type: this.locType,
+            _Offer__location: this.location,
+            _Offer__employer: this.employer,
+            _Offer__languages: this.languages,
             _Offer__skills: this.skills,
         };
     }

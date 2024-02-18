@@ -1,13 +1,13 @@
-<!-- <%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
 <html lang="it">
 <head>
     <meta charset="UTF-8" />
-    <title>Turing Careers - Offer search page</title>
+    <title>Cerca Offerte | Turing Careers</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="" />
-    <link rel="stylesheet" type="text/css" href="../css/commons.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/search_page.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css"/>
+    <link rel="icon" href="static/tc_logo.svg" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <link rel="stylesheet" type="text/css" href="css/search_page.css"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,8 +74,8 @@
 
     <div id="search-main">
         <div id="mb-of-searchbar-wrap" class="flex-center">
-            <div id="mb-of-searchbar" class="flex-center">
-                <input id="mb-searchbar-input" type="text" class="inter-regular"/>
+            <div id="mb-of-searchbar" class="flex-center" style="z-index: 10">
+                <input id="mb-searchbar-input" type="text" class="inter-regular" />
                 <i id="mb-search-button" class="bi bi-search search-icon flex-center"></i>
             </div>
         </div>
@@ -126,68 +126,25 @@
                 </div>
             </div>
         </div>
-        <div id="of-list-wrap" class="flex-center">
-            <div id="item-cards-list">
-                <!--
-                <div class="item-card">
-                    <div class="of-offer-card-header">
-                        <div class="of-offer-head no-select">
-                            <h3 class="of-offer-employer-name inter-medium">Azienda X</h3>
-                            <h1 class="of-offer-tile inter-bold no-select">Software Developer</h1>
-                        </div>
-                        <div class="of-offer-bookmark">
-                            <i class="bi bi-bookmark"></i>
-                        </div>
-                    </div>
-                    <div class="of-offer-card-meta inter-regular no-select">
-                        <h3>Roma, Italia</h3>
-                    </div>
-                    <div class="of-offer-card-content">
-                        <div class="of-offer-desc-preview">
-                            <p class="inter-light">
-                                Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Sed ut ligula et odio  fermentum commodo...
-                            </p>
-                        </div>
-                        <div class="of-offer-button">
-                            <div class="flex-center">
-                                <a class="inter-bold no-select">Dettagli</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="of-offer-card-header">
-                        <div class="of-offer-head no-select">
-                            <h3 class="of-offer-employer-name inter-medium">Azienda X</h3>
-                            <h1 class="of-offer-tile inter-bold no-select">Software Developer</h1>
-                        </div>
-                        <div class="of-offer-bookmark">
-                            <i class="bi bi-bookmark"></i>
-                        </div>
-                    </div>
-                    <div class="of-offer-card-meta inter-regular no-select">
-                        <h3>Roma, Italia</h3>
-                        <h3>Impiego</h3>
-                    </div>
-                    <div class="of-offer-card-content">
-                        <div class="of-offer-desc-preview">
-                            <p class="inter-light">
-                                Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Sed ut ligula et odio  fermentum commodo...
-                            </p>
-                        </div>
-                        <div class="of-offer-button">
-                            <div class="flex-center">
-                                <a class="inter-bold no-select">Dettagli</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+        <div id="of-list-wrap" class="flex-center display-none">
+            <div id="of-search-wrap">
+                <h2 id="search-out-header" class="inter-bold no-select"></h2>
+                <div id="item-cards-list"></div>
+            </div>
+        </div>
+        <div id="of-default-recommendations" class="flex-center">
+            <div id="of-def-rec-wrap">
+                <h2 class="inter-bold no-select">Potrebbero Interessarti</h2>
+                <div id="recommended-cards-list"></div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-    <script src="../js/pages/search_page.js"></script>
-    <script src="../js/model/offer.js"></script>
-    <script src="../js/shared/navbar.js"></script>
+    <script src="js/model/offer.js"></script>
+    <script src="js/model/developer.js"></script>
+    <script src="js/model/skills.js"></script>
+    <script src="js/model/languages.js"></script>
+    <script src="js/pages/search_page.js"></script>
+    <script src="js/shared/navbar.js"></script>
 </body>
 </html>

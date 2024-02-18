@@ -1,12 +1,13 @@
 class Skill {
-    constructor(skill) {
+    constructor(id, skill, type) {
+        this.id = id;
         this.skill = skill;
-        this.type = 'Programming Language'
+        this.type = type;
     }
 
     toJSON() {
         return {
-            _Skill_id: 3,
+            _Skill__id: this.id,
             _Skill__name: this.skill,
             _Skill__type: this.type
         }
