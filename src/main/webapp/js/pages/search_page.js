@@ -93,7 +93,7 @@ $(document).ready(() => {
     function searchOffers(query) {
         return $.ajax({
             url: 'http://localhost:8080/TuringCareers_war/search/offers?' +
-                'query=' + encodeURIComponent(query) + '&searchType=search',
+                'query=' + encodeURIComponent(query),
             method: 'POST',
             success: function(response) {
                 updateList(extractOffers(response), $("#item-cards-list"))
@@ -110,7 +110,8 @@ $(document).ready(() => {
      * */
     function recommendOffers() {
         return $.ajax({
-            url: 'http://localhost:8080/TuringCareers_war/search/offers?' + '&searchType=recommend',
+            url: 'http://localhost:8080/TuringCareers_war/search/offers?' +
+                'query=' + encodeURIComponent('RECOMMEND'),
             method: 'POST',
             success: function(response) {
                 updateList(extractOffers(response), $("#recommended-cards-list"))
