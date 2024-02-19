@@ -324,14 +324,84 @@ input[name="location"] {
     width: 100%;
 }
 
+.input-disabled {
+    opacity: 40%;
+}
+
 .offer-form-label {
     font-size: 18px;
+}
+
+#selected-skills {
+    display: flex;
+    justify-content: start;
+    gap: .5rem;
+
+    border-bottom: 2px solid var(--purple);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#selected-skills ul {
+    width: fit-content !important;
+}
+
+.input-tag {
+    max-width: 33%;
+    height: 45px;
+    outline: none;
+    border: 0;
+}
+
+#proposed-skills-list {
+    list-style: none;
+    padding-left: .5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+    border: 2px solid var(--purple);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+#proposed-skills-list li {
+    cursor: pointer;
+}
+
+#description {
+    min-height: 200px;
+    max-height: 450px;
 }
 
 #loc-type-wrap {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+#language-input-wrapper {
+    display: flex;
+}
+
+#language-input-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--white);
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+    font-size: 22px;
+}
+
+#language-input-button:hover {
+    color: var(--white);
+    background-color: var(--purple);
+
 }
 
 #create-offer-buttons {
@@ -423,12 +493,16 @@ input[name="location"] {
     width: 80%;
 }
 
+.font-small {
+    font-size: 18px;
+}
+
 .of-offer-head h3{
     font-size: 16px;
 }
 
-.of-offer-head h1{
-    font-size: 24px;
+.of-offer-head h2{
+    font-size: 20px;
 }
 
 .show-developers-wrap {

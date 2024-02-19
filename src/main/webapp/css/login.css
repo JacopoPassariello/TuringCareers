@@ -28,7 +28,7 @@
     left: 0;
     right: 0;
     width: 400px;
-    height: 370px;
+    height: 500px;
 
     margin: auto auto;
     padding: 40px;
@@ -43,6 +43,11 @@
 
 #login-form:hover {
     box-shadow: 0 6px 8px rgba(33, 38, 44, 0.4);
+}
+
+#user-type {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 

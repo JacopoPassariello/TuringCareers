@@ -67,14 +67,14 @@
             <div class="profile-header">
                 <div class="info-wrapper">
                     <div class="name-wrapper">
-                        <h2 class="user-name no-select inter-bold ">Nome Employer</h2>
+                        <h2 id="employer-name" class="user-name no-select inter-bold ">Nome Employer</h2>
                     </div>
                     <div class="user-info-wrapper">
                         <div id="employer-email" class="user-info">
-                            <p class="inter-light"><i class="bi bi-envelope"></i>email@email.com</p>
+                            <p id="employer-email-p" class="inter-light"><i class="bi bi-envelope"></i>email@email.com</p>
                         </div>
                         <div id="employer-company" class="user-info">
-                            <p class="inter-light"><i class="bi bi-building"></i>Employer company</p>
+                            <p id="employer-company-p" class="inter-light"><i class="bi bi-building"></i>Employer company</p>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
             <div class="profile-content">
                 <div id="emp-offer-form-wrap" class="display-none">
                     <h2 class="inter-bold no-select" style="font-size: 20px">Create Offer</h2>
-                    <form id="create-offer-form">
+                    <div id="create-offer-form">
                         <div id="create-offer-content">
                             <div id="form-main" class="form-section">
                                 <div id="title">
@@ -99,31 +99,45 @@
                                 </div>
                                 <div>
                                     <h3 class="no-select inter-medium offer-form-label">Description</h3>
-                                    <textarea id="description" class="inter-regular input input-text w-100">Description</textarea>
+                                    <textarea id="description" name="description" class="inter-regular input input-text w-100 px-2 py-2">Description</textarea>
                                 </div>
                             </div>
                             <div id="form-meta" class="form-section">
                                 <div id="form-skills">
-
+                                    <h3 class="no-select inter-medium offer-form-label">Skills</h3>
+                                    <div>
+                                        <div id="selected-skills" class="input-text px-2 py-2">
+                                            <ul id="form-skills-list" class="dev-skills">
+                                                <input type="text" name="skill" class="input-tag inter-regular" placeholder="es. Java">
+                                            </ul>
+                                        </div>
+                                        <ul id="proposed-skills-list" class="inter-regular display-none"></ul>
+                                    </div>
                                 </div>
                                 <div id="location-type">
                                     <h3 class="no-select inter-medium offer-form-label">Location</h3>
                                     <div id="loc-type-wrap">
                                         <div>
                                             <h3 class="no-select inter-medium" style="font-size: 14px">Remote</h3>
-                                            <input type="radio" name="locType">
+                                            <input type="radio" name="locType" value="remote">
                                         </div>
                                         <div>
                                             <h3 class="no-select inter-medium" style="font-size: 14px">On Site</h3>
-                                            <input type="radio" name="locType">
+                                            <input type="radio" name="locType" value="onsite">
                                         </div>
                                     </div>
                                 </div>
                                 <div id="location">
-                                    <input type="text" name="location" class="inter-regular input input-text px-2 py-2" placeholder="Location">
+                                    <input type="text" name="location" disabled class="input-disabled inter-regular input input-text px-2 py-2" placeholder="Location">
                                 </div>
                                 <div id="form-languages">
-
+                                    <h3 class="no-select inter-medium offer-form-label">Languages</h3>
+                                    <div id="language-input-wrapper" class="input-text px-2 py-2">
+                                        <ul id="form-languages-list" class="dev-skills">
+                                            <input type="text" name="language" class="input-tag inter-regular" placeholder="es. Italian">
+                                        </ul>
+                                        <div id="language-input-button" class="inter-bold">+</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +145,9 @@
                             <button class="inter-bold submit-button" id="create-offer-submit"><i class="bi bi-send"></i>Create</button>
                             <button class="inter-bold hover-dissolve" id="create-offer-delete"><i class="bi bi-x-lg"></i>Delete</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div id="emp-offers-wrap" class="">
+                <div id="emp-offers-wrap">
                     <div id="offers-header">
                         <h2 class="inter-bold no-select">Your Offers</h2>
                         <button id="offer-form-open-button" class="hover-dissolve">Create Offer</button>

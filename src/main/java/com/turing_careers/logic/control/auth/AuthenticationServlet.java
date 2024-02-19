@@ -39,37 +39,40 @@ public class AuthenticationServlet extends HttpServlet {
         else if (userType.equals("employer"))
             authenticator = new EmployerAuthenticator();
         else {
-            // TODO: handle error
             throw new ServletException("Invalid UserType");
         }
 
         System.out.println("Logging " + userType);
+        Cookie ssid = new Cookie("SSID", "testValue");
         try {
             if (authType.equals("login")) {
                 // Login
                 User u = authenticator.loginUser(mail, password);
                 request.getSession().setAttribute("userType", userType);
                 request.getSession().setAttribute("user", u);
+
+                response.addCookie(ssid);
+                response.setContentType("text/html");
+                response.sendRedirect("/TuringCareers_war/user");
             } else if (authType.equals("register")) {
                 ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.configure(
-                        DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-                        false
-                );
+                // objectMapper.configure(
+                //         DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                //         false
+                // );
                 String jsonString = request.getReader().lines().collect(Collectors
                         .joining(System.lineSeparator())
                 );
                 System.out.println(jsonString);
                 if (userType.equals("developer")) {
-                    System.out.println("Registering developer");
                     Developer dev = objectMapper.readValue(jsonString, Developer.class);
-                    System.out.println(dev);
                     dev = (Developer) authenticator.signupUser(dev);
-                    System.out.println("Developer Post-Auth: \n" + dev);
+
                     request.getSession().setAttribute("userType", userType);
                     request.getSession().setAttribute("user", dev);
                 } else {
                     Employer emp = objectMapper.readValue(jsonString, Employer.class);
+                    System.out.println(emp);
                     emp = (Employer) authenticator.signupUser(emp);
                     request.getSession().setAttribute("userType", userType);
                     request.getSession().setAttribute("user", emp);
@@ -88,7 +91,9 @@ public class AuthenticationServlet extends HttpServlet {
         }
 
         System.out.println("success");
-        String redirectUrl = "index.jsp";
+        response.addCookie(ssid);
+
+        String redirectUrl = "user";
         String jsonResponse = "{\"redirectUrl\": \"" + redirectUrl + "\"}";
         response.setContentType("application/json");
         response.getWriter().write(jsonResponse);

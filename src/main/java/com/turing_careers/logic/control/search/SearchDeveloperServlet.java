@@ -1,10 +1,14 @@
 package com.turing_careers.logic.control.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
 import com.turing_careers.data.model.Offer;
+import com.turing_careers.logic.service.search.ClientFactory;
+import com.turing_careers.logic.service.search.ClientType;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,18 +16,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Servlet incaricata di esporre le funzionalità di ricerca di sviluppatori
  */
+@WebServlet(name = "recommendDevelopers", value = "/recommend-developers")
 public class SearchDeveloperServlet extends HttpServlet {
     /**
      * Fornisce le funzionalità relative alla ricerca di Developer, controllando che l'accesso sia consentito solo ai Datori di Lavoro.
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Employer emp = null;
-
         if (request.getSession().getAttribute("userType") == null) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
@@ -38,31 +42,30 @@ public class SearchDeveloperServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
 
-            emp = (Employer) request.getSession().getAttribute("user");
+            // Get Offer for Recommendation
+            ObjectMapper objectMapper = new ObjectMapper();
+            String offerJSON = request.getReader().lines().collect(Collectors
+                    .joining(System.lineSeparator())
+            );
+            Offer offer = objectMapper.readValue(offerJSON, Offer.class);
+            Employer emp = (Employer) request.getSession().getAttribute("user");
+            offer.setEmployer(emp);
+            offer.setId(1000L);
 
-            String query = request.getParameter("query");
 
-            if (!query.isEmpty() && !query.equals(" ")) {
+            // Getting recommended developers
+            List<Developer> developers = new ClientFactory()
+                    .setType(ClientType.DEVELOPER)
+                    .getRecommenderEngine()
+                    .search(offer);
 
-                List<Offer> offers = new ArrayList<>();
-                        /*
-                            new ClientFactory()
-                            .setType(ClientType.DEVELOPER)
-                            .getRecommenderEngine()
-                            .search(query, emp);
-                        */
-                ObjectMapper objectMapper = new ObjectMapper();
-                String offersJSON = objectMapper.writeValueAsString(offers);
+            // Response
+            String devsJSON = objectMapper.writeValueAsString(developers);
+            response.setContentType("application/json");
+            response.getWriter().write(devsJSON);
+            response.setStatus(200);
 
-                response.setContentType("application/json");
-                response.getWriter().print(offersJSON);
-                response.setStatus(200);
-            } else {
-                response.setStatus(400);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-                dispatcher.forward(request, response);
-            }
-        } else if (userType.equals("developer")) {
+        } else {
             response.setStatus(400);
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);

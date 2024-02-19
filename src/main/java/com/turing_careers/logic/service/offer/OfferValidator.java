@@ -26,7 +26,7 @@ public class OfferValidator {
         if (offer == null
                 || offer.getTitle().length() < 8
                 || offer.getTitle().length() > 64
-                || offer.getDescription().length() < 32
+                /*|| offer.getDescription().length() < 32 */
                 || offer.getDescription().length() > 5120
                 || offer.getSkills().size() == 0
                 || offer.getLanguages().size() == 0

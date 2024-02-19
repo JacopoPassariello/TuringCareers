@@ -92,11 +92,20 @@ $(document).ready(() => {
         let skills = []
         skillTags.each(function() {
             let skillText = $(this).find('p').text().trim();
-            skills.push(new Skill(skillText));
+            skills.push(new Skill(skillText, 'Programming Language'));
         });
 
-        let dev = new Developer(firstName, lastName, '', mail, psw, location, skills, [new Languages('italiano')])
-        // console.log('Input Developer: ' + JSON.stringify(dev))
+        let dev = new Developer(
+            firstName,
+            lastName,
+            '',
+            mail,
+            psw,
+            location,
+            skills,
+            [new Languages('italiano')]
+        )
+        console.log('Input Developer: ' + JSON.stringify(dev))
 
         // TODO: validation should be done inside Developer validate method
         if (!dev.validate()) {
@@ -168,7 +177,27 @@ $(document).ready(() => {
      * TODO: cleanup
      * */
 
+    const userTypeHidden = $("input[name='userType']")
+    const typeDeveloper = $("input[value='developer']")
+    const typeEmployer = $("input[value='employer']")
+
+    typeDeveloper.change(function() {
+        if ($(this).is(':checked')) {
+            userTypeHidden.val('developer');
+            console.log('developer checked');
+        }
+    });
+
+    typeEmployer.change(function() {
+        if ($(this).is(':checked')) {
+            userTypeHidden.val('employer');
+            console.log('employer checked');
+        }
+    });
+
     function validateSubForm() {
+
+
         let mail = document.forms["form"]["email"].value;
         let password = document.forms["form"]["password"].value;
         let nome = document.forms["form"]["firstname"].value;

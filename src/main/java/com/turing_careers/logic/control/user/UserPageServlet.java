@@ -1,5 +1,6 @@
 package com.turing_careers.logic.control.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.*;
 import com.turing_careers.logic.service.user.UserManager;
@@ -22,76 +23,46 @@ import java.util.List;
 public class UserPageServlet extends HttpServlet {
 
     /**
-     * Ritorna la pagina di un profilo di uno Sviluppatore o un Employer
+     * Ritorna la pagina di un profilo o le informazioni di uno Sviluppatore o un Employer
      * */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: remove if jsp are used
-        response.setContentType("text/html");
+        String requestType = request.getParameter("requestType");
+        if (requestType != null && requestType.equals("info")) {
+            response.setContentType("application/json");
 
-        String userType = (String) request.getSession().getAttribute("userType");
-        Developer dev = null;
-        Employer emp = null;
+            User u = (User) request.getSession().getAttribute("user");
+            // TODO: add employer offers
 
-        if (request.getSession().getAttribute("user") == null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-            dispatcher.forward(request, response);
-        }
+            ObjectMapper objectMapper = new ObjectMapper();
+            response.getWriter().write(
+                    objectMapper
+                            .writeValueAsString(u)
+            );
+        } else {
+            // Return Page
+            response.setContentType("text/html");
 
-        if (userType.equals("developer"))
-            dev = (Developer) request.getSession().getAttribute("user");
-        else if (userType.equals("employer"))
-            emp = (Employer) request.getSession().getAttribute("user");
+            String userType = (String) request.getSession().getAttribute("userType");
+            Developer dev = null;
+            Employer emp = null;
 
-
-        if (userType.equals("developer")) {
-            List<Offer> offers = dev.getSavedOffers();
-            List<Language> languages = dev.getLanguages();
-            String location = dev.getLocation();
-
-            if (!offers.isEmpty()) {
-                request.setAttribute("noOffers", false);
-                request.setAttribute("offers", offers);
-            } else {
-                request.setAttribute("noOffers", true);
+            if (request.getSession().getAttribute("user") == null) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                dispatcher.forward(request, response);
             }
 
-            if (!languages.isEmpty()) {
-                request.setAttribute("noLanguages", false);
-                request.setAttribute("languages", languages);
-            } else {
-                request.setAttribute("noLanguages", true);
+            if (userType.equals("developer"))
+                dev = (Developer) request.getSession().getAttribute("user");
+            else if (userType.equals("employer"))
+                emp = (Employer) request.getSession().getAttribute("user");
+
+
+            if (userType.equals("developer")) {
+                request.getRequestDispatcher("/developer_page.html").forward(request, response);
+            } else if (userType.equals("employer")) {
+                request.getRequestDispatcher("/employer_page.html").forward(request, response);
             }
-
-            if (location == null) {
-                request.setAttribute("noLocation", false);
-                request.setAttribute("location", location);
-            } else {
-                request.setAttribute("noLocation", true);
-            }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
-        } else if (userType.equals("employer")) {
-            List<Offer> offers = emp.getOffers();
-            List<Developer> developers = emp.getSavedDevelopers();
-
-            if (!offers.isEmpty()) {
-                request.setAttribute("noOffers", false);
-                request.setAttribute("offers", offers);
-            } else {
-                request.setAttribute("noOffers", true);
-            }
-
-
-            if (!developers.isEmpty()) {
-                request.setAttribute("noDevelopers", false);
-                request.setAttribute("developers", developers);
-            } else {
-                request.setAttribute("noDevelopers", true);
-            }
-
-            request.getRequestDispatcher("/employer_page.html").forward(request, response);
-            // TODO: remove if jsp are used
-            // RequestDispatcher dispatcher = request.getRequestDispatcher("userPage.jsp");
         }
     }
 

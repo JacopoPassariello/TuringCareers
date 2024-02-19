@@ -10,7 +10,7 @@ class Languages {
 
     toJSON() {
         return {
-            _Language__id: 1,
+            _Language__id: null,
             _Language__code: this.lang['code']
         }
     }
