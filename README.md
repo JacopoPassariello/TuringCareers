@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: center; align-items: center; border-bottom:2px solid gray">
     <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">
-        <img id="logo" src="./src/main/webapp/static/text_logo.jpeg" alt="" style="padding: 20px 0; width: 45%; height: 45%">
+        <img id="logo" src="./src/main/webapp/static/text_logo.jpeg" alt="" style="padding: 20px; width: 45%; height: 45%;">
     </a>
 </div>
 
