@@ -75,7 +75,13 @@ public class RecommenderEngine {
         }
 
         this.client.setRequestBody(query, user);
-        Optional<String> itemsOpt = client.sendRequest("engine/v1/offers");
+        String type = null;
+        if (query.equals("RECOMMEND"))
+            type = "recommend";
+        else
+            type = "search";
+
+        Optional<String> itemsOpt = client.sendRequest("engine/v1/offers/search");
 
         List<Offer> offerList = new ArrayList<>();
         if (itemsOpt.isPresent()) {

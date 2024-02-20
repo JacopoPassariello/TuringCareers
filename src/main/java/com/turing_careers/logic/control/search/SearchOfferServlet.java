@@ -48,45 +48,33 @@ public class SearchOfferServlet extends HttpServlet {
      * */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Developer dev = null;
-        if (request.getSession().getAttribute("userType") == null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-            dispatcher.forward(request, response);
-        }
-
         String userType = (String) request.getSession().getAttribute("userType");
-
-        if (userType.equals("employer")) {
-            response.setStatus(400);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-            dispatcher.forward(request, response);
-        } else if (userType.equals("developer")) {
-            if (request.getSession().getAttribute("user") == null) {
-                response.setStatus(500);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-                dispatcher.forward(request, response);
-            }
-            dev = (Developer) request.getSession().getAttribute("user");
+        if (userType == null || userType.equals("employer")) {
+            request.getRequestDispatcher("index.html").forward(request, response);;
+        } else {
+            Developer dev = (Developer) request.getSession().getAttribute("user");
             String query = request.getParameter("query");
 
-            if (!query.isEmpty() && !query.equals(" ")) {
-
-                List<Offer> offers = new ClientFactory()
-                        .setType(ClientType.OFFER)
-                        .getRecommenderEngine()
-                        .search(query, dev);
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                String offersJSON = objectMapper.writeValueAsString(offers);
-
-                response.setContentType("application/json");
-                response.getWriter().print(offersJSON);
-                response.setStatus(200);
-            } else {
-                response.setStatus(400);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
-                dispatcher.forward(request, response);
+            if (dev == null ||
+                    query.isEmpty() ||
+                    query.equals(" ")
+            ) {
+                request.getRequestDispatcher("index.html").forward(request, response);
             }
+
+            List<Offer> offers = new ClientFactory()
+                    .setType(ClientType.OFFER)
+                    .getRecommenderEngine()
+                    .search(query, dev);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String offersJSON = objectMapper.writeValueAsString(offers);
+
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    objectMapper
+                            .writeValueAsString(offers)
+            );
         }
     }
 }

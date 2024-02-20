@@ -44,6 +44,9 @@ public class AuthenticationServlet extends HttpServlet {
 
         System.out.println("Logging " + userType);
         Cookie ssid = new Cookie("SSID", "testValue");
+        ssid.setMaxAge(-1);
+        Cookie uType = new Cookie("TCUT", userType);
+        uType.setMaxAge(-1);
         try {
             if (authType.equals("login")) {
                 // Login
@@ -52,6 +55,7 @@ public class AuthenticationServlet extends HttpServlet {
                 request.getSession().setAttribute("user", u);
 
                 response.addCookie(ssid);
+                response.addCookie(uType);
                 response.setContentType("text/html");
                 response.sendRedirect("/TuringCareers_war/user");
             } else if (authType.equals("register")) {
@@ -90,11 +94,9 @@ public class AuthenticationServlet extends HttpServlet {
             throw new ServletException("Signup Error: " + signupError.getMessage());
         }
 
-        System.out.println("success");
         response.addCookie(ssid);
-
-        String redirectUrl = "user";
-        String jsonResponse = "{\"redirectUrl\": \"" + redirectUrl + "\"}";
+        response.addCookie(uType);
+        String jsonResponse = "{\"redirectUrl\": \"" + "user" + "\"}";
         response.setContentType("application/json");
         response.getWriter().write(jsonResponse);
 
