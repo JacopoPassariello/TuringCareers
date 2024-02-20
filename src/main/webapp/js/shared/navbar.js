@@ -25,9 +25,6 @@ $(document).ready(() => {
             mbButton.addClass('display-none')
         } else {
             nav.addClass('sticky-top')
-            //nav.removeClass('sticky-top')
-            //nav.addClass('fixed-bottom')
-            //mbButton.removeClass('display-none')
         }
     }
 
@@ -65,6 +62,25 @@ $(document).ready(() => {
 
         navbarLinksLogged.removeClass('navbar-collapse')
         navbarLinksLogged.addClass('display-none')
+    }
+
+    /**
+     *
+     * */
+    const navbarLogged = $("#logged-navbar")
+    if (checkCookie("TCUT") && getCookieValue("TCUT") === "developer") {
+        let searchButton = $("<a>")
+            .addClass('nav-item inter-bold nav-link')
+            .prop('href', '/TuringCareers_war/search/offers')
+
+        searchButton.append(
+            $("<i>")
+                .addClass('bi bi-search dsk-account-icon bi-icon-dev hover-dissolve')
+        )
+
+        searchButton.text('Search')
+
+        navbarLogged.prepend(searchButton)
     }
 
     /**

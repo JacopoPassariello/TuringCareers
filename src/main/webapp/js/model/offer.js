@@ -10,21 +10,11 @@ class Offer {
         else
             this.location = undefined;
     }
-/*
-    constructor(id, title, description, employer, skills, locType, location, languages) {
-        this.id = id
-        this.title = title;
-        this.description = description;
-        this.skills = skills;
+
+    setEmployer(employer) {
         this.employer = employer
-        this.languages = languages;
-        this.locType = locType;
-        if (locType === 'OnSite')
-            this.location = location;
-        else
-            this.location = undefined;
     }
-*/
+
     setId(offer_id) {
         this.id = offer_id
     }

@@ -20,10 +20,6 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #mb-of-searchbar-wrap {
-        display: none;
-    }
-
     #of-filter-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -40,11 +36,6 @@
 
     #recommended-cards-list {
         width: 50% !important;
-    }
-
-    #search-main {
-        margin-top: 20dvh;
-        padding-bottom: 2dvh !important;
     }
 }
 
@@ -78,7 +69,7 @@
     opacity: 80%;
 }
 
-#mb-searchbar-input {
+#searchbar-input {
     width: 90%;
     height: 40px;
     outline: none;
@@ -292,11 +283,6 @@
 
 .of-offer-button div:active {
     margin-top: 2px;
-}
-
-
-#search-main {
-    padding-bottom: 12dvh;
 }
 
 #of-search-wrap {

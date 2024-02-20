@@ -28,13 +28,11 @@ $(document).ready(() => {
     /**
      * Search Listeners
      * */
-    const searchInputDesktop = $("#dsk-search-input")
-    const searchButtonDesktop = $("#dsk-search-button")
-    const searchInputMobile = $("#mb-searchbar-input")
-    const searchButtonMobile = $("#mb-search-button")
+    const searchInput = $("#searchbar-input")
+    const searchButton = $("#search-button")
 
-    searchButtonMobile.click(() =>{
-        let userInput = searchInputMobile.val()
+    searchButton.click(() =>{
+        let userInput = searchInput.val()
         if (userInput.length > 0) {
             $("#of-default-recommendations").empty()
             $("#of-list-wrap").removeClass('display-none')
@@ -42,26 +40,9 @@ $(document).ready(() => {
                 .text('Results for: ')
                 .append(
                     $("<p>")
-                        .addClass('no-select inter-regular search-out-query')
+                        .addClass('no-select inter-regular search-out-query pt-3')
                         .text(userInput)
                 )
-            searchOffers(userInput)
-        }
-    })
-
-    searchButtonDesktop.click(() =>{
-        let userInput = searchInputDesktop.val()
-        if (userInput.length > 0) {
-            $("#of-default-recommendations").empty()
-            $("#of-list-wrap").removeClass('display-none')
-            $("#search-out-header")
-                .text('Results for: ')
-                .append(
-                    $("<p>")
-                        .addClass('no-select inter-light search-out-query')
-                        .text(userInput)
-                )
-
             searchOffers(userInput)
         }
     })
@@ -72,17 +53,20 @@ $(document).ready(() => {
      * */
     function extractOffers(response) {
         let out = []
-        for (let item of response) {
-            out.push(new Offer(
-                item['_Offer__title'] ? item['_Offer__title'].slice(2, -1) : '',
-                item['_Offer__description'] ? item['_Offer__description'].slice(2, -1) : '',
-                item['_Offer__employer'] ? item['_Offer__employer']: '',
-                item['_Offer__skills'] ? item['_Offer__skills'].slice(2, -1) : '',
-                item['_Offer__location_type'] ? item['_Offer__location_type'] : '',
-                item['_Offer__location'],
-                item['_Offer__languages'] ? item['_Offer__languages'].slice(2, -1) : ''
-            ))
+        for (let offer of response) {
+            let o = new Offer(
+                offer['_Offer__title'] ? offer['_Offer__title'].slice(2, -1) : '',
+                offer['_Offer__description'] ? offer['_Offer__description'].slice(2, -1) : '',
+                offer['_Offer__skills'] ? offer['_Offer__skills'] : '',
+                offer['_Offer__location_type'] ? offer['_Offer__location_type'] : '',
+                offer['_Offer__location'] ? offer['_Offer__location'] : '',
+                offer['_Offer__languages'] ? offer['_Offer__languages'].slice(2, -1) : ''
+            )
+            o.setEmployer(offer['_Offer__employer'] ? offer['_Offer__employer']: '')
+            console.log(o)
+            out.push(o)
         }
+        console.log(out)
         return out
     }
 
@@ -127,7 +111,6 @@ $(document).ready(() => {
      * */
     function updateList(items, wrapper) {
         wrapper.empty();
-
         if (items.length > 0) {
             items.forEach((item) => {
                 let item_card = $("<div>")
@@ -149,8 +132,7 @@ $(document).ready(() => {
         let employer = $("<h3>")
             .addClass('of-offer-employer-name inter-medium')
             .text(
-                item.employer['_Employer__f_name'] + ' ' +
-                item.employer['_Employer__l_name']
+                (item.employer ? item.employer['_Employer__f_name'] + item.employer['_Employer__l_name'] : '')
             )
         let title = $("<h1>")
             .addClass('of-offer-tile inter-bold no-select')
@@ -169,6 +151,23 @@ $(document).ready(() => {
         let location = $("<h3>")
             .text(item.locType === 'OnSite' ? item.location: item.locType)
         meta.append(location)
+
+        let skills = $("<ul>")
+            .addClass('dev-skills')
+
+        let j = 0
+        for (let skill of item.skills) {
+            if (j <= 3) {
+                let name = $("<li>")
+                    .addClass('inter-light no-select font-small')
+                    .text(skill['_Skill__name'])
+                skills.append(name)
+                j += 1
+            }
+            else
+                break
+        }
+        skills.append($("<li>").addClass('inter-ligth no-select').text('...'))
 
         let content = $("<div>")
             .addClass('of-offer-card-content')
@@ -192,7 +191,7 @@ $(document).ready(() => {
 
         content.append(description, buttonSection)
 
-        card.append(headerWrapper, meta, content)
+        card.append(headerWrapper, meta, skills, content)
     }
 
     recommendOffers()
