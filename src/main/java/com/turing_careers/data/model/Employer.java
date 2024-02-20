@@ -23,7 +23,8 @@ import java.util.List;
     @NamedQuery(name = "findAllEmployers", query = "SELECT e FROM Employer e"),
     @NamedQuery(name = "findEmplsByMailAndPassword", query = "SELECT e FROM Employer e WHERE e.mail = :mail  AND e.password = :password"),
     @NamedQuery(name = "findEmployerByMail", query = "SELECT e FROM Employer e WHERE e.mail = :mail "),
-    @NamedQuery(name = "findEmployerById", query = "SELECT e FROM Employer e WHERE e.id = :id")
+    @NamedQuery(name = "findEmployerById", query = "SELECT e FROM Employer e WHERE e.id = :id"),
+    @NamedQuery(name = "findEmployerOffers", query = "SELECT o FROM Offer o WHERE o.employer = :employer")
 })
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Employer implements User {

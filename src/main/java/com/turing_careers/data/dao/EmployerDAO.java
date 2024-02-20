@@ -1,6 +1,7 @@
 package com.turing_careers.data.dao;
 
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.Offer;
 
 import java.util.List;
 import java.util.Optional;
@@ -100,5 +101,12 @@ public class EmployerDAO extends DAO {
             em.merge(employer);
             em.getTransaction().commit();
         } catch (Exception ex) { throw new PersistenceException(ex.getMessage()); }
+    }
+
+    public List<Offer> getEmployerOffers(Employer employer) {
+        return super.em
+                .createNamedQuery("findEmployerOffers", Offer.class)
+                .setParameter("employer", employer)
+                .getResultList();
     }
 }
