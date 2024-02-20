@@ -5,7 +5,10 @@ import com.turing_careers.data.dao.EmployerDAO;
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Employer;
+import com.turing_careers.data.model.Offer;
 import com.turing_careers.logic.service.utils.ValidationException;
+
+import java.util.List;
 
 
 /**
@@ -118,6 +121,16 @@ public class UserManager {
         EmployerDAO retriever = EmployerDAO.getInstance();
         return retriever.getEmployerByMail(mail);
     }
+
+    /**
+     * @author Antonino Lorenzo
+     * @return offers managed by employer
+     * */
+    public static List<Offer> getEmployerOffers(Employer employer) {
+        EmployerDAO employerDAO = EmployerDAO.getInstance();
+        return employerDAO.getEmployerOffers(employer);
+    }
+
     /*
     public static Developer retrieveDeveloperByMail(String mail) throws UpdateProfileException, PersistenceException {
         DeveloperDAO updater = DeveloperDAO.getInstance();

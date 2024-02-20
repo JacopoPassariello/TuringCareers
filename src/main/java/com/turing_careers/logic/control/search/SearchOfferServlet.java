@@ -27,14 +27,14 @@ public class SearchOfferServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("userType") == null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
             dispatcher.forward(request, response);
         }
         String userType = (String) request.getSession().getAttribute("userType");
 
         if (userType.equals("employer")) {
             response.setStatus(400);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.html");
             dispatcher.forward(request, response);
         }
 
@@ -50,7 +50,7 @@ public class SearchOfferServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Developer dev = null;
         if (request.getSession().getAttribute("userType") == null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
             dispatcher.forward(request, response);
         }
 
@@ -58,12 +58,12 @@ public class SearchOfferServlet extends HttpServlet {
 
         if (userType.equals("employer")) {
             response.setStatus(400);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
             dispatcher.forward(request, response);
         } else if (userType.equals("developer")) {
             if (request.getSession().getAttribute("user") == null) {
                 response.setStatus(500);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
                 dispatcher.forward(request, response);
             }
             dev = (Developer) request.getSession().getAttribute("user");
@@ -84,7 +84,7 @@ public class SearchOfferServlet extends HttpServlet {
                 response.setStatus(200);
             } else {
                 response.setStatus(400);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
                 dispatcher.forward(request, response);
             }
         }

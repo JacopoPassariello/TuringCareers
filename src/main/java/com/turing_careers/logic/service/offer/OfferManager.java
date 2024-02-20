@@ -63,6 +63,8 @@ public class OfferManager {
     }
 
     /**
+     * // TODO: remove from OfferManager, it is not specified by Interfaces,
+     * // TODO: put in UserManager, also getEmployerOffers is implemented there
      * Restituisce una Offer
      * @param offerId L'id della Offer da restituire
      * @return La Offer che ha offerId come id

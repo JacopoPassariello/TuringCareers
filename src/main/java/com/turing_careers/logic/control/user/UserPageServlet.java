@@ -14,7 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Servlet incaricata di esporre le funzionalità di visualizzazione e modifica di un profilo
@@ -27,41 +29,50 @@ public class UserPageServlet extends HttpServlet {
      * */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") == null) {
+            request.getRequestDispatcher("index.html")
+                    .forward(request, response);
+        }
+
+        String userType = (String) request.getSession().getAttribute("userType");
         String requestType = request.getParameter("requestType");
+
         if (requestType != null && requestType.equals("info")) {
+            // Return User Info
             response.setContentType("application/json");
+            ObjectMapper objectMapper = new ObjectMapper();
 
             User u = (User) request.getSession().getAttribute("user");
-            // TODO: add employer offers
+            if (userType.equals("employer")) {
+                // Return Employer and Employer Offers
+                List<Offer> offers = UserManager.getEmployerOffers((Employer) u);
+                Map<Employer, List<Offer>> map = new HashMap<>();
+                map.put((Employer) u, offers);
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            response.getWriter().write(
-                    objectMapper
-                            .writeValueAsString(u)
-            );
+                response.getWriter().write(
+                        objectMapper
+                                .writeValueAsString(map)
+                );
+            } else if (userType.equals("developer")) {
+                // TODO: add developer data
+                response.getWriter().write(
+                        objectMapper
+                                .writeValueAsString(u)
+                );
+            } else {
+                request.getRequestDispatcher("index.html")
+                        .forward(request, response);
+            }
         } else {
             // Return Page
             response.setContentType("text/html");
 
-            String userType = (String) request.getSession().getAttribute("userType");
-            Developer dev = null;
-            Employer emp = null;
-
-            if (request.getSession().getAttribute("user") == null) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-                dispatcher.forward(request, response);
-            }
-
-            if (userType.equals("developer"))
-                dev = (Developer) request.getSession().getAttribute("user");
-            else if (userType.equals("employer"))
-                emp = (Employer) request.getSession().getAttribute("user");
-
-
             if (userType.equals("developer")) {
-                request.getRequestDispatcher("/developer_page.html").forward(request, response);
+                request.getRequestDispatcher("/developer_page.html")
+                        .forward(request, response);
             } else if (userType.equals("employer")) {
-                request.getRequestDispatcher("/employer_page.html").forward(request, response);
+                request.getRequestDispatcher("/employer_page.html")
+                        .forward(request, response);
             }
         }
     }

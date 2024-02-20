@@ -29,7 +29,7 @@ public class SearchDeveloperServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("userType") == null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
             dispatcher.forward(request, response);
         }
 
@@ -38,7 +38,7 @@ public class SearchDeveloperServlet extends HttpServlet {
         if (userType.equals("employer")) {
             if (request.getSession().getAttribute("user") == null) {
                 response.setStatus(500);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
                 dispatcher.forward(request, response);
             }
 
@@ -67,7 +67,7 @@ public class SearchDeveloperServlet extends HttpServlet {
 
         } else {
             response.setStatus(400);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
             dispatcher.forward(request, response);
         }
     }
