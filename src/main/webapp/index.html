@@ -24,6 +24,13 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 <body>
+    <!-- Page Load Animation -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav id="tc-navbar" class="navbar navbar-expand-lg bg-white fixed-bottom p-0" data-wow-delay="0.1s">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
@@ -60,7 +67,7 @@
 
     <!-- Header -->
     <div id="header-wrapper">
-        <div id="dev-header" class="user-header">
+        <div id="dev-header" class="user-header wow" data-wow-delay="0.1s">
             <div id="dev-card" class="header-card">
                 <h2 class="inter-bold no-select">Unlock Your Career Pontential with Turing Careers</h2>
                 <p class="inter-regular no-select">
@@ -70,7 +77,7 @@
                 <a href="login.html" id="find-offer-button" type="button" class="inter-regular input-text px-4 py-2">Find Jobs</a>
             </div>
         </div>
-        <div id="emp-header" class="user-header">
+        <div id="emp-header" class="user-header wow" data-wow-delay="0.2s">
             <div id="emp-card" class="header-card">
                 <h2 class="inter-bold no-select">Discover Your Ideal Developer with Turing Careers</h2>
                 <p class="inter-regular no-select">

@@ -1,6 +1,27 @@
 (function ($) {
     "use strict";
 
+    const devHeader = $("#dev-header")
+    const empHeader = $("#emp-header")
+    $(window).on('resize', () => {
+        indexAnimationSetup()
+    });
+
+    function indexAnimationSetup() {
+        if (window.innerWidth >= 992) {
+            devHeader.removeClass('fadeInLeft')
+            devHeader.addClass('fadeInDown')
+            empHeader.removeClass('fadeInRight')
+            empHeader.addClass('fadeInDown')
+        } else {
+            devHeader.addClass('fadeInLeft')
+            devHeader.removeClass('fadeInDown')
+            empHeader.addClass('fadeInRight')
+            empHeader.removeClass('fadeInDown')
+        }
+    }
+    indexAnimationSetup()
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {
