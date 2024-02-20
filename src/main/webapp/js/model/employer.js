@@ -24,6 +24,7 @@ class Employer {
 
     toJSON() {
         return {
+            _Employer__id: null,
             _Employer__f_name: this.firstName,
             _Employer__l_name: this.lastName,
             _Employer__mail: this.empMail,

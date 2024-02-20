@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Turing Careers - Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
+    <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+    <link rel="stylesheet" href="css/register_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div id="register-main-content" class="flex-center">
+        <form id="user-type-form" class="register-form-wrapper fade-in">
+            <div id="register-form-0">
+                <div id="register-form-0-content">
+                    <h3 class="no-select inter-bold">Scegli un tipo di account.</h3>
+                    <div id="register-form-user-type-input">
+                        <div class="register-user-type">
+                            <button type="button" id="account-type-developer" class="submit-button inter-bold" value="developer">Developer</button>
+                        </div>
+                        <div class="register-user-type">
+                            <button type="button" id="account-type-employer" class="submit-button inter-bold" value="employer">Employer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form id="first-form" class="register-form-wrapper display-none fade-in">
+            <div id="register-form-1-wrapper">
+                <div id="register-form" class="register-form-1">
+                    <div class="register-form-input-wrapper">
+                        <input type="hidden" name="type" value="register">
+                        <div class="input-container input-text ic1">
+                            <input id="firstname" name="firstname" class="input inter-regular" type="text" placeholder="Nome" />
+                        </div>
+                        <div class="input-container input-text ic2">
+                            <input id="lastname" name="lastname" class="input inter-regular" type="text" placeholder="Cognome" />
+                        </div>
+                        <div class="input-container input-text ic2">
+                            <input id="email" name="email" class="input inter-regular" type="email" placeholder="Email" />
+                        </div>
+                        <div id="password-container" class="input-container">
+                            <div style="position: relative" class="input-text">
+                                <input name="password" id="password-input" class="input inter-regular" type="password" placeholder="Password" />
+                                <div id="see-psw">
+                                    <input id="see-psw-toggle" type="checkbox"/>
+                                    <i id="see-psw-icon" class="bi bi-eye-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="login-redirect" class="inter-light">Hai gi&agrave; un account? <a href="login.html">Login</a></div>
+                    </div>
+                    <div class="register-switch-form-wrapper" >
+                        <div class="register-switch-form">
+                            <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                            <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                            <button type="submit" class="register-submit-button display-none submit-button inter-bold">Invia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- Developer Form -->
+        <!-- name="form" action="AuthenticationServlet" onsubmit="return validateSubForm()" method="post" -->
+        <div id="second-form" class="register-form-wrapper display-none fade-in" >
+            <div id="register-form-2-wrapper">
+                <div id="register-form-2">
+                    <div id="form-2-inputs" class="">
+                        <div class="form-labeled-input">
+                            <div id="dev-skills-input">
+                                <h3 class="no-select inter-regular">Skill</h3>
+                                <div id="form-skills">
+                                    <div id="selected-skills" class="input-text px-2 py-2">
+                                        <ul id="form-skills-list" class="dev-skills">
+                                            <input type="text" name="skill" class="input-tag inter-regular" placeholder="es. Java">
+                                        </ul>
+                                    </div>
+                                    <ul id="proposed-skills-list" class="inter-regular display-none"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-labeled-input">
+                            <div id="dev-locations-input">
+                                <h3 class="no-select inter-regular">Location</h3>
+                                <div class="autocomplete-wrapper">
+                                    <div>
+                                        <input id="locations-input-text" type="text" class="input">
+                                    </div>
+                                    <div id="locations-autocomplete-section" class="autocomplete-section display-none">
+                                        <ul id="locations-autocomplete-list" class="autocomplete-suggestions">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-switch-form-wrapper" >
+                        <div class="register-switch-form">
+                            <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                            <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                            <button  id="dev-register-submit" class="register-submit-button submit-button inter-bold">Invia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Employer Form -->
+        <div id="second-form-employer" class="register-form-wrapper display-none fade-in">
+              <!--action="AuthenticationServlet" onsubmit="return registerEmployer()" method="post">-->
+            <div id="register-form-employer">
+                <div id="emp-company-wrapper">
+                    <h3 class="no-select inter-regular">Company</h3>
+                    <div class="input-container input-text ic2">
+                        <input id="company" class="input inter-regular" placeholder="Company" />
+                    </div>
+                </div>
+                <div class="register-switch-form-wrapper" >
+                    <div class="register-switch-form">
+                        <span class="switch-form-left switch-arrow material-symbols-outlined">chevron_left</span>
+                        <span class="switch-form-right switch-arrow material-symbols-outlined">chevron_right</span>
+                        <button  id="emp-register-submit" class="register-submit-button submit-button inter-bold">Invia</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/pages/register_page.js"></script>
+    <script type="text/javascript" src="js/model/skills.js"></script>
+    <script type="text/javascript" src="js/model/locations.js"></script>
+    <script type="text/javascript" src="js/model/developer.js"></script>
+    <script type="text/javascript" src="js/model/employer.js"></script>
+    <script type="text/javascript" src="js/model/languages.js"></script>
+</body>
+</html>

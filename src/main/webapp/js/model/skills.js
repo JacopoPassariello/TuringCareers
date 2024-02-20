@@ -1,26 +1,23 @@
 class Skill {
-    constructor(skill) {
+    constructor(skill, type) {
         this.skill = skill;
-        this.type = 'Programming Language'
+        this.type = type;
     }
 
     toJSON() {
         return {
-            _Skill_id: 3,
+            _Skill__id: null,
             _Skill__name: this.skill,
             _Skill__type: this.type
         }
     }
 }
-
+/*
 $(document).ready(() => {
 
-    const skillInput = $("#skill-input-text");
-    const skillsAutocompleteSection = $("#skills-autocomplete-section");
+    const skillInput = $("input[name='skill']");
+    const skillsAutocompleteSection = $("#proposed-skills-list");
 
-    /**
-     * Listener to text input
-     * */
     skillInput.on('input', () => {
         // shrink/grow text field on input
         skillInput.css({
@@ -32,6 +29,7 @@ $(document).ready(() => {
         if (userInput.length > 2) {
             skillsAutocompleteSection.removeClass('display-none')
             console.log('input: ' + userInput)
+
             getSkills(userInput).then(matchingSkills => {
                 console.log('Matching skills: ')
                 console.log(matchingSkills)
@@ -47,19 +45,6 @@ $(document).ready(() => {
     }).trigger('input');
 
 
-
-    /**
-     * Listener to suggestion list items
-     * */
-
-    /**
-     * Listener to tag close button
-     * */
-
-
-    /**
-     * Triggered on item click in suggestions
-     * */
     function addSkillTag(skill) {
         const skillTags = $("#skill-tags")
 
@@ -80,11 +65,6 @@ $(document).ready(() => {
         skillTag.append(name, close)
         skillTags.append(skillTag)
     }
-
-    /**
-     * Triggered on input of Skill
-     * @param query: user input
-     * */
     function getSkills(query) {
         return $.ajax({
             url: 'http://localhost:8080/TuringCareers_war/suggest-skills',
@@ -93,12 +73,8 @@ $(document).ready(() => {
         });
     }
 
-    /**
-     * Shows available skills
-     * @param skills: a not empty list of skills
-     * */
     function updateSkillsSuggestions(skills) {
-        const skillsSuggestionsContainer = $("#skills-autocomplete-list");
+        const skillsSuggestionsContainer = $("#proposed-skills-list");
         skillsSuggestionsContainer.empty();
 
         if (skills.length > 0) {
@@ -123,3 +99,4 @@ $(document).ready(() => {
     }
 
 })
+*/

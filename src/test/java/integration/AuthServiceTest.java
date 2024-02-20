@@ -3,9 +3,9 @@ package integration;
 
 import com.turing_careers.data.dao.PersistenceException;
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.logic.auth.EmployerAuthenticator;
-import com.turing_careers.logic.auth.InvalidCredentialsException;
-import com.turing_careers.logic.validator.ValidationException;
+import com.turing_careers.logic.service.auth.EmployerAuthenticator;
+import com.turing_careers.logic.service.auth.InvalidCredentialsException;
+import com.turing_careers.logic.service.utils.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

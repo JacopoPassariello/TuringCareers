@@ -1,9 +1,9 @@
 package tcs;
 
 import com.turing_careers.data.model.Employer;
-import com.turing_careers.logic.auth.Authenticator;
-import com.turing_careers.logic.auth.EmployerAuthenticator;
-import com.turing_careers.logic.validator.ValidationException;
+import com.turing_careers.logic.service.auth.Authenticator;
+import com.turing_careers.logic.service.auth.EmployerAuthenticator;
+import com.turing_careers.logic.service.utils.ValidationException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;

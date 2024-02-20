@@ -1,12 +1,13 @@
 package com.turing_careers.data.dao;
 
-import com.turing_careers.data.DAO;
-import com.turing_careers.data.model.Developer;
 import com.turing_careers.data.model.Language;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe che implementa la gestione della persistenza dell'entità data.model.Language
+ */
 public class LanguageDAO extends DAO {
 
     private static LanguageDAO instance;
@@ -15,6 +16,7 @@ public class LanguageDAO extends DAO {
     }
 
     /**
+     * Implementazione del design pattern Singleton
      * @return Istanza condivisa da tutti gli LanguageDAO
      */
     public static synchronized LanguageDAO getInstance() {

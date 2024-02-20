@@ -1,11 +1,13 @@
 package com.turing_careers.data.dao;
 
-import com.turing_careers.data.DAO;
 import com.turing_careers.data.model.*;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe che implementa la gestione della persistenza dell'entità data.model.Developer
+ */
 public class DeveloperDAO extends DAO {
 
     private static DeveloperDAO instance;
@@ -14,6 +16,7 @@ public class DeveloperDAO extends DAO {
     }
 
     /**
+     * Implementazione del design pattern Singleton
      * @return Istanza condivisa da tutti i DeveloperDAO
      */
     public static synchronized DeveloperDAO getInstance() {

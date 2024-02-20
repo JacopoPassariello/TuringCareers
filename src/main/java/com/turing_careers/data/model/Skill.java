@@ -6,6 +6,9 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * Modella l'entità persistente Skill
+ */
 @Entity
 @Table(name = "Skill")
 @Getter

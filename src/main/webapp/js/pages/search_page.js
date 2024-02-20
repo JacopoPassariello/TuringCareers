@@ -26,51 +26,61 @@ $(document).ready(() => {
     })
 
     /**
-     * Search Setup
+     * Search Listeners
      * */
-    const searchInputDesktop = $("#dsk-search-input")
-    const searchButtonDesktop = $("#dsk-search-button")
-    const searchInputMobile = $("#mb-searchbar-input")
-    const searchButtonMobile = $("#mb-search-button")
+    const searchInput = $("#searchbar-input")
+    const searchButton = $("#search-button")
 
-    searchButtonMobile.click(() =>{
-        let userInput = searchInputMobile.val()
+    searchButton.click(() =>{
+        let userInput = searchInput.val()
         if (userInput.length > 0) {
-            queryOffers(userInput)
+            $("#of-default-recommendations").empty()
+            $("#of-list-wrap").removeClass('display-none')
+            $("#search-out-header")
+                .text('Results for: ')
+                .append(
+                    $("<p>")
+                        .addClass('no-select inter-regular search-out-query pt-3')
+                        .text(userInput)
+                )
+            searchOffers(userInput)
         }
     })
 
-    searchButtonDesktop.click(() =>{
-        let userInput = searchInputDesktop.val()
-        if (userInput.length > 0) {
-            console.log('Query: ' + userInput)
-            queryOffers(userInput)
+    /**
+     *
+     * Extract offer data from JSON response.
+     * */
+    function extractOffers(response) {
+        let out = []
+        for (let offer of response) {
+            let o = new Offer(
+                offer['_Offer__title'] ? offer['_Offer__title'].slice(2, -1) : '',
+                offer['_Offer__description'] ? offer['_Offer__description'].slice(2, -1) : '',
+                offer['_Offer__skills'] ? offer['_Offer__skills'] : '',
+                offer['_Offer__location_type'] ? offer['_Offer__location_type'] : '',
+                offer['_Offer__location'] ? offer['_Offer__location'] : '',
+                offer['_Offer__languages'] ? offer['_Offer__languages'].slice(2, -1) : ''
+            )
+            o.setEmployer(offer['_Offer__employer'] ? offer['_Offer__employer']: '')
+            console.log(o)
+            out.push(o)
         }
-    })
+        console.log(out)
+        return out
+    }
 
-    function queryOffers(query) {
-        // TODO: ajax query
+    /**
+     *
+     * Called by Search button listener when user makes a search query
+     * */
+    function searchOffers(query) {
         return $.ajax({
             url: 'http://localhost:8080/TuringCareers_war/search/offers?' +
                 'query=' + encodeURIComponent(query),
             method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(''),
-            dataType: 'json',
             success: function(response) {
-                let devs = []
-                for (let item of response) {
-
-                    devs.push(new Offer(
-                        item['_Offer__title'] ? item['_Offer__title'].slice(2, -1) : '',
-                        item['_Offer__description'] ? item['_Offer__description'].slice(2, -1) : '',
-                        item['_Offer__skills'] ? item['_Offer__skills'].slice(2, -1) : '',
-                        item['_Offer__location_type'] ? item['_Offer__location_type'].slice(2, -1) : '',
-                        item['_Offer__location'],
-                        item['_Offer__languages'] ? item['_Offer__languages'].slice(2, -1) : ''
-                    ))
-                }
-                updateList(devs, 'offer')
+                updateList(extractOffers(response), $("#item-cards-list"))
             },
             error: function(jqXHR, textStatus, errorThrown) {
 
@@ -78,22 +88,36 @@ $(document).ready(() => {
         });
     }
 
+    /**
+     *
+     * Called on page load, request the recommended offers for developer
+     * */
+    function recommendOffers() {
+        return $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/search/offers?' +
+                'query=' + encodeURIComponent('RECOMMEND'),
+            method: 'POST',
+            success: function(response) {
+                updateList(extractOffers(response), $("#recommended-cards-list"))
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
 
-    function updateList(items, type) {
-        const wrapper = $("#item-cards-list");
+            }
+        });
+    }
+
+    /**
+     * Updates the offers list
+     * */
+    function updateList(items, wrapper) {
         wrapper.empty();
-
         if (items.length > 0) {
             items.forEach((item) => {
-               let item_card = $("<div>")
-                   .addClass('item-card');
+                let item_card = $("<div>")
+                    .addClass('item-card fade-in');
 
-               if (type === 'offer')
-                   createOfferCard(item, item_card);
-               else if (type === 'developer')
-                   item_card.append(createDeveloperCard(item, item_card));
-
-               wrapper.append(item_card)
+                createOfferCard(item, item_card);
+                wrapper.append(item_card)
             });
         } else
             console.log("Empty Item List");
@@ -107,7 +131,9 @@ $(document).ready(() => {
             .addClass('of-offer-head no-select')
         let employer = $("<h3>")
             .addClass('of-offer-employer-name inter-medium')
-            .text('Azienda X')
+            .text(
+                (item.employer ? item.employer['_Employer__f_name'] + item.employer['_Employer__l_name'] : '')
+            )
         let title = $("<h1>")
             .addClass('of-offer-tile inter-bold no-select')
             .text(item.title)
@@ -123,8 +149,25 @@ $(document).ready(() => {
         let meta = $("<div>")
             .addClass('of-offer-card-meta inter-regular no-select')
         let location = $("<h3>")
-            .text(item.loc)
+            .text(item.locType === 'OnSite' ? item.location: item.locType)
         meta.append(location)
+
+        let skills = $("<ul>")
+            .addClass('dev-skills')
+
+        let j = 0
+        for (let skill of item.skills) {
+            if (j <= 3) {
+                let name = $("<li>")
+                    .addClass('inter-light no-select font-small')
+                    .text(skill['_Skill__name'])
+                skills.append(name)
+                j += 1
+            }
+            else
+                break
+        }
+        skills.append($("<li>").addClass('inter-ligth no-select').text('...'))
 
         let content = $("<div>")
             .addClass('of-offer-card-content')
@@ -132,7 +175,7 @@ $(document).ready(() => {
         let descriptionWrapper = $("<div>")
             .addClass('of-offer-desc-preview')
         let description = $("<p>")
-            .addClass('inter-light')
+            .addClass('inter-light no-select')
             .text(item.description.slice(0, 40) + '...')
         descriptionWrapper.append(description)
 
@@ -148,10 +191,8 @@ $(document).ready(() => {
 
         content.append(description, buttonSection)
 
-        card.append(headerWrapper, meta, content)
+        card.append(headerWrapper, meta, skills, content)
     }
 
-    function createDeveloperCard() {
-
-    }
+    recommendOffers()
 })

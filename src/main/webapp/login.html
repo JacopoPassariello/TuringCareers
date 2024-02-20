@@ -3,57 +3,56 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Turing Careers - Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <title>Turing Careers - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
-  <link rel="stylesheet" type="text/css" href="css/commons.css"/>
-  <link rel="stylesheet" href="css/login.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="static/tc_logo.svg">
+    <link rel="stylesheet" type="text/css" href="css/commons.css"/>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <div id="login-main-content">
-    <form id="login-form" name="form" action="AuthenticationServlet" onsubmit="return validateLoginForm()" method="post">
-      <div id="login-form-header" >
-        <h3 class="inter-medium subtitle no-select">Login</h3>
-      </div>
-
-      <!--
-      <%
-        String block = "none";
-        String outcome = (String) request.getAttribute("authOutcome");
-        if(outcome != null) {
-          if (outcome.equals("negative"))
-            block = "block";
-        }else if(outcome == null)
-          block = "none";
-      %>-->
-      <!--<div id="error" class="error"  style="display: <%=block%>">Riprova!</div>-->
-      <input type="hidden" name="authType" value="login">
-      <input type="hidden" name="userType" value="developer">
-      <div id="login-input-wrapper">
-        <div id="email-container" class="input-container">
-          <div class="input">
-            <input name="email" id="email-input" class="input inter-regular" type="email" placeholder="Email" />
-          </div>
-        </div>
-        <div id="password-container" class="input-container">
-          <div style="position: relative">
-            <input name="password" id="password-input" class="input-text inter-regular" type="password" placeholder="Password" />
-            <div id="see-psw">
-              <input id="see-psw-toggle" type="checkbox"/>
-              <i id="see-psw-icon" class="bi bi-eye-fill"></i>
+    <div id="login-main-content">
+        <form id="login-form" class="fade-in" name="form" action="AuthenticationServlet" onsubmit="return validateLoginForm()" method="post">
+            <div id="login-form-header">
+                <h3 class="inter-medium subtitle no-select">Login</h3>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="register inter-light no-select">Non hai ancora un account? <a href="subscription.jsp">Registrati</a></div>
-      <button type="submit" id="login-submit-button" class="submit-button inter-bold">Invia</button>
-    </form>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/pages/register_page.js"></script>
+
+            <input type="hidden" name="authType" value="login">
+            <input type="hidden" name="userType" value="developer">
+            <div id="login-input-wrapper">
+                <div id="email-container" class="input-container input-text">
+                    <div class="input">
+                        <input name="email" id="email-input" class="input inter-regular" type="email" placeholder="Email" />
+                    </div>
+                </div>
+                <div id="password-container" class="input-container">
+                    <div style="position: relative">
+                        <input name="password" id="password-input" class="input-text inter-regular" type="password" placeholder="Password" />
+                        <div id="see-psw">
+                            <input id="see-psw-toggle" type="checkbox"/>
+                            <i id="see-psw-icon" class="bi bi-eye-fill"></i>
+                        </div>
+                    </div>
+                </div>
+                <div id="user-type">
+                    <div>
+                        <h3 class="no-select inter-regular">Developer</h3>
+                        <input type="radio" name="type" value="developer">
+                    </div>
+                    <div>
+                        <h3 class="no-select inter-regular">Employer</h3>
+                        <input type="radio" name="type" value="employer">
+                    </div>
+                </div>
+            </div>
+            <div class="register inter-light no-select">Non hai ancora un account? <a href="subscription.jsp">Registrati</a></div>
+            <button type="submit" id="login-submit-button" class="submit-button inter-bold">Invia</button>
+        </form>
+    </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/pages/register_page.js"></script>
 </body>
 </html>
 

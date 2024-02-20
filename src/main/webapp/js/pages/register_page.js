@@ -78,6 +78,53 @@ $(document).ready(() => {
     })
 
     /**
+     * Developer Skill Suggestions
+     * */
+    let requiredSkills = []
+    const formSkillsList = $("#form-skills-list")
+    const formSkillsInput = $("input[name='skill']")
+    function requestSkills(query) {
+        return $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/suggest-skills',
+            data: {skillsQuery: query},
+            dataType: 'json'
+        });
+    }
+
+    function addSkillTag(skillName) {
+        formSkillsList.prepend($("<li>").text(skillName))
+    }
+
+    formSkillsInput.on('input', () => {
+        let skillInput = formSkillsInput.val()
+        let proposedSkillsList = $("#proposed-skills-list")
+        proposedSkillsList.empty()
+        proposedSkillsList.removeClass('display-none')
+
+        requestSkills(skillInput).then(matchingSkills => {
+            if (matchingSkills) {
+                for (let s of matchingSkills) {
+                    proposedSkillsList.append(
+                        $("<li>")
+                            .text(s['_Skill__name'])
+                            .click(() => {
+                                if (!requiredSkills.includes(s)) {
+                                    addSkillTag(s['_Skill__name'])
+                                    requiredSkills.push(s)
+                                }
+                            })
+                    )
+                }
+            } else
+                console.log("Empty skills list")
+        }).catch(error => {
+            console.error("Error getting skills:", error);
+        });
+
+    })
+
+
+    /**
      * Form Submit
      * */
     const developerSubmit = $("#dev-register-submit")
@@ -92,11 +139,20 @@ $(document).ready(() => {
         let skills = []
         skillTags.each(function() {
             let skillText = $(this).find('p').text().trim();
-            skills.push(new Skill(skillText));
+            skills.push(new Skill(skillText, 'Programming Language'));
         });
 
-        let dev = new Developer(firstName, lastName, '', mail, psw, location, skills, [new Languages('italiano')])
-        // console.log('Input Developer: ' + JSON.stringify(dev))
+        let dev = new Developer(
+            firstName,
+            lastName,
+            '',
+            mail,
+            psw,
+            location,
+            skills,
+            [new Languages('italiano')]
+        )
+        console.log('Input Developer: ' + JSON.stringify(dev))
 
         // TODO: validation should be done inside Developer validate method
         if (!dev.validate()) {
@@ -168,7 +224,27 @@ $(document).ready(() => {
      * TODO: cleanup
      * */
 
+    const userTypeHidden = $("input[name='userType']")
+    const typeDeveloper = $("input[value='developer']")
+    const typeEmployer = $("input[value='employer']")
+
+    typeDeveloper.change(function() {
+        if ($(this).is(':checked')) {
+            userTypeHidden.val('developer');
+            console.log('developer checked');
+        }
+    });
+
+    typeEmployer.change(function() {
+        if ($(this).is(':checked')) {
+            userTypeHidden.val('employer');
+            console.log('employer checked');
+        }
+    });
+
     function validateSubForm() {
+
+
         let mail = document.forms["form"]["email"].value;
         let password = document.forms["form"]["password"].value;
         let nome = document.forms["form"]["firstname"].value;

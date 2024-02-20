@@ -1,5 +1,13 @@
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {  }
+@media only screen and (max-width: 600px) {
+    #of-search-wrap h2 {
+        font-size: 22px !important;
+    }
+
+    .search-out-query {
+        font-size: 22px !important;
+    }
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -12,10 +20,6 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #mb-of-searchbar-wrap {
-        display: none;
-    }
-
     #of-filter-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -30,9 +34,8 @@
         width: 50% !important;
     }
 
-    #search-main {
-        margin-top: 20dvh;
-        padding-bottom: 2dvh !important;
+    #recommended-cards-list {
+        width: 50% !important;
     }
 }
 
@@ -66,7 +69,7 @@
     opacity: 80%;
 }
 
-#mb-searchbar-input {
+#searchbar-input {
     width: 90%;
     height: 40px;
     outline: none;
@@ -167,6 +170,13 @@
 }
 
 #item-cards-list {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#recommended-cards-list {
     width: 85vw;
     display: flex;
     flex-direction: column;
@@ -275,7 +285,51 @@
     margin-top: 2px;
 }
 
+#of-search-wrap {
+    width: 85%;
+    justify-content: start !important;
+}
 
-#search-main {
-    padding-bottom: 12dvh;
+#of-search-wrap h2 {
+    font-size: 28px;
+}
+
+#search-out-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.search-out-query {
+    font-size: 28px;
+    color: rgba(33, 38, 44, 0.8);
+}
+
+/* DEF */
+#of-default-recommendations {
+    width: 100%;
+}
+
+#of-def-rec-wrap {
+    width: 85%;
+    justify-content: start !important;
+}
+#of-def-rec-wrap h2 {
+    font-size: 28px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity:  0.1;
+    }
+
+    100% {
+        opacity:  1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.1s ease-in 0s  1 normal none running;
 }

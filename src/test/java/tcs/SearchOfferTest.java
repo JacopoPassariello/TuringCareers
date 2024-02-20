@@ -1,10 +1,10 @@
 package tcs;
 
 import com.turing_careers.data.model.*;
-import com.turing_careers.logic.search.ApiClient;
-import com.turing_careers.logic.search.ClientFactory;
-import com.turing_careers.logic.search.ClientType;
-import com.turing_careers.logic.search.RecommenderEngine;
+import com.turing_careers.logic.service.search.ApiClient;
+import com.turing_careers.logic.service.search.ClientFactory;
+import com.turing_careers.logic.service.search.ClientType;
+import com.turing_careers.logic.service.search.RecommenderEngine;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;

@@ -1,5 +1,5 @@
 class Developer {
-    constructor(firstName, lastName, bio, mail, password,loc, skills, langs) {
+    constructor(firstName, lastName, bio, mail, password, loc, skills, langs) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
@@ -16,6 +16,7 @@ class Developer {
 
     toJSON() {
         return {
+            _Developer__id: null,
             _Developer__f_name: this.firstName,
             _Developer__l_name: this.lastName,
             _Developer__bio: this.bio,
