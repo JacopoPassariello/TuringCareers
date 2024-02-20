@@ -404,11 +404,38 @@ $(document).ready(() => {
             const emailElement = $("#employer-email-p")
             const companyElement = $("#employer-company-p")
 
-            nameElement.text(employerData['_Employer__f_name'] + ' ' + employerData['_Employer__l_name'])
-            emailElement.text(employerData['_Employer__mail'])
-            companyElement.text(employerData['_Employer__company'])
+            let employerKey = Object.keys(employerData)[0];
+            let offers = employerData[employerKey];
 
-            // TODO: add employer offers
+            // Add Offers
+            for (let offer of offers) {
+                addEmployerOffer(
+                    new Offer(
+                        offer['_Offer__title'],
+                        offer['_Offer__description'],
+                        offer['_Offer__skills'],
+                        offer['_Offer__location_type'],
+                        offer['_Offer__location'],
+                        offer['_Offer__languages']
+                    ),
+                    $("#emp-offers-list")
+                )
+            }
+
+            // Add Data
+            const employerInfo = employerKey.split(', ').reduce((acc, part) => {
+                const [key, value] = part.split('=');
+                acc[key] = value.replace(/^"|"$/g, ''); // Remove quotes from the value
+                return acc;
+            }, {});
+            const firstName = employerInfo['firstName'];
+            const lastName = employerInfo['lastName'];
+            const email = employerInfo['mail'];
+            const companyName = employerInfo['companyName'];
+
+            nameElement.text(firstName + ' ' + lastName)
+            emailElement.text(email)
+            companyElement.text(companyName)
 
         }).catch(error => {
             console.error("Error getting employer info:", error);

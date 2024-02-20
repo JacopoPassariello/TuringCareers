@@ -79,6 +79,7 @@ body {
 
 #tc-navbar {
     border-bottom: 2px solid var(--light-gray);
+    height: 10dvh !important;
 }
 
 .show-nav div {
