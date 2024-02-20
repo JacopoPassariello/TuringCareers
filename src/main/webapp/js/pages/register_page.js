@@ -78,6 +78,53 @@ $(document).ready(() => {
     })
 
     /**
+     * Developer Skill Suggestions
+     * */
+    let requiredSkills = []
+    const formSkillsList = $("#form-skills-list")
+    const formSkillsInput = $("input[name='skill']")
+    function requestSkills(query) {
+        return $.ajax({
+            url: 'http://localhost:8080/TuringCareers_war/suggest-skills',
+            data: {skillsQuery: query},
+            dataType: 'json'
+        });
+    }
+
+    function addSkillTag(skillName) {
+        formSkillsList.prepend($("<li>").text(skillName))
+    }
+
+    formSkillsInput.on('input', () => {
+        let skillInput = formSkillsInput.val()
+        let proposedSkillsList = $("#proposed-skills-list")
+        proposedSkillsList.empty()
+        proposedSkillsList.removeClass('display-none')
+
+        requestSkills(skillInput).then(matchingSkills => {
+            if (matchingSkills) {
+                for (let s of matchingSkills) {
+                    proposedSkillsList.append(
+                        $("<li>")
+                            .text(s['_Skill__name'])
+                            .click(() => {
+                                if (!requiredSkills.includes(s)) {
+                                    addSkillTag(s['_Skill__name'])
+                                    requiredSkills.push(s)
+                                }
+                            })
+                    )
+                }
+            } else
+                console.log("Empty skills list")
+        }).catch(error => {
+            console.error("Error getting skills:", error);
+        });
+
+    })
+
+
+    /**
      * Form Submit
      * */
     const developerSubmit = $("#dev-register-submit")

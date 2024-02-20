@@ -72,25 +72,13 @@
                         <div class="form-labeled-input">
                             <div id="dev-skills-input">
                                 <h3 class="no-select inter-regular">Skill</h3>
-                                <div class="autocomplete-wrapper">
-                                    <div id="skill-tags-section">
-                                        <div id="skill-tags-wrapper">
-                                            <ul id="skill-tags">
-                                                <li class="skill-tag">
-                                                    <p class="no-select inter-regular">Python</p>
-                                                    <h3 class="no-select inter-regular">X</h3>
-                                                </li>
-                                            </ul>
-                                            <input id="skill-input-text" type="text" class="inter-regular" >
-                                        </div>
-                                        <!--<div id="add-skill-button">
-                                            <p class="no-select inter-regular">Add</p>
-                                            <i class="bi bi-plus-circle"></i>
-                                        </div>-->
+                                <div id="form-skills">
+                                    <div id="selected-skills" class="input-text px-2 py-2">
+                                        <ul id="form-skills-list" class="dev-skills">
+                                            <input type="text" name="skill" class="input-tag inter-regular" placeholder="es. Java">
+                                        </ul>
                                     </div>
-                                    <div id="skills-autocomplete-section" class="autocomplete-section">
-                                        <ul id="skills-autocomplete-list" class="autocomplete-suggestions"></ul>
-                                    </div>
+                                    <ul id="proposed-skills-list" class="inter-regular display-none"></ul>
                                 </div>
                             </div>
                         </div>
