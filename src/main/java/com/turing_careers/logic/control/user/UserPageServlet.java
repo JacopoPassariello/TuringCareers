@@ -54,7 +54,6 @@ public class UserPageServlet extends HttpServlet {
                                 .writeValueAsString(map)
                 );
             } else if (userType.equals("developer")) {
-                // TODO: add developer data
                 response.getWriter().write(
                         objectMapper
                                 .writeValueAsString(u)

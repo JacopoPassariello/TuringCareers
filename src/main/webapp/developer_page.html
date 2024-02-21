@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/commons.css"/>
     <link rel="stylesheet" type="text/css" href="css/employer_page.css">
+    <link rel="stylesheet" type="text/css" href="css/developer_page.css">
 
 </head>
 <body>
@@ -67,6 +68,45 @@
         </div>
     </nav>
 
+    <!-- Content -->
+    <div id="developer-page-main">
+        <div class="profile-header-wrapper flex-center">
+            <div class="profile-header">
+                <div class="info-wrapper">
+                    <div class="name-wrapper">
+                        <h2 id="developer-name" class="user-name no-select inter-bold ">Nome Developer</h2>
+                    </div>
+                    <div class="user-info-wrapper">
+                        <div id="developer-email" class="user-info">
+                            <p id="developer-email-p" class="inter-light"><i class="bi bi-envelope"></i>email@email.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-modify-wrapper">
+                    <div class="user-modify">
+                        <p class="inter-medium"><i class="bi bi-pencil"></i>Modifica Profilo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content-wrapper">
+            <div class="profile-content">
+                <div class="pt-3">
+                    <h1 class="inter-bold no-select">Bio</h1>
+                </div>
+                <div id="bio-content" class="flex-center">
+                    <div>
+                        <p id="dev-bio" class="inter-regular no-select"></p>
+                    </div>
+                    <div id="empty-bio-wrapper" class="flex-center display-none">
+                        <h3 class="inter-regular">No biography <input type="button" class="input px-4 py-1 mx-1" value="Add Bio"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
@@ -83,6 +123,7 @@
 
     <script src="js/main.js"></script>
     <script type="text/javascript" src="js/shared/navbar.js"></script>
+    <script type="text/javascript" src="js/pages/developer_page.js"></script>
     <script type="text/javascript" src="js/model/skills.js"></script>
     <script type="text/javascript" src="js/model/locations.js"></script>
     <script type="text/javascript" src="js/model/languages.js"></script>
